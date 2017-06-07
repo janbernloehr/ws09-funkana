@@ -1,0 +1,705 @@
+\chapter{Normierte Räume}
+
+\section{Grundlagen}
+ 
+ Im Folgenden sollen die grundlegenden Begriffe der normierten Räume wiederholt
+ werden.
+ 
+ \begin{defn}
+ \label{defn:1.1}
+ Sei $\K = \C$ bzw. $\K=\R$. Eine abelsche Gruppe $(L,+)$ heißt 
+ \emph{linearer Raum} oder \emph{Vektorraum}\index{Vektorraum}, falls eine
+ skalare Multiplikation
+ \begin{align*}
+ \cdot : \K\times L \to L
+ \end{align*}
+definiert ist, so dass für $\alpha,\beta\in\K$, $x,y\in L$ gilt
+\begin{align*}
+&\alpha\cdot (x+y) = \alpha\cdot x + \alpha\cdot y,\\
+&(\alpha+\beta)\cdot x = \alpha\cdot x + \beta \cdot x,\\
+&\alpha\cdot(\beta\cdot x) = (\alpha\beta)\cdot x.
+\end{align*}
+Falls $\K=\R$ heißt $L$, \emph{reeller linearer Raum}. Lineare Unabhängigkeit
+und Dimension sind wie üblich definiert.\fishhere
+\end{defn}
+\begin{proof}
+Aus $\alpha\cdot x = (\alpha+0)\cdot x = \alpha\cdot x + 0\cdot x$ folgt
+unmittelbar, $0\cdot x = 0$.\qedhere
+\end{proof}
+
+\begin{bsp}
+\label{bps:1.2}
+Beispiele für lineare Räume sind,
+\begin{bspenum}
+  \item $L=\C^n$.
+  \item $L=\setdef{(x_n)_{n\in\N}}{(x_n)\text{ komplexe Folge}}$. Die Addition
+  ist hier definiert als $(x_n)+(y_n):= (x_n+y_n)$, die skalare Multiplikation als
+  $\alpha\cdot (x_n):= (\alpha x_n)$.
+  \item $L=C(\R\to\C)= \setdef{f:\R\to\C}{f\text{ ist stetig}}$.\bsphere
+\end{bspenum}
+\end{bsp}
+
+Nun wollen wir die Begriffe Konvergenz und Abstand erklären.
+
+\begin{defn}
+\label{defn:1.3}
+Eine Abbildung $\norm{\cdot}: L\to\R$ heißt \emph{Norm (auf $L$)}\index{Norm},
+falls sie für $x\in L$ und $\alpha\in\K$ folgende Eigenschaften erfüllt.
+\begin{enumerate}[label=(N\arabic{*})]
+  \item $\norm{x}\ge 0$,\qquad Positivität,
+  \item $\norm{x} = 0\Leftrightarrow x=0$,\qquad Definitheit,
+  \item $\norm{\alpha x} = \abs{\alpha}\norm{x}$,\qquad Homogentität,
+  \item $\norm{x+y} \le \norm{x}+\norm{y}$,\qquad Dreiecksungleichung.
+\end{enumerate}
+$(L,\norm{\cdot})$ heißt \emph{normierter Raum}\index{Norm!Normierter Raum},
+falls (N1)-(N4) erfüllt sind. Gilt nur (N2) nicht, so heißt $\norm{\cdot}$
+\emph{Halbnorm}\index{Norm!Halb-} und $(L,\norm{\cdot})$ \emph{halbnormierter Raum}.\fishhere
+\end{defn}
+
+Die geometrische Interpretation von $\norm{x}$ ist die ``Länge'' von $x$, die
+von $\norm{x-y}$ ist der ``Abstand'' von $x$ und $y$.
+
+Im Folgenden sei $E$ stets ein normierter Raum.
+
+\begin{defn}
+\label{defn:1.4}
+Sei $(x_n)$ eine Folge in $E$.
+\begin{defnenum}
+  \item $(x_n)$ heißt \emph{konvergent}\index{Konvergenz} gegen $x\in E$, falls
+\begin{align*}
+\forall \ep > 0 \exists N_\ep \in \N \forall n> N_\ep : \norm{x-x_n} < \ep.
+\end{align*}
+\item $(x_n)$ heißt \emph{Cauchyfolge}\index{Cauchyfolge}, falls
+\begin{align*}
+\forall \ep > 0 \exists N_\ep \in\N \forall n,m> N_\ep : \norm{x_n-x_m} < \ep.
+\end{align*}
+\item $E$ heißt \emph{vollständig} oder
+\emph{Banachraum}\index{Banach!-raum}, falls gilt,
+\begin{align*}
+(x_n)\text{ Cauchy} \Rightarrow (x_n) \text{ konvergent}.\fishhere
+\end{align*}
+\end{defnenum}
+\end{defn}
+
+\begin{bemn}[Übung.]
+Zeigen Sie, dass jede konvergente Folge auch eine Cauchyfolge ist.\maphere
+\end{bemn}
+
+\begin{bsp}
+\label{bsp:1.5}
+\begin{bspenum}
+  \item $E=\C^n$ lässt sich mit der $p$-Norm versehen,
+\begin{align*}
+\norm{x}_p = \begin{cases}
+              \left(\abs{x_1}^p + \ldots +
+\abs{x_n}^p\right)^{1/p}, & p\le 1 < \infty,\\
+\max\limits_{j=1,\ldots,n} \abs{x_j},& p = \infty.
+             \end{cases}
+\end{align*}
+Wichtige Spezialfälle sind, die euklidische Norm
+\begin{align*}
+\norm{x}_2 = \left(\abs{x_1}^2 + \ldots + \abs{x_n}^2\right)^{1/2},
+\end{align*}
+die Summennorm
+\begin{align*}
+\norm{x}_1 = \abs{x_1} + \ldots + \abs{x_n},
+\end{align*}
+und die Supremumsnorm
+\begin{align*}
+\norm{x}_\infty = \max\limits_{j=1,\ldots,n} \abs{x_j}.
+\end{align*}
+Einen Nachweis der Normeigenschaften findet man in jedem Standard Analysis
+Werk. Für $p<1$ lässt sich so keine $p$-Norm definieren, da die
+Dreiecksungleichung nicht erfüllt werden kann. Für $1\le p<\infty$ ist
+$(\C^n,\norm{\cdot}_p)$ ein Banachraum.
+\item Für eine komplexe Folge sei
+\begin{align*}
+&\norm{(x_n)}_p := \left(\sum\limits_{j=1}^\infty \abs{x_j}^p \right)^{1/p},\\
+&\norm{(x_n)}_\infty := \max\limits_{j\in\N}\abs{x_j}.
+\end{align*}
+Der Raum, auf dem sich diese Norm definieren lässt, heißt
+\begin{align*}
+l^p := \setdef{(x_n)\text{ komplexe Folge}}{\norm{(x_n)}_p < \infty}.
+\end{align*}
+Die Normeigenschaften (N1)-(N3) sind klar, (N4) folgt mittels der Minkowski
+Ungleichung. Jeder $l^p$ ist ein Banachraum.
+\item $E=C([0,1]\to\C)$, der Raum der stetigen Funktionen auf dem Intervall
+$[0,1]$, lässt sich ebenfalls mit einer $p$-Norm versehen,
+\begin{align*}
+\norm{f}_p :=
+\begin{cases}
+ \left(\int_0^1 \abs{f(x)}^p \dx\right)^{1/p},& 1\le p <\infty,\\
+ \max\limits_{0\le x\le 1} \abs{f(x)}, & p = \infty.
+\end{cases}
+\end{align*}
+Da $[0,1]$ kompakt und $f\in E$ stetig ist, ist die $p$-Norm stets endlich.
+Die $2$-Norm bildet einen wichtigen Spezialfall in der Theorie der Hilberträume.
+
+Eine leichte Übung zeigt, dass $(E,\norm{\cdot}_\infty)$ Banachraum ist,
+während $(E,\norm{\cdot}_p)$ für $1\le p <\infty$ kein Banachraum ist.
+\item Sei $k\in\N$ fest, $E:=C^k([0,1]\to\C)$ und
+\begin{align*}
+\norm{f}_{j,p}^{\sim} := \norm{\frac{\diffd^j f}{\dx^j}}_p,\qquad
+j=1,\ldots,k.
+\end{align*}
+Offensichtlich ist $\norm{f}_{j,p}^{\sim}$ lediglich eine
+Halbnorm. Mittels der Konstruktion
+\begin{align*}
+\norm{f}_{k,p} := \sum\limits_{j=1}^k \norm{f}_{j,p}^{\sim} + \norm{f}_p
+\end{align*}
+erhalten wir eine Norm auf $E$.\bsphere
+\end{bspenum}
+\end{bsp}
+
+\begin{lem}
+\label{prop:1.6}
+In $(E,\norm{\cdot})$ gelten die Aussagen:
+\begin{propenum}
+  \item Der Grenzwert einer Folge ist eindeutig.
+  \item\label{prop:1.6:2} Umgekehrte Dreiecksungleichung,
+\begin{align*}
+\abs{\norm{x}-\norm{y}}\le\norm{x-y},\qquad x,y\in E.
+\end{align*}
+\item Seien $(x_n)$, $(y_n)$ Folgen in $E$ und $\alpha\in\K$. Gilt
+$\lim\limits_{n\to\infty} x_n = x$, $\lim\limits_{n\to\infty} y_n = y$, so gilt
+ebenfalls
+\begin{equivenum}
+  \item $\lim\limits_{n\to\infty} (x_n+y_n) = x+y$,
+  \item $\lim\limits_{n\to\infty} (\alpha\cdot x_n) = \alpha\lim\limits_{n\to\infty}
+x_n$.
+\end{equivenum} 
+D.h. Addition und skalare Multiplikation sind stetig bezüglich der Norm.
+\item $\lim\limits_{n\to\infty} x_n = x \Rightarrow \lim\limits_{n\to\infty}
+\norm{x_n} = \norm{x}$.
+\item Sei $(x_n)$ Cauchyfolge, so ist $(\norm{x_n})$ konvergent.\fishhere
+\end{propenum}
+\end{lem}
+\begin{proof}
+\begin{proofenum}
+  \item Angenommen $x_n\to x$ und $x_n\to y$, so gilt
+\begin{align*}
+\norm{x-y} = \norm{x-x_n-(y-x_n)} \le \norm{x-x_n} + \norm{y-x_n} \to 0.
+\end{align*}
+Da die linke Seite unabhängig von $n$ ist, gilt $\norm{x-y}=0$, d.h. $x=y$.
+\item Klar.
+\item Betrachte $\norm{(x+y)-(x_n+y_n)} \le \norm{x-x_n}+\norm{y-y_n} \to
+0.$
+\item $\abs{\norm{x_n}-\norm{x}} \overset{\ref{prop:1.6:2}}{\le} \norm{x_n-x}
+\to 0$.
+\item $\abs{\norm{x_n}-\norm{x_m}} \le \norm{x_n-x_m} < \ep$ für $n,m$
+hinreichend groß. Also ist $(\norm{x_n})$ Cauchy und daher konvergent.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{lem}
+\label{lem:1.7}
+Für $(E,\norm{\cdot})$ sind äquivalent,
+\begin{equivenum}
+  \item\label{lem:1.7:1} $E$ ist vollständig,
+  \item\label{lem:1.7:2} $(x_n)\in E^\N$ und $\sum\limits_{n=1}^\infty
+  \norm{x_n} < \infty$
+$\Rightarrow \sum\limits_{j=1}^n x_j$\text{ konvergent}.\fishhere
+\end{equivenum}
+\end{lem}
+\begin{proof}
+\ref{lem:1.7:1}$\Rightarrow$\ref{lem:1.7:2} : Sei $y_k :=
+\sum\limits_{n=1}^k x_n$ und $k>l$, dann ist
+\begin{align*}
+\norm{y_k-y_l} = \norm{\sum\limits_{n=l}^k x_n} \le \sum\limits_{n=l}^k
+\norm{x_n} < \ep
+\end{align*}
+für $k,l$ hinreichend groß, da die Reihe $\sum\limits_{n=1}^\infty \norm{x_n}$
+konvergiert. Also ist $(y_k)$ Cauchy und aufgrund von \ref{lem:1.7:1}
+konvergent.
+
+\ref{lem:1.7:2}$\Rightarrow$\ref{lem:1.7:1}: Sei $(y_k)$ Cauchy. Wähle eine
+Teilfolge $(y_{k_l})_{l\in\N}$ mit
+\begin{align*}
+&\norm{y_{k_1}-y_k} < \frac{1}{2}, && \text{für }k>k_1,\\
+&\norm{y_{k_2}-y_k} < \frac{1}{4}, && \text{für }k>k_2, k_2 >k_1,\\
+&\quad\vdots\\
+&\norm{y_{k_l}-y_{k}} < \frac{1}{2^l} , && \text{für }k>k_l, k_l >k_{l-1}.
+\end{align*}
+Setze nun $x_l := y_{k_{l+1}} - y_{k_l}$, dann ist
+\begin{align*}
+\sum\limits_{l=1}^\infty \norm{x_l} \le \sum\limits_{l=1}^\infty \frac{1}{2^l}
+< \infty,
+\end{align*}
+also existiert $\sum\limits_{k=1}^\infty x_k\in E$.
+Weiterhin gilt
+\begin{align*}
+\sum\limits_{l=1}^n x_l = y_{k_{n+1}} - y_{k_1},
+\end{align*}
+also konvergiert auch $y_{k_{n+1}} = \sum\limits_{l=1}^n x_k + y_{k_1}$ in $E$.
+$(y_k)$ ist Cauchy und besitzt eine konvergente Teilfolge, ist also selbst
+konvergent.\qedhere
+\end{proof}
+
+\section{Vergleich von Normen}
+
+In diesem kurzen Abschnitt soll alles Notwendige erarbeitet werden, um mit
+mehreren Normen auf demselben Raum zu arbeiten, sowie Kriterien, um Ergebnisse
+bezüglich der einen Norm auf die andere zu übertragen. 
+
+\begin{defn}
+\label{defn:1.8}
+Seien $\norm{\cdot}$, $\norm{\cdot}^\sim$ zwei Normen  auf $E$.
+\begin{defnenum}
+  \item $\norm{\cdot}$ heißt \emph{feiner}\index{Norm!Gröber, feiner} als
+  $\norm{\cdot}^\sim$, falls
+\begin{align*}
+\exists c > 0 \forall x\in E : \norm{x}^\sim \le c \norm{x}.
+\end{align*}
+\item $\norm{\cdot}$ und $\norm{\cdot}^\sim$ heißen
+\emph{äquivalent}\emph{Norm!Äquivalenz}, wenn $\norm{\cdot}$ feiner als
+$\norm{\cdot}^\sim$ und $\norm{\cdot}^\sim$ feiner als $\norm{\cdot}$, d.h.
+\begin{align*}
+\exists c_1,c_2 > 0 \forall x\in E : c_1 \norm{x} \le \norm{x}^\sim \le
+c_2\norm{x}.\fishhere
+\end{align*}
+\end{defnenum}
+\end{defn}
+
+\begin{bemn}
+Die Äquivalenz von Normen bildet eine Äquivalenzrelation.\maphere
+\end{bemn}
+
+\begin{prop}
+\label{prop:1.9}
+\begin{propenum}
+  \item Ist $\norm{\cdot}$ feiner als $\norm{\cdot}^\sim$ und $(x_n)$
+  konvergent (Cauchy) bezüglich $\norm{\cdot}$, dann auch bezüglich
+  $\norm{\cdot}^\sim$.
+  \item Sind $\norm{\cdot}$ und $\norm{\cdot}^\sim$ äquivalent, so ist $(x_n)$
+  genau dann konvergent (Cauchy) bezüglich $\norm{\cdot}$, falls $(x_n)$
+  konvergent (Cauchy) bezüglich $\norm{\cdot}^\sim$.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+Sei $x_n\to x$ bezüglich $\norm{\cdot}$, dann gilt
+\begin{align*}
+\norm{x_n-x}^\sim \le c \norm{x_n-x} \to 0.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{bsp}
+\label{bsp:1:10}
+Sei $E:= C([0,1]\to\C)$, sowie
+\begin{align*}
+&\norm{f}_1 := \int\limits_0^1 \abs{f(x)}\dx,\\
+&\norm{f}_\infty := \sup\limits_{x\in[0,1]} \abs{f(x)},\\
+&f_n = x^n.
+\end{align*}
+\begin{bspenum}
+  \item $\norm{\cdot}_\infty$ ist feiner als $\norm{\cdot}_1$, denn
+\begin{align*}
+\norm{f}_1 = \int\limits_0^1 \abs{f(x)}\dx \le \norm{f}_\infty.
+\end{align*}
+\item $\norm{\cdot}_1$ ist nicht feiner als $\norm{\cdot}_\infty$. Zeige dazu,
+\begin{align*}
+\forall c > 0 \exists f\in E : \norm{f}_\infty > c\norm{f}_1. 
+\end{align*}
+Betrachte dazu die Funktionenfolge $(f_n)$
+\begin{align*}
+\Rightarrow \norm{f_n}_\infty = 1,\quad \norm{f_n}_1 =
+\frac{1}{n+1}.
+\end{align*}
+\item $(f_n)$ konvergiert bezüglich $\norm{\cdot}_1$ aber nicht bezüglich
+$\norm{\cdot}_\infty$.
+
+$f(x) = 0$ ist die Grenzfunktion bezüglich $\norm{\cdot}_1$, denn
+\begin{align*}
+\norm{f_n-f} = \frac{1}{n+1}\to 0.
+\end{align*}
+Zeige nun, dass $f_n$ bezüglich $\norm{\cdot}_\infty$ nicht Cauchy ist, d.h.
+\begin{align*}
+\exists \ep > 0 \forall N\in\N \exists n,m > N : \norm{f_n-f_m}_\infty > \ep.
+\end{align*}
+Setze $\ep =\frac{1}{4}$. Zu beliebigem $n>N$ wähle $x_0\in[0,1)$ mit $f_n(x_0)
+= x_0^n > \frac{1}{2}$. Wähle $m>n$ mit $f_m(x_0) = x_0^m < \frac{1}{4}$, dann
+gilt $\norm{f_n-f_m} > \frac{1}{4}$.\bsphere
+\end{bspenum}
+\end{bsp}
+
+\begin{prop}
+\label{prop:1.11}
+Ist $L$ endlichdimensional, dann sind alle Normen auf $L$ äquivalent.\fishhere
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item Sei $\BB=\setd{b_1,\ldots,b_n}$ Basis von $L$. Setze
+\begin{align*}
+\norm{x}_1 = \norm{\sum\limits_{j=1}^n x_j b_j}_1 := \sum \abs{x_j}
+\end{align*}
+als Vergleichsnorm.
+\item Sei $\norm{\cdot}$ Norm auf $L$. Dann ist $\norm{\cdot}_1$ feiner
+\begin{align*}
+\norm{x} = \norm{\sum\limits_{j=1}^n x_j b_j} \le
+\sum\limits_{j=1}^n \abs{x_j} \norm{b_j} \le
+\underbrace{\max_j \norm{b_j}}_{>0} \cdot \sum\limits_{j=1}^n \abs{x_j}.
+\end{align*}
+\item Sei $\norm{\cdot}$ Norm auf $L$. Dann ist $\norm{\cdot}$ feiner als
+$\norm{\cdot}_1$.
+Die Norm $\norm{\cdot}$ ist als Abbildung
+\begin{align*}
+f : (L,\norm{\cdot}_1) \to \R, \quad x\mapsto \norm{x} =
+\norm{\sum\limits_{j=1}^n x_j b_j}
+\end{align*}
+stetig, denn für $x,y\in L$ gilt,
+\begin{align*}
+\abs{f(x)-f(y)} &= 
+\abs{\norm{\sum\limits_{j=1}^n x_j b_j}-\norm{\sum\limits_{j=1}^n y_j b_j}}
+\le \norm{\sum\limits_{j=1}^n (x_j-y_j)b_j}\\ & \le
+\sum\limits_{j=1}^n \abs{x_j-y_j}\norm{b_j} \le
+\max_j \norm{b_j}\cdot\sum\limits_{j=1}^n \abs{x_j-y_j} \\ &= c \norm{x-y}_1
+\end{align*}
+Nun ist die Menge $S=\setdef{x\in L}{\norm{x}_1 = 1}$ beschränkt und
+abgeschlossen bezüglich der $\norm{\cdot}_1$ Norm, also kompakt. $f$
+nimmt daher auf $S$ sein Minimum an, d.h.
+\begin{align*}
+\exists \xi\in S \forall x\in S : f(x) \ge f(\xi). 
+\end{align*}
+Da $\xi\in S$ gilt $\xi\neq 0$ und damit folgt für $0\neq x\in L$,
+\begin{align*}
+\norm{x} = \norm{\sum\limits_{j=1}^n x_j b_j} = \left(\sum\limits_{l=1}^n
+\abs{x_l}\right)
+\norm{\sum\limits_{j=1}^n \frac{x_j}{\sum\limits_{l=1}^n \abs{x_l}}b_j}
+\ge \norm{x}_1 \underbrace{f(\xi)}_{> 0}.
+\end{align*}
+\item Seien nun $\norm{\cdot}$ und $\norm{\cdot}^\sim$ zwei Normen auf $L$,
+dann gilt
+\begin{align*}
+\exists c_1,c_2,c_3,c_4 > 0 :
+\norm{x} \le c_1 \norm{x}_1 \le c_2 \norm{x}^\sim \le c_3 \norm{x}_1 \le c_4
+\norm{x}.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\section{Topologische Grundbegriffe}
+
+Es folgen einige topologische Begriffe für normierte Räume. Nicht alle Aussagen
+lassen sich auf einen metrischen bzw. allgemeinen topologischen Raum übertragen.
+
+\begin{defn}
+\label{defn:1.12}
+Sei $(E,\norm{\cdot})$ ein normierter Raum, $X\subseteq E$.
+\begin{defnenum}
+  \item $K_r(x) := \setdef{y\in E}{\norm{x-y} < r}$
+  \emph{offene Kugel} mit Radius $r (>0)$.
+  \item $x\in E$ heißt \emph{innerer Punkt}\index{Innerer Punkt} von $X$,
+  falls
+\begin{align*}
+\exists r > 0 : K_r(x) \subseteq X.
+\end{align*}
+\item $X$ heißt \emph{offen}\index{Menge!offen}, falls
+\begin{align*}
+\forall x\in X : x\text{ ist innerer Punkt von $X$}.
+\end{align*}
+\item $x\in E$ heißt \emph{Häufungspunkt}\index{Häufungspunkt}\item  von $X$, falls
+\begin{align*}
+\forall r>0 : K_r(x)\cap X\setminus \setd{x} \neq \emptyset
+\end{align*}
+oder äquivalent: Es existiert eine Folge $(x_n)$ in $X$ mit $x_n\to x$ und
+$x_n\neq x$.
+\item $X$ heißt \emph{abgeschlossen}\index{Menge!abgeschlossen}, wenn $X$ alle
+seine Häufungspunkte enthält.
+\item $\overline{X}:=X\cup\setd{\text{Häufungspunkte von }X}$ heißt
+\emph{Abschluss} von $X$. \\
+$\overline{X}$ ist abgeschlossen und die kleinste abgeschlossene Menge, die $X$
+enthält.
+\item $Y\subseteq X\subseteq E$ heißt \emph{dicht}\index{Menge!dicht} in $X$,
+falls $\overline{Y}\supseteq X$.
+\item $X$ heißt \emph{kompakt}\index{Menge!kompakt}, wenn jede offene
+Überdeckung $(\OO_\alpha)$, (d.h. ein System offener Mengen $O_\alpha$, $\alpha\in\AA$ Indexmenge, mit
+ $X\subseteq \bigcup_\alpha O_\alpha$) eine endliche Teilmenge 
+ $\setd{O_{\alpha_1},\ldots,O_{\alpha_n}}$ besitzt, die bereits $X$ überdeckt.\\
+ Oder hier äquivalent: Wenn jede Folge $(x_n)$ in $X$ eine in $X$ konvergente
+ Teilfolge enthält.
+ \item Seien $(E_1,\norm{\cdot}_1)$, $(E_2,\norm{\cdot}_2)$ normierte Räume.
+ Eine Abbildung
+ \begin{align*}
+ f: E_1\to E_2,
+ \end{align*}
+heißt \emph{stetig}\index{Abbildung!stetig} in $x_0\in E$, falls
+\begin{align*}
+\forall \ep > 0 \exists \delta > 0 \forall x \in E_1: \norm{x-x_0}_1 < \delta
+\Rightarrow \norm{f(x)-f(x_0)}_2 < \ep.
+\end{align*}
+Oder äquivalent: Wenn für jede Folge $(x_n)$ in $E_1$ gilt
+\begin{align*}
+x_n \to x_0 \Rightarrow f(x_n)\to f(x_0).
+\end{align*}
+$f$ heißt \emph{stetig}, wenn $f$ in jedem $x\in E_1$ stetig
+ist.\fishhere
+\end{defnenum}
+\end{defn}
+
+\section{Neue Räume aus alten}
+
+\begin{defn}[Direkte Summe]
+\label{defn:1.13}
+Seien $(E_1,\norm{\cdot}_1),(E_2,\norm{\cdot}_2)$ normierte Räume, so ist
+\begin{align*}
+&E_1\oplus E_2 := \setdef{(x,y)}{x\in E_1,y\in E_2},\\
+&\norm{(x,y)} := \norm{x}_1 + \norm{x}_2
+\end{align*}
+ein normierter Raum\index{Vektorraum!Direkte Summe}. Sind $E_1,E_2$ Banachräume,
+so ist auch $E_1\oplus E_2$ Banachraum.\fishhere
+\end{defn}
+
+\begin{defn}[Quotientenraum]
+\label{defn:1.14}
+Sei $F$ ein linearer Unterraum von $E$. Setze $x\sim y\Leftrightarrow x-y\in
+F$, so ist $\sim$ eine Äquivalenzrelation.
+\begin{align*}
+E/F  := \setdef{[x]}{x\in E}
+\end{align*}
+wird zum Quotientenraum\index{Vektorraum!Quotientenraum} mit Addition
+$[x]+[y]:=[x+y]$ und skalarer Multiplikation $\alpha[x]=[\alpha x]$.\fishhere
+\end{defn}
+
+\begin{prop}
+\label{prop:1.15}
+Sei $(E,\norm{\cdot})$ ein normierter Raum, $F$ abgeschlossener linearer
+Unterraum von $E$ und
+\begin{align*}
+\norm{[x]}_0 := \inf\setdef{\norm{x+z}}{z\in F} = \inf\setdef{\norm{y}}{y\in
+[x]}.
+\end{align*}
+Dann gelten
+\begin{propenum}
+  \item $\norm{\cdot}_0$ ist Norm auf $E/F$.
+  \item Ist $E$ Banachraum, so ist auch $E/F$ Banachraum.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item $\norm{[x]}_0$ ist unabhängig vom gewählten Vertreter von $x$,
+  denn
+\begin{align*}
+\norm{[x]}_0 :=  \inf\setdef{\norm{y}}{y\in
+[x]]}.
+\end{align*}
+$\norm{[x]}_0$ ist Norm. (N1) ist offensichtlich erfüllt. (N2): Sei
+$\norm{[x]}_0 = 0$, dann existiert eine Folge $(z_n)$ in $F$ mit
+$\norm{x+z_n}\to 0$, d.h. $z_n\to-x\in F$ also ist $[x]=[0]$.
+(N3): Zunächst ist $\norm{0\cdot[x]}_0 = \norm{[0\cdot x]}_0 = 0$. Für
+$\alpha\neq0$ gilt weiterhin,
+\begin{align*}
+\norm{\alpha[x]}_0 &= \norm{[\alpha x]}_0 = \inf\setdef{\norm{\alpha x +
+z}}{z\in F} \\ &= \abs{\alpha}\setdef{\norm{x+\frac{1}{\alpha}z}}{z\in F} =
+\abs{\alpha}\norm{[x]}_0.
+\end{align*}
+(N4): Sei $\ep>0$, dann existieren $z_1,z_2\in F$ mit
+\begin{align*}
+ \norm{x+z_1} \le \norm{[x]}_0+\ep,\quad
+\norm{y+z_2} \le \norm{[y]}_0 + \ep.
+\end{align*}
+Somit erhalten wir
+\begin{align*}
+\norm{[x]+[y]}_0 &= \norm{[x+y]}_0
+= \inf\setdef{\norm{x+y+z}}{z\in F}\\
+&\le \norm{x+z_1+y+z_2}
+\le \norm{x+z_1} + \norm{y+z_2}
+\\ &\le \norm{[x]}_0 + \norm{[y]}_0 + 2\ep
+\end{align*}
+Da $\ep$ beliebig war, folgt die Dreiecksungleichung.
+\item Sei $[x_n]$ Folge in $E/F$ mit $\sum\limits_{j=1}^\infty \norm{[x_n]}_0
+<\infty$. Zu $n\in\N$ wähle jeweils einen Vertreter $x_n\in E$, so dass
+\begin{align*}
+&\norm{x_n} \le \norm{[x_n]_n}_0 + \frac{1}{2^n},\\
+\Rightarrow & \sum\limits_{n=1}^\infty \norm{x_n} < \infty. 
+\end{align*} 
+$E$ ist Banachraum, daher ist nach Lemma \ref{lem:1.7} $y=\sum\limits_{j=1}^n
+x_n$ konvergent. Sei nun $N\in\N$, so gilt
+\begin{align*}
+\norm{\sum\limits_{j=1}^N [x_n] - [y]}_0 = \norm{\nrm{\sum\limits_{j=1}^N x_n
+- y}}_0 \le \norm{\sum\limits_{j=1}^N x_n-y} \to 0,\quad N\to \infty,
+\end{align*}
+d.h. $\sum\limits_{j=1}^N [x_n] = [y]$ bezüglich $\norm{\cdot}_0$.
+Ebenfalls mit Lemma \ref{lem:1.7} folgt, $E/F$ ist vollständig.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Vervollständigung]
+\index{Vervollständigung}
+\label{prop:1.16}
+Sei $(E,\norm{\cdot})$ ein normierter Raum. Dann existiert ein Banachraum
+$(F,\norm{\cdot}_F)$, so dass $E$ mit einem dichten linearen Unterraum
+identifiziert werden kann. D.h. es existiert eine lineare, normerhaltende
+Abbildung,
+\begin{align*}
+j: E\to F,
+\end{align*}
+mit $j(E)$ ist dicht in $F$. $j$ ist dann insbesondere injektiv.\fishhere
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item Betrachte dazu den Raum der Cauchyfolgen auf $E$,
+\begin{align*}
+\hat{F} := \setdef{(x_n)\in E^\N}{(x_n)\text{ ist Cauchy}}.
+\end{align*}
+Dieser Raum ist linear und lässt sich mit der Halbnorm
+\begin{align*}
+\norm{(x_n)}^\land := \lim\limits_{n\to\infty} \norm{x_n}_E
+\end{align*}
+versehen, denn für jede Cauchyfolge konvergiert die Folge $(\norm{x_n})$.
+\item Sei
+\begin{align*}
+\hat{N} := \setdef{(x_n)\in E^\N}{(x_n)\text{ Nullfolge}}
+\end{align*}
+der Raum der Nullfolgen. Setze $F=\hat{F}/\hat{N}$ und
+\begin{align*}
+\norm{[x_n]}_F &:= \inf\setdef{\norm{(x_n)-(z_n)}^\land}{(z_n)\in\hat{N}}\\
+&= \inf\setdef{\lim\limits_{n\to\infty}\norm{y_n}_E}{(x_n)-(y_n)\in\hat{N}}.
+\end{align*}
+Eine äquivalente Formulierung erhalten wir, wenn wir $\hat{x}=(x_n)$ setzen,
+\begin{align*}
+\norm{[\hat{x}]}_F :=
+\inf\setdef{\norm{\hat{y}}^\land}{\hat{x}-\hat{y}\in\hat{N}} =
+\norm{\hat{x}}^\land.
+\end{align*}
+\textit{$\norm{\cdot}_F$ ist Norm}. (N1),(N3),(N4) sind klar, da
+$\norm{\cdot}^\land$ Halbnorm. (N2): Des Weiteren gilt $\norm{[\hat{x}]}_F = 0\Leftrightarrow
+\norm{\hat{x}}^\land = 0$, d.h. $\hat{x}\in\hat{N}$ und daher $[\hat{x}] = [0]$.
+\item
+Sei $j: E\to F, x\mapsto (x,x,x,\ldots)$. $j$ ist offensichtlich linear und
+\begin{align*}
+\norm{j(x)}_F = \lim\limits_{n\to\infty} \norm{x}_E = \norm{x}_E.
+\end{align*}
+\item \textit{$j(E)$ ist dicht in $E$}. Sei $[\hat{x}]\in F=\hat{F}/\hat{N}$,
+dann ist $\hat{x}=(x_n)$ Cauchy in $E$. Nun ist
+\begin{align*}
+\norm{j(x_m)-[\hat{x}]}_F = \norm{[\hat{y}_m] - [\hat{x}]}_F
+= \norm{\nrm{\hat{y}_m-\hat{x}}}_F = \norm{(x_m-x_n)}^{\land}.
+\end{align*}
+Es gilt
+\begin{align*}
+\lim\limits_{n\to\infty} \norm{x_m-x_n} < \ep,
+\end{align*}
+für $m> N_\ep$, also liegt $j(E)$ dicht in $F$.
+\item \textit{$F$ ist vollständig}. Sei $([\hat{x}_n])_{n\in\N}$ Cauchyfolge in
+$F$, so ist $\hat{x}_n=(y_k^{(n)})_{k\in\N}$ Cauchyfolge in $E$ und da
+$\norm{[\hat{x}]}_F = \norm{\hat{x}}^\land$, ist $\hat{x}_n$ Cauchyfolge in
+$\hat{F}$. Somit gilt,
+\begin{align*}
+&\forall n\in\N \forall \ep > 0 \exists K_{n,\ep} \forall k,l \ge K_{n,\ep}
+\norm{y_k^{(n)}-y_l^{(n)}}_E < \ep,\tag{*}\\
+&\forall \ep > 0 \exists N_\ep \in\N \forall n,m>N_\ep :
+\norm{\hat{x}_n-\hat{x}_m}^\land <\ep\tag{**}.
+\end{align*}
+Setze nun $y_k:=y_{K_{k,1/k}}^{(k)}$, $y:=(y_k)_{k\in\N}$, so ist $(y_k)$
+Cauchyfolge in $E$, denn
+\begin{align*}
+\norm{y_k-y_l}_E &= \norm{y_{K_{k,1/k}}^{(k)}-y_{K_{l,1/l}}^{(l)}}_E\\
+&\le \underbrace{\norm{y_{K_{k,1/k}}^{(k)}-y_j^{(k)}}_E}_{(1)} +
+\underbrace{\norm{y_j^{(k)}-y_j^{(l)}}_E}_{(2)} +
+\underbrace{\norm{y_j^{(l)}-y_{K_{l,1/l}}^{(l)}}_E}_{(3)}.
+\end{align*}
+Sei $\ep > 0$, wähle $j$ so, dass $j> \max\setd{K_{k,1/k},K_{l,1/l},N_\ep}$, so
+sind nach (*) $(1)<\frac{1}{k}$ und $(3)<\frac{1}{l}$. Für eventuell noch
+größeres $j$ gilt außerdem
+\begin{align*}
+(2) = \norm{y_j^{(k)}-y_j^{(l)}}_E \le \lim\limits_{j\to\infty}
+\norm{y_j^{(k)}-y_j^{(l)}}_E + \ep = \norm{\hat{x}_k - \hat{x}_l}^\land + \ep.
+\end{align*}
+Wählen wir nun $k,l>N_\ep$ so erhalten wir nach (**) 
+\begin{align*}
+\norm{y_k-y_l}_E \le \frac{1}{k} + 2\ep + \frac{1}{l},\qquad \text{für }k,l >
+N_\ep.
+\end{align*}
+also ist $(y_k)$ Cauchy in $E$ und daher $[\hat{y}]\in F$.
+
+Um die Konvergenz zu zeigen, betrachte
+\begin{align*}
+\norm{\hat{x}_n - \hat{y}}^\sim &= \lim\limits_{k\to\infty}
+\norm{y_k^{(n)}-y_{K_{k,1/k}}^{(k)}}_E\\
+&\le\lim\limits_{k\to\infty}
+\underbrace{\norm{y_k^{(n)}-y_{K_{k,1/k}}^{(n)}}_E}_{(*): < \frac{1}{k}} +
+\underbrace{\norm{y_{K_{k,1/k}}^{(n)}- y_{K_{k,1/k}}^{(k)}}_E}_{(**): <
+\frac{1}{k}} < \frac{2}{k}
+\end{align*}
+für $k,l$ hinreichend groß. Also $[\hat{x}_n]\to [\hat{y}]$ in $F$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(0,-2.64)(6.6,2.68)
+\pscircle(0.62,1.48){0.58}
+\pscircle(4.26,0.92){1.28}
+\pscircle(1.62,-1.36){1.28}
+\psbezier[linecolor=darkblue]{->}(1.18,1.94)(1.66,2.4)(2.7,2.4)(3.26,2.0)
+
+\rput(2.21,2.485){\color{gdarkgray}Bilde Cauchyfolgen}
+\psbezier[linecolor=darkblue]{->}(0.46,1.14)(0.96,0.54)(0.54,-0.1)(0.96,-0.5)
+
+\rput(0.56,0.505){\color{gdarkgray}$j$}
+\psline[linecolor=yellow](3.26,0.14)(5.2,1.76)
+
+\rput(4.63,2.405){\color{gdarkgray}$\hat{F}$}
+\rput(4.61,0.885){\color{gdarkgray}$\hat{N}$}
+\psbezier[linecolor=darkblue]{->}(4.06,-0.42)(3.8,-1.16)(3.44,-1.3)(2.98,-1.34)
+
+\psline[linecolor=yellow](0.38,-1.14)(1.38,-0.12)
+\psline[linecolor=yellow](0.36,-1.52)(1.8,-0.12)
+\psline[linecolor=yellow](0.44,-1.82)(2.12,-0.2)
+\psline[linecolor=yellow](0.58,-2.1)(2.38,-0.36)
+\psline[linecolor=yellow](0.76,-2.3)(2.58,-0.54)
+\psline[linecolor=yellow](1.02,-2.48)(2.76,-0.8)
+\psline[linecolor=yellow](1.28,-2.58)(2.86,-1.08)
+\psline[linecolor=yellow](1.66,-2.62)(2.88,-1.48)
+
+\rput(4.47,-0.575){\color{gdarkgray}bilde}
+\rput(5.2,-1.015){\color{gdarkgray}Äquivalenzklassen}
+\psdots[dotsize=0.12](0.4,1.2)
+
+\rput(0.11,2.105){\color{gdarkgray}$E$}
+\rput(2.64,-2.495){\color{gdarkgray}$F$}
+\rput(1.66,0.14){\color{gdarkgray}$\hat{x}+\hat{N}$}
+\end{pspicture} 
+\caption{Zur Konstruktion des Raumes $F=\hat{F}/\hat{N}$.}
+\end{figure}
+
+
+\begin{bem}
+\label{bem:1.17}
+Wir werden im nächsten Kapitel sehen, dass diese
+Vervollständigung bis auf Isomorphie auch eindeutig ist.\maphere
+\end{bem}
+
+\begin{bsp}
+\label{bsp:1.18}
+\begin{bspenum}
+  \item $E=l_\text{abb}:=\setdef{(x_n)\in \C^\N}{\exists N\in\N \forall n> N :
+  x_n =0}$. Vervollständigung bezüglich $\norm{\cdot}_p$ ist $l_p$. $(1\le p <
+  \infty)$. Für $p=\infty$ ist die Vervollstängigung bezüglich
+  $\norm{\cdot}_\infty$ der Raum der Nullfolgen.
+  \item $P([a,b]):=\text{Menge der komplexen Polynome als Funktion
+  }[a,b]\to\C$. Die Vervollständigung bezüglich $\norm{\cdot}_\infty$ ist
+  $C([a,b]\to\C)$ (siehe Weierstraßscher Approximationssatz).
+  \item Sei $O\subseteq\R^n$ offen. Für stetiges $f:O\to\C$ setze
+\begin{align*}
+\norm{f}_p &:= \left(\int\limits_O \abs{f(x)}^p \right)^{1/p},\\
+E&:=C_0^\infty(O\to C) \\ &:= \setdef{f\in C^\infty(O\to\C)}{\supp f
+\text{ kompakt und }\supp f \subseteq O}.
+\end{align*}
+Die Vervollständigung ist der $\LL^p(O)$.
+\item Sei $O\subseteq \R^n$ offen, $1\le p <\infty$ und $k\in\N$.
+\begin{align*}
+&E:= \setdef{f\in C^k(\overline{O}\to C)}{\norm{f}_{k,p}< \infty},\\
+&\norm{f}_{k,p} := \sum\limits_{\atop{(\alpha_1,\ldots,\alpha_k)\in
+\N_0}{\abs{\alpha_1}+\ldots+\abs{\alpha_k}\le k}}
+\norm{\frac{\partial^{\alpha_1}\cdots \partial^{\alpha_k}}{\partial
+x_1^{\alpha_1}\cdots \partial x_n^{\alpha_n}} f}_p. 
+\end{align*}
+Die Vervollständigung ist der Sobolevraum $W^{k,p}(O)$. Die Elemente dieses
+Raumes sind in einem verallgemeinerten Sinne differenzierbar (schwache
+Ableitung, Distributionenableitung, starke Ableitung).\\
+Sobolevsche Einbettung:
+Für $k>\frac{n}{2}$ gilt $W^{k,2}(O)\subseteq C(\overline{O}\to\C)$, falls
+$\partial O$ ``genügend gut''.\bsphere
+\end{bspenum}
+\end{bsp}
+

@@ -1,0 +1,1213 @@
+\chapter{Lineare Operatoren auf normierten Räumen}
+
+Sofern nicht anders angegeben seien $E$ und $F$ normierte Räume mit Normen
+$\norm{\cdot}_E$, $\norm{\cdot}_F$. Sollte aus dem Zusammenhang hervorgehen,
+welcher Raum gemeint ist, wird auch nur $\norm{\cdot}$ verwendet.
+
+\section{Spektraltheorie beschränkter Operatoren}
+
+In diesem Abschnitt studieren wir zunächst die beschränkten Operatoren. Meißt
+sind die unbeschränkten Operatoren (wie z.B. Differentialoperatoren)
+von größerem Interesse, in einigen Fällen lassen sie sich jedoch zu
+einem beschränkten Operator invertieren, auf den wir dann die hier entwickelte
+Theorie anwenden können.
+
+\begin{defn}
+\label{defn:6.1}
+Sei $E$ Banachraum und $A\in\LL(E)$.
+\begin{defnenum}
+  \item $\lambda\in\K$ heißt \emph{regulär} bezüglich $A$, falls
+\begin{align*}
+A-\lambda\Id : E\to E
+\end{align*}
+bijektiv. (Dann ist $(A-\lambda\Id)^{-1}\in\LL(E)$)
+\item Die Menge
+\begin{align*}
+\rho(A) := \setdef{\lambda\in\K}{\lambda\text{ regulär bezüglich $A$}}
+\end{align*}
+heißt \emph{Resolventenmenge}\index{Resolventen!-Menge} von $A$. Die Abbildung
+\begin{align*}
+R: \rho(A)\to\LL(E),\quad \lambda\mapsto R(\lambda) = (A-\lambda\Id)^{-1}
+\end{align*}
+heißt \emph{Resolventenfunktion}\index{Resolventen!-Funktion} von $A$.
+\item Die Menge
+\begin{align*}
+\sigma(A) := \K\setminus\rho(A)
+\end{align*}
+heißt \emph{Spektrum}\index{Spektrum} von $A$; $\lambda\in\sigma(A)$
+heißt \emph{Spektralwert von $A$}. $\lambda\in\K$ heißt \emph{Eigenwert
+(EW)}\index{Eigen!-wert} von $A$, falls $\ker (A-\lambda\Id)\neq (0)$. Der Kern
+von $A-\lambda\Id$ heißt \emph{Eigenraum}\index{Eigen!-raum} zum EW
+$\lambda$.\fishhere
+\end{defnenum}
+\end{defn}
+
+\begin{bsp}
+\label{bsp:6.2}
+\begin{bspenum}
+  \item Sei $E=\C^n$ und $A\in\LL(E)$, so besitzt $A$ in Koordinaten eine 
+  Darstellung als $n\times n$ Matrix. $\lambda$ ist genau dann
+  Eigenwert, wenn ein $x\neq 0$ existiert mit $Ax=\lambda x$. Dann ist $A-\lambda \Id$ nicht injektiv also $\lambda\in\sigma(A)$.
+
+Ist $\lambda$ kein Eigenwert, dann ist $\ker(A-\lambda\Id)=(0)$ und damit
+$A-\lambda\Id$ injektiv. Die Dimensionsformel besagt nun, dass
+$\dim\ker(A-\lambda\Id)+\dim\im (A-\lambda\Id) = n$, also ist $A-\lambda\Id$
+auch surjektiv und somit $\lambda\in\rho(A)$.
+
+In diesem Fall ist $\sigma(A) := \setdef{\lambda\in\C}{\lambda \text{ ist
+Eigenwert von }A}$ und $\card\sigma(A)\le n$.
+  \item Sei $E=l^2$. Betrachte den Shift-Operator 
+\begin{align*}
+S:(x_1,x_2,\ldots) \mapsto (0,x_1,x_2,\ldots).
+\end{align*}
+$(1,0,0,\ldots)\notin\im (S)$, also ist $S-0\Id$ nicht surjektiv, d.h.
+$0\in\sigma(S)$. Aber $0$ ist kein Eigenwert, denn
+\begin{align*}
+Sx = 0\Leftrightarrow (0,x_1,x_2,\ldots) = 0\Leftrightarrow x=0,
+\end{align*}
+Tatsächlich besitzt $S$ keine Eigenwerte aber $\sigma(S) =
+\overline{K_1(0)}$.\bsphere 
+\end{bspenum}
+\end{bsp}
+
+\begin{lem}
+\label{prop:6.3}
+Seien $E,F$ Banachräume, $T\in\LL(E\to F)$ bijektiv, $S\in\LL(E\to F)$ mit
+$\norm{S-T}< \norm{T^{-1}}^{-1}$, dann ist $S$ bijektiv.\fishhere
+\end{lem}
+\begin{proof}
+Der Beweis wird in den Übungen behandelt.\qedhere
+\end{proof}
+
+\begin{cor}
+\label{prop:6.4}
+$\rho(A)$ ist offen.\fishhere
+\end{cor}
+\begin{proof}
+Sei $\lambda\in\rho(A)$, d.h. $T:=A-\lambda\Id$ ist invertierbar. Mit
+\ref{prop:6.3} folgt, dass $S=A-z\Id$ invertierbar, also $z\in\rho(A)$, falls
+\begin{align*}
+\norm{S-T} = \norm{A-z\Id-(A-\lambda\Id)} = \abs{z-\lambda} <
+\norm{(A-\lambda\Id)^{-1}}^{-1} =: r > 0.
+\end{align*}
+Also ist $K_r(\lambda)\subseteq \rho(A)$.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:6.5}
+Sei $E$ Banachraum, $A\in\LL(E)$. Dann ist die Resolventenfunktion $R$
+analytisch auf $\rho(A)$, d.h. lokal als Potenzreihe mit Koeffizienten in
+$\LL(E)$ entwickelbar:
+\begin{align*}
+\forall \lambda\in\rho(A) \exists r > 0 \forall z\in K_r(\lambda) :
+R(z) = (A-z\Id)^{-1} = \sum\limits_{n=0}^\infty A_n(z-\lambda)^n
+\end{align*}
+mit $A_n\in\LL(E)$.\fishhere
+\end{prop}
+\begin{proof}
+Der Beweis wird in den Übungen behandelt.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:6.6}
+Sei $E$ ein Banachraum über $\C$ und $A\in\LL(E)$. Dann gilt
+\begin{propenum}
+  \item\label{prop:6.6:1} $\sigma(A)\neq \varnothing$,
+  \item\label{prop:6.6:2} $\sigma(A) \subseteq
+  \setdef{z\in\C}{\abs{z}\le\norm{A}}$,
+  \item\label{prop:6.6:3} $\sigma(A)$ ist kompakt.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+``\ref{prop:6.6:2}'': Sei $\abs{\lambda}> \norm{A}$. Wir 
+zeigen, dass $A-\lambda\Id$ invertierbar ist. Dazu wenden wir Satz
+\ref{prop:6.3} auf $T=\Id$ und $S=\Id-\frac{1}{\lambda}A$ an, dann ist $S$
+invertierbar, falls
+\begin{align*}
+\norm{S-T} = \frac{1}{\abs{\lambda}}\norm{A} < \norm{\Id^{-1}}^{-1}
+= 1.
+\end{align*}
+``\ref{prop:6.6:3}'': Aus \ref{prop:6.4} folgt, dass $\sigma(A) = \rho(A)^c$
+abgeschlossen und mit \ref{prop:6.6:2} folgt, dass $\sigma(A)$ beschränkt ist.
+
+``\ref{prop:6.6:1}'': Angenommen $\sigma(A)=\varnothing$, d.h. für jedes
+$\lambda_0\in\C$ ist $A-\lambda_0\Id$ bijektiv. Wir bezeichnen die
+Entwicklung der Resolventenfunktion um $\lambda_0$ als $R_{\lambda_0}$ und
+zeigen nun, dass
+\begin{align*}
+\forall \lambda_0 \in \C \forall f\in E' : f(R_{\lambda_0}(z)) = 0.
+\end{align*} 
+Mit \ref{bem:4.14} folgt somit $\forall z\in\C :
+R_{\lambda_0}(z)=0$, dies ist jedoch ein Widerspruch dazu, dass
+$R(\lambda)=(A-z\Id)^{-1}$.
+
+Sei also $f\in E'$ und $\ph(z)=f(R(z))$, so existiert $\ph:\C\to\C$.
+\begin{defnenum}
+  \item \textit{$\ph$ ist holomorph}. Sei $\lambda_0\in\C$, so existiert ein
+  $\ep >0$, so dass nach \ref{prop:6.5}
+\begin{align*}
+R(\lambda) = \sum\limits_{j=0}^\infty A_n (\lambda-\lambda_0)^j,\qquad
+\text{für } \abs{\lambda-\lambda_0}<\ep.
+\end{align*}
+Da $f$ stetig und linear folgt somit auch
+\begin{align*}
+\ph(\lambda) = \sum\limits_{j=0}^\infty (\lambda-\lambda_0)^j f(A_n),\qquad
+\text{für } \abs{\lambda-\lambda_0}<\ep.
+\end{align*}
+Somit ist $\ph$ in jedem Punkt in eine Potenzreihe entwickelbar, also holomorph.
+\item \textit{$\ph$ ist beschränkt}. Wir zeigen, dass $R(\lambda)$ beschränkt
+ist.
+\begin{enumerate}
+  \item[$\alpha$)]
+Sei $M=\setdef{\lambda\in\C}{\abs{\lambda}\le2\norm{A}}$. $R(\lambda)$ ist
+stetig, also $\sup\limits_{\lambda\in M} \norm{R(\lambda)}<c$.
+  \item[$\beta$)]
+Sei nun $\lambda\in\C$ mit $\abs{\lambda}>2\norm{A}$. Betrachte $\Id =
+\frac{1}{\lambda}\left(A-(A-\lambda\Id)\right)$, dann ist
+\begin{align*}
+R(\lambda) = (A-\lambda\Id)^{-1}\Id =
+\frac{1}{\lambda}\left(A(A-\lambda\Id)^{-1} - \Id\right)
+\end{align*}
+und es folgt,
+\begin{align*}
+&\norm{R(\lambda)} 
+\le \frac{1}{\abs{\lambda}}\left(\norm{A\left(A-\lambda\Id\right)^{-1}}+1\right)
+< \frac{1}{2}\norm{R(\lambda)} + \frac{1}{\abs{\lambda}}\\
+\Rightarrow &\norm{R(\lambda)} < \frac{2}{\abs{\lambda}}\to 0,\qquad
+\abs{\lambda}\to
+\infty
+\end{align*}
+\end{enumerate}
+$\alpha$) und $\beta$) erlauben es uns, den Satz von Liouville anzuwenden, d.h.
+$\ph$ ist konstant. Aus $\beta$) folgt außerdem, $\ph\equiv0$.\qedhere
+\end{defnenum} 
+\end{proof}
+
+\section{Kompakte Operatoren}
+
+\begin{defn}
+\label{defn:6.7}
+$T\in\LL(E\to F)$ heißt \emph{kompakt}\index{Operator!kompakt}, falls
+$\overline{T(K_1(0))}$ kompakt in $F$.
+
+Wir setzten $\KK(E\to F) := \setdef{T:E\to F}{T\text{ ist kompakt}}$,
+$\KK(E):=\KK(E\to E)$.\fishhere
+\end{defn}
+
+\begin{prop}
+\label{prop:6.8}
+\begin{propenum}
+  \item Für $T\in \LL(E\to F)$ sind äquivalent:
+\begin{equivenum}
+  \item\label{prop:6.8:1.1} $T\in\KK(E\to F)$.
+  \item\label{prop:6.8:1.2} Für jede beschränkte Folge $(x_n)$ in $E$ besitzt
+  $(Tx_n)$ eine in $F$ konvergente Teilfolge.
+  \item\label{prop:6.8:1.3} Für jede beschränkte Teilmenge $M\subseteq E$ ist
+  $\overline{T(M)}$ kompakt.
+\end{equivenum}
+\item Seien $T\in\LL(E\to F)$, $S\in\LL(F\to G)$. Ist $T$ oder $S$ kompakt, so
+ auch $S\circ T$.
+ \item Ist $F$ Banachraum, so ist $\KK(E\to F)$ linearer abgeschlossener
+ Teilraum von $\LL(E\to F)$.
+ \item Ist $E$ Banachraum, so ist $\KK(E)$ ein abgeschlossenes Ideal von
+ $\LL(E)$.\fishhere
+\end{propenum}
+\end{prop}
+
+\begin{bemn}[Vorbemerkung.]
+In einem normierten Raum sind Überdeckungs- und Folgenkompaktheit
+äquivalent.\maphere
+\end{bemn}
+
+\begin{proof}
+\begin{propenum}
+  \item ``\ref{prop:6.8:1.1}$\Rightarrow$\ref{prop:6.8:1.2}'': Sei $(x_n)$
+  beschränkt in $E$, so ist $(\norm{x_n})$ beschränkt in $\R$ und besitzt daher
+  eine konvergente Teilfolge $\norm{x_{n_k}}\to c$.
+  Setze $y_k := (1+\norm{x_{n_k}})^{-1}x_{n_k}$, so ist $y_k\in K_1(0)$ und
+  daher besitzt $(Ty_k)$ eine konvergente Teilfolge, $y_{k_l}\to y$. Folglich
+  ist
+\begin{align*}
+Tx_{n_{k_l}} = (1+\norm{x_{n_{k_l}}})y_{n_{k_l}}\to cy.
+\end{align*}
+  
+%     Falls $(x_n)$ eine Teilfolge $(x_{n_k})$ besitzt mit
+%   $x_{n_k}\to 0$, so konvergiert $Tx_{n_k}\to0$, denn $T$ ist stetig.
+%   
+% Habe nun
+%   $(x_n)$ keine gegen Null konvergente Teilfolge. Setze
+%   $y_n:=\frac{x_n}{2\norm{x_n}}$ für $n>N$. $(y_n)$ ist nun Folge in $K_1(0)$
+%   und folglich ist $(Ty_n)$ Folge in $\overline{T(K_1(0))}$, besitzt also eine
+%   konvergente Teilfolge $(Ty_{n_k})$ mit $Ty_{n_k}\to y$ in $F$, also
+% \begin{align*}
+% Tx_{n_k} = 2\norm{x_{n_k}}Ty_{n_k}.
+% \end{align*}
+% $(\norm{x_{n_k}})$ ist beschränkt, besitzt also eine konvergente Teilfolge, also
+% \begin{align*}
+% Tx_{n_{k_l}} \to 2c y.
+% \end{align*} 
+``\ref{prop:6.8:1.2}$\Rightarrow$\ref{prop:6.8:1.3}'':
+Sei $M\subseteq E$ beschränkt und $(y_n)$ Folge in $\overline{T(M)}$. Zeige es
+existiert eine konvergente Teilfolge $(y_{n_k})$. Wähle dazu $\eta_n=Tx_n$ mit
+$x_n\in M$ und $\norm{\eta_n-y_n}<\frac{1}{n}$. $(x_n)$ ist Folge in $M$, also
+beschränkt und mit \ref{prop:6.8:1.2} folgt $Tx_{n_k}\to y$ in $F$.
+Insbesondere $y\in \overline{T(M)}$, also
+\begin{align*}
+y_{n_k} = \underbrace{y_{n_k} - Tx_{n_k}}_{\to 0} + Tx_{n_k},
+\end{align*}
+also $y_{n_k}\to y$.
+
+``\ref{prop:6.8:1.3}$\Rightarrow$\ref{prop:6.8:1.1}'': Spezialisierung.
+\item Sei $(x_n)$ beschränkt in $E$. Ist $T$ kompakt, dann ist $Tx_{n_k}\to y$
+und $S$ ist stetig, also $S\circ Tx_{n_k}\to Sy$. Ist $S$ kompakt, nun ist
+$(Tx_{n})$ beschränkt also $S\circ Tx_{n_k}\to z$ in $G$.
+\item Seien $S,T\in\KK(E\to F)$, $\alpha\in \K$ und $(x_n)$ beschränkte Folge
+in $E$.
+\begin{align*}
+ &T(x_{n_k}) \to y\Rightarrow \alpha T(x_{n_k}) \to \alpha y\\
+ &T(x_{n_k})\to y_1,\quad S(x_{n_k})\to y_2\Rightarrow
+ (S+T)(x_{n_k}) \to y_1+y_2.
+\end{align*}
+Also ist $\KK(E\to F)$ linearer Teilraum von $\LL(E\to F)$.
+
+Sei nun $(T_k)$ Folge in $\KK(E\to F)$, $T\in\LL(E\to F)$ und $\norm{T_k-T}\to
+0$. Sei $(x_n)$ beschränkt in $E$, dann ist $T_1$ kompakt, d.h.
+\begin{align*}
+&T_1(x_n^{(1)})\to y^{(1)}, && (x_n^{(1)}) \text{ Teilfolge von } (x_n).
+\end{align*}
+Sei nun $T_2$ kompakt, dann
+\begin{align*}
+&T_2(x_n^{(2)})\to y^{(2)}, && (x_n^{(2)}) \text{ Teilfolge von } (x_n^{(1)}),
+\end{align*}
+usw. Setze $\xi_n := x_n^{(n)}$ (Diagonalfolge), dann folgt
+\begin{align*}
+\forall k\in\N : T_k(\xi_n)\to y^{(k)}
+\end{align*}
+und $(\xi_n)$ ist Teilfolge von $(x_n)$. Zeige nun $(T\xi_n)$ ist Cauchyfolge,
+\begin{align*}
+\norm{T\xi_n-T\xi_m} &\le \norm{T\xi_n-T_k \xi_n}
++ \norm{T_k\xi_n-T_k\xi_m} + \norm{T_k\xi_m-T\xi_m}\\
+&< \ep\norm{\xi_n} +\norm{T_k\xi_n-T_k\xi_m} + \ep \norm{\xi_m},
+\end{align*}
+für $k$ hinreichend groß. Außerdem ist $(\xi_n)$ konvergent also beschränkt,
+d.h. $\norm{\xi_n}\le c$. Für festes $k$ ist $(T_k\xi_n)_n$ Cauchyfolge da
+konvergent und daher $\norm{T_k\xi_n-T_k\xi_m}<\ep$ für $n,m>N_\ep$, d.h.
+\begin{align*}
+\norm{T\xi_n-T\xi_m}  < 2\ep c + \ep = (2c+1)\ep,\qquad n,m> N_\ep.
+\end{align*}
+\item Folgt direkt aus 2.) und 3.).\qedhere
+\end{propenum}
+\end{proof}
+
+\begin{lem}[Rieszsches Lemma (fast orthogonales Element)]
+\index{Satz!Rieszsches Lemma}
+\label{prop:6.9}
+Sei $L$ abgeschlossener echter Teilraum von $E$. Dann gilt
+\begin{align*}
+\forall q \in (0,1) \exists x_q\in E\setminus L : \norm{x_q} = 1 \text{ und }
+d(x_q,L)\ge q.\fishhere
+\end{align*} 
+\end{lem}
+\begin{proof}
+Sei $y\in E\setminus L$, dann folgt mit \ref{prop:3.4}, dass $d(y,L)>0$. Wähle
+nun $x_0\in L$ mit
+\begin{align*}
+d(y,L) = \inf_{x\in L} \norm{y-x} \le \norm{y-x_0} \le \frac{d(y,L)}{q}.
+\end{align*}
+Setze nun $x_q = \frac{y-x_0}{\norm{y-x_0}}$, so ist $\norm{x_q}=1$ und für
+$x\in L$ gilt,
+\begin{align*}
+\norm{x_q-x} &= \frac{1}{\norm{y-x_0}}\norm{y-x_0-\norm{y-x_0}x}
+\\ &= \frac{1}{\norm{y-x_0}}\norm{y-\underbrace{(x_0+\norm{y-x_0}x)}_{\in L}}
+\ge \frac{d(y,L)}{\norm{y-x_0}} \ge q.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{cor}
+\label{prop:6.10}
+Sei $E$ normierter Raum, dann ist $\overline{K_1(0)}$ genau dann kompakt, wenn
+$\dim E<\infty$.\fishhere
+\end{cor}
+
+\begin{bsp}
+\label{bsp:6.11}
+\begin{bspenum}
+  \item $\Id: E\to E$ ist genau dann kompakt, wenn $\dim E<\infty$.
+  \item Sei $T\in\LL(E\to F)$ und $m:=\dim \im T < \infty$, so ist $T$ kompakt,
+  denn ist $(x_n)$ beschränkt in $E$, so ist $(Tx_n)$ beschränkt in $\im T$.
+  $\im T$ ist endlichdimensional und daher isomorph zum $\K^n$, also besitzt
+  $(Tx_n)$ eine konvergente Teilfolge.
+  \item Sei $E:=(C([a,b]\to\C),\norm{\cdot}_\infty)$ und $K\in
+  C([a,b]\times[a,b]\to\C)$, so ist
+\begin{align*}
+T : E\to E,\quad Tf(x) := \int_a^b K(x,y)f(y)\dy
+\end{align*}
+kompakt.\bsphere
+\end{bspenum}
+\end{bsp}
+
+\begin{prop}
+\label{prop:6.12}
+Sei $T\in\KK(E)$. Dann gelten
+\begin{propenum}
+  \item $\dim \ker (\Id - T) < \infty$.
+  \item $\im (\Id - T)$ ist abgeschlossener linearer Teilraum von $E$.
+  \item Ist $\ker (\Id-T) = (0)$, so ist $\im (\Id - T) = E$ und
+  $(\Id-T)^{-1}\in\LL(E)$.\fishhere
+\end{propenum}
+\end{prop}
+
+Für $\Id-T$ mit $T$ kompakt gilt also tatsächlich injektiv $\Rightarrow$
+surjektiv.
+
+\begin{proof}
+\begin{proofenum}
+  \item Sei $M=\ker(\Id-T)$. Wir zeigen, dass $\Id:M\to M$ kompakt
+  ist, dann folgt mit \ref{prop:6.10}, dass $M$ endlichdimensional ist.
+  
+  Sei also $(x_n)$ beschränkt in $M$, dann gilt $Tx_{n_k}\to y$ und damit auch
+\begin{align*}
+&x_{n_k} = \underbrace{(\Id-T)(x_{n_k})}_{\to 0} + Tx_{n_k} \to y,\\
+\Rightarrow\;& (\Id- T)y = \lim\limits_{k\to\infty} (\Id -T)x_{n_k} = 0.
+\end{align*}
+Also ist $y\in M$.
+\item $\im (\Id-T)$ ist stets ein linearer Teilraum von $E$.
+
+Sei nun $y_n$ Folge in $\im(\Id-T)$, d.h. $y_n=(\Id-T)x_n$, mit $y_n\to y\in E$.
+\begin{proofenuma}
+  \item\textit{$(x_n)$ kann als beschränkte Folge gewählt werden}. Wähle
+  $\xi_n \in \ker (\Id-T)$ so, dass
+\begin{align*}
+&\norm{x_n-\xi_n} \le 2d(x_n,\ker(\Id-T))
+\end{align*}
+Dann gilt
+\begin{align*}
+&(\Id-T)(x_n-\xi_n) = y_n,\\
+&\norm{x_n-\xi_n} \le 2d(x_n-\xi_n,\ker(\Id-T)) =: d_n.
+\end{align*}
+Angenommen $d_n\to \infty$. Setze $z_n := \frac{x_n-\xi_n}{d_n}$, so gilt
+\begin{align*}
+\norm{z_n} \le 1,\qquad d(z_n,\ker(\Id-T)) = \frac{1}{d_n}d(x_n-\xi,\ker(\Id-T))
+= \frac{1}{2}.
+\end{align*}
+Nun ist $z_n$ beschränkt, also $Tz_{n_k}\to z$, wobei
+\begin{align*}
+z_{n_k} = \underbrace{(\Id-T)(z_{n_k})}_{\to 0} + Tz_{n_k} \to z.
+\end{align*}
+Somit gilt
+\begin{align*}
+(\Id-T)z = \lim\limits_{k\to\infty} (\Id-T)z_{n_k} = z-z=0.
+\end{align*}
+Also $z\in\ker (\Id-T)$, wobei $z_{n_k}\to z$. Dies ist ein Widerspruch zu
+$d(z_n,\ker(\Id-T))=\frac{1}{2}$.
+
+Somit ist $\norm{x_n-\xi_n}\le d_n \le c$ mit $(\Id-T)(x_n-\xi_n)=y_n$. Im
+Folgenden sei daher $(x_n)$ beschränkte Folge.
+\item $(x_n)$ ist beschränkt, also $Tx_{n_k}\to x$, mit
+\begin{align*}
+&x_{n_k} = (\Id-T)x_{n_k} + Tx_{n_k} = y_{n_k} + Tx_{n_k} \to y + x,\\
+\Rightarrow &
+(\Id-T)(y+x) = \lim\limits_{k\to\infty} (\Id-T)(x_{n_k}) =
+\lim\limits_{k\to\infty} y_{n_k} = y.
+\end{align*}
+Also ist $y\in \im (\Id-T)$.
+\end{proofenuma}
+\item Sei $\ker(\Id-T)=(0)$. Angenommen $\Id-T$ ist nicht surjektiv, es gibt
+also ein $x\in E\setminus\im (\Id-T)$.
+\begin{proofenuma}
+\item Wir zeigen nun $\forall n\in \N: (\Id-T)^n(x) \in E\setminus
+\im (\Id-T)^{n+1}$ durch Widerspruch. Angenommen
+\begin{align*}
+\exists n\in\N \exists y\in E : (\Id-T)^n(x) = (\Id-T)^{n+1}y,
+\end{align*}
+so ist $(\Id-T)^n(x-(\Id-T)y) = 0$, da $\ker (\Id-T) = (0)$ gilt
+\begin{align*}
+(\Id-T)^{n-1}(x-(\Id-T)y) = 0.
+\end{align*}
+Wir erhalten induktiv,
+\begin{align*}
+x-(\Id-T)y = 0 \Rightarrow x\in\im (\Id-T).\dipper
+\end{align*}
+\item \textit{$\im (\Id-T)^{n+1}$ ist abgeschlossen}.
+\begin{align*}
+(\Id-T)^{n+1} = \sum\limits_{j=0}^{n+1}\binom{n+1}{j} (-T)^j
+= \Id - \underbrace{\left(-\sum\limits_{j=1}^{n+1}\binom{n+1}{j}
+(-T)^j\right)}_{\text{kompakt}}.
+\end{align*}
+Anwendung von 2.) ergibt die Behauptung.
+\item Mit a.) und b.) folgt, $d((\Id-T)^nx,\im(\Id-T)^{n+1})>0$. Es existiert
+also eine Folge $(a_n)$ in $\im (\Id-T)^{n+1}$ mit
+\begin{align*}
+0 \le \norm{(\Id-T)^{n}x-a_n} < 2d((\Id-T)^nx, \im (\Id-T)^{n+1}).
+\end{align*}
+Setze $x_n = \frac{1}{\norm{(\Id-T)^nx-a_n}}((\Id-T)^nx-a_n)$, dann ist
+$\norm{x_n}=1$, also ist $(x_n)$ beschränkt, und es gilt $x_n\in \im
+(\Id-T)^n$. Jedoch
+\begin{align*}
+d(x_n,\im(\Id-T)^{n+1}) &= \frac{1}{\norm{(\Id-T)^nx-a_n}}d
+\left((\Id-T)^nx -a_n,\im (\Id-T)^{n+1}\right)\\
+&=
+\frac{1}{\norm{(\Id-T)^nx-a_n}}d
+\left((\Id-T)^nx,\im (\Id-T)^{n+1}\right) > \frac{1}{2},
+\end{align*}
+denn $a_n\in \im (\Id-T)^{n+1}$, also enthält $Tx_n$ auch keine konvergente
+Teilfolge, denn für $m>n$ gilt,
+\begin{align*}
+\norm{Tx_m-Tx_n} &= \norm{(\Id-T)(x_m-x_n)-(x_m-x_n)}
+\\ &= \norm{x_n - \left(x_m + (\Id-T)(x_m-x_n) \right)}.
+\end{align*}
+Nun ist $x_m\in \im (\Id-T)^{n}$ und $(\Id-T)(x_m-x_n)\in \im(\Id-T)^{n+1}$,
+also
+\begin{align*}
+\norm{x_n - \left(x_m + (\Id-T)(x_m-x_n) \right)}
+\ge d(x_n, \im (\Id-T)^{n+1}) > \frac{1}{2},
+\end{align*}
+im Widerspruch zur Kompaktheit von $T$. Also $\im(\Id-T)=E$. 
+\item
+$(\Id-T)$ ist also bijektiv und daher existiert $(\Id-T)^{-1}$. Wir müssen noch
+zeigen, dass $(\Id-T)^{-1}\in\LL(E)$. Angenommen $(\Id-T)^{-1}$ ist
+unbeschränkt, d.h.
+\begin{align*}
+\sup\limits_{y\neq 0} \frac{\norm{(\Id-T)^{-1}}}{\norm{y}} = \infty.
+\end{align*}
+Wir können also $(y_n)$ in $E$ wählen mit $y_n\to 0$ und
+$\norm{(\Id-T)^{-1}y_n}=1$. Setze $x_n=(\Id-T)^{-1}y_n$, so ist $\norm{x_n}=1$
+und $y_n=(\Id-T)x_n$. Nach Voraussetzung existiert eine konvergente Teilfolge $(Tx_{n_k})$ mit Grenzwert
+$y$. Für diese gilt dann
+\begin{align*}
+x_{n_k} = y_{n_k}+Tx_{n_k} \to 0 + y = y.
+\end{align*}
+Somit ist
+\begin{align*}
+(\Id-T)y &= \lim\limits_{k\to\infty} (\Id-T)x_{n_k}
+= \lim\limits_{k\to\infty} x_{n_k}-Tx_{n_k} = 
+\lim\limits_{k\to\infty} y_{n_k}+Tx_{n_k}-Tx_{n_k} \\ &= 
+\lim\limits_{k\to\infty} y_{n_k} = 0.
+\end{align*}
+Da $\ker (\Id-T)=(0)$ folgt $y=0$ aber dies steht im Widerspruch zu
+$\norm{x_n}=1$ und $x_{n_k}\to y$. Also ist $(\Id-T)^{-1}$ beschränkt.\qedhere
+\end{proofenuma}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}
+\label{prop:6.13}
+Sei $T\in\KK(E)$. Dann gelten
+\begin{propenum}
+  \item Sei $\lambda\in\sigma(T)$ und $\lambda\neq 0$, dann ist $\lambda$
+  Eigenwert endlicher Vielfachheit.
+  \item $\sigma(T)$ hat höchstens $0$ als Häufungspunkt. Insbesondere ist
+  $\sigma(T)$ endlich oder abzählbar und jeder Eigenwert $\neq 0$ ist
+  isoliert.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item Sei $\lambda\in\sigma(T)$ und $\lambda\neq 0$, dann ist $T-\lambda \Id$
+  nicht bijektiv und somit auch $\frac{1}{\lambda}T-\Id$.
+  
+  $\lambda$ ist Eigenwert, denn falls $\ker (\frac{1}{\lambda}T-\Id) = (0)$, so
+  ist nach \ref{prop:6.12} $\frac{1}{\lambda}T-\Id$ bijektiv. Außerdem ist
+  $\dim \ker (\frac{1}{\lambda}T-\Id)< \infty$, also hat $\lambda$ endliche
+  Vielfachheit.
+  \item Sei $\lambda\neq 0$ Häufungspunkt, so existiert eine Folge
+  $(\lambda_n)$ in $\sigma(T)$ mit $\lambda_n\to\lambda$ und $\lambda_n\neq
+  \lambda_m$, falls $n\neq m$.
+  
+  Sei $Tx_n = \lambda_n x_n$ und $\norm{x_n}=1$, so gilt für jedes $N\in\N$,
+$\setd{x_1,\ldots,x_N}$
+ist linear unabhängig. Sei $V_n=\lin{x_1,\ldots,x_n}$, so ist $\dim V_n = n$
+und $V_{n+1}\supsetneq V_n$. Außerdem ist $V_n$ abgeschlossen, wir können also
+das Lemma von Riesz anwenden und erhalten so eine Folge $(y_n)$ mit
+\begin{align*}
+y_n\in V_{n+1}\setminus V_n,\qquad \norm{y_n} = 1,\qquad d(y_n,V_n)=
+\frac{1}{2}.
+\end{align*}
+$(y_n)$ ist beschränkt aber $(Ty_n)$ enthält keine konvergente Teilfolge.
+Schreibe dazu $y_n=sx_{n+1} + \eta_n$ mit $s\neq 0$ und $\eta_n\in
+V_n$, so gilt für $m>n$
+\begin{align*}
+&\norm{Ty_m-Ty_n} = \norm{T(sx_{m+1}+\eta_m)-T(sx_{n+1}+\eta_n)}\\
+&= \norm{s\lambda_{m+1}x_{m+1}+T\eta_m - s\lambda_{n+1}x_{n+1}-T\eta_n}\\
+&= \norm{\lambda_{m+1}y_m - \lambda_{m+1}\eta_m+T\eta_m - \lambda_{n+1}y_n +
+\lambda_{n+1}\eta_n -T\eta_n}\\
+&= \abs{\lambda_{m+1}}\norm{y_m -
+\underbrace{\frac{1}{\lambda_{m+1}}\left(\lambda_{m+1}\eta_m-T\eta_m +
+\lambda_{n+1}y_n -
+\lambda_{n+1}\eta_n +T\eta_n\right)}_{\in V_m}}\\
+&> \abs{\lambda_{m+1}}\frac{1}{2} \ge \frac{1}{2}c > 0.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\section{Fredholmsche Alternative}
+
+In der linearen Algebra studiert man die Lösbarkeit von linearen
+Gleichungssystemen. Sei $A$ eine reelle $n\times n$-Matrix und
+\begin{align*}
+T: \R^n\to\R^n,\quad x\mapsto Ax,
+\end{align*}
+der zugehörige Homomorphismus. Gesucht sind nun Lösungen von $Ax=y$, d.h.
+$Tx=y$. In endlichdimensionalen Räumen gibt es zwei Fälle zu unterscheiden:
+\begin{propenum}
+  \item \textit{$T$ ist bijektiv}. So gilt $\forall y\in\R^n \exists ! x\in\R^n
+  : Tx=y$. Hier ist außerdem $T$ genau dann bijektiv, wenn $\ker T = (0)$.
+  \item \textit{$T$ nicht bijektiv}. Hier ist $T$ also weder surjektiv
+  noch injektiv. Lösungen exisieren genau dann, wenn folgende Rangbedingung erfüllt
+  ist,
+\begin{align*}
+\rg(A\mid y) = \rg(A) \Leftrightarrow
+\rg\begin{pmatrix}
+   A^\top \\ y^\top
+   \end{pmatrix}
+= \rg(A^\top).
+\end{align*}
+Dies ist wiederum äquivalent dazu, dass $y^\top$ linear abhängig von den
+Zeilenvektoren von $A^\top$ ist, d.h.
+\begin{align*}
+\forall z\in\R^n : (A^\top z = 0\Rightarrow y^\top z = 0).
+\end{align*}
+Da $\R^n$ euklidisch, existiert ein Skalarprodukt und wir können dies
+schreiben als
+\begin{align*}
+\forall z\in\R^n : (T^\top z = 0\Rightarrow \lin{y,z} = 0).
+\end{align*}
+\end{propenum}
+
+Wir wollen diese Fragestellung nun auf unendlichdimensionale normierte
+Vektorräume übetragen.
+\begin{propenum}
+  \item Betrachten wir dazu
+\begin{align*}
+\Id-T : E\to E,\quad x\mapsto (\Id-T)x,
+\end{align*}
+so impliziert (nach Satz \ref{prop:6.12}) $\ker (\Id-T)=(0)$, dass $(\Id-T)$
+bijektiv und daher $(\Id-T)x=y$ für jedes $y\in E$ eindeutig lösbar ist.
+Außerdem hängt die Lösung
+\begin{align*}
+x = (\Id-T)^{-1}y
+\end{align*}
+stetig von $y$ ab.
+\item Die Bedingung  
+\begin{align*}
+\forall z\in\R^n : (T^\top z = 0\Rightarrow \lin{y,z} = 0).
+\end{align*}
+lässt sich jedoch nicht ohne Weiteres auf einen normierten Raum $E$ übertragen,
+da weder $T^\top$ noch $\lin{\cdot,\cdot}$ zur Verfügung stehen.
+
+Für Hilbeträume kennen wir bereits die
+\begin{prop}[Riesz Abbildung]
+\index{Satz!Riesz Abbildung}
+\label{prop:6.14}
+Sei $H$ ein Hilbertraum.
+\begin{align*}
+R_H: H\to H',\quad x\mapsto \ph_x,
+\end{align*}
+mit $\ph_x(y) = \lin{y,x}$ ist eine antilineare, bijektive und isometrische
+Abbildung.\fishhere
+\end{prop}
+
+Wir wollen nun ein Analogon des $\lin{\cdot,\cdot}$ für normierte Räume durch
+Anwendung eines Elementes des Dualraumes finden.
+\end{propenum}
+
+\begin{defn}
+\label{defn:6.15}
+Sei $L\subseteq E$ linearer Teilraum. Dann heißt
+\begin{align*}
+L^\bot := \setdef{x'\in E'}{x'\big|_L = 0} = \setdef{x'\in E'}{L\subseteq \ker
+x'}
+\end{align*}
+\emph{Annihilator}\index{Annihilator} von $L$.\fishhere
+\end{defn}
+
+\begin{prop}
+\label{prop:6.16}
+\begin{propenum}
+  \item $L^\bot$ ist ein abgeschlossener linearer Teilraum von $E'$.
+  \item $L^\bot = \overline{L}^\bot$.
+  \item Ist $E$ reflexiv, so gilt $(L^\bot)^\bot = J_E(\overline{L}) =
+  \overline{J_E(L)}$.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item Sei $(x_n')$ Folge in $E'$ mit $x_n'(y)=0$ und $x_n'\to x'\in E'$. Sei
+  $y\in L$, dann gilt
+\begin{align*}
+x'(y) = \lim\limits_{n\to\infty} x_n'(y) = 0.
+\end{align*}
+\item $L\subseteq \overline{L}$, also $(\overline{L})^\bot \subseteq L^\bot$.
+Sei weiterhin $x'\in L^\bot$ und $y_n$ Folge in $L$ mit $y_n\to y\in E$, dann
+gilt
+\begin{align*}
+x'(y) = \lim\limits_{n\to\infty} x'(y_n) = 0.
+\end{align*}
+Somit ist $L^\bot\subseteq \overline{L}^\bot$.
+\item Sei $x''\in (L^\bot)^\bot\subseteq E''$, so existiert ein $x\in E$, so
+dass $J_E(x) = x''$.
+\begin{align*}
+x''\in (L^\bot)^\bot 
+&\Leftrightarrow \forall x' \in L^\bot : x''(x') = 0\\
+&\Leftrightarrow \forall x' \in L^\bot : J_E(x)(x') = x'(x) = 0\\
+&\Leftrightarrow \forall x' \in L^\bot : x\in \ker x'.
+\end{align*}
+Satz \ref{prop:4.17} besagt, dass
+\begin{align*}
+\overline{L} = \bigcap\setdef{\ker y'}{L\subseteq \ker y'},
+\end{align*}
+also gilt
+\begin{align*}
+\forall x' \in L^\bot : x\in \ker x'
+\Leftrightarrow x\in \bigcap\setdef{\ker x'}{x'\in L^\bot} = \overline{L}.
+\end{align*}
+Somit ist $x''=J_E(x) \in (L^\bot)^\bot \Leftrightarrow x\in
+\overline{L}\Leftrightarrow x'' = J_E(x) \in J_E(\overline{L})$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{defn}
+\label{defn:6.17}
+Sei $T\in\LL(E\to F)$.
+\begin{align*}
+T' : F'\to E',\quad y'\mapsto y'\circ T,
+\end{align*}
+heißt \emph{adjungierter Operator}\index{Operator!adjungiert} zu $T$.\fishhere
+\end{defn}
+
+\begin{prop}
+\label{prop:6.18}
+\begin{propenum}
+  \item $\norm{T'}_{\LL(F'\to E')}=\norm{T}_{\LL(E\to F)}$.
+  \item $(\alpha T_1+\beta T_2)' = \alpha T_1' + \beta T_2'$.
+  \item Sei $T'' = (T')' : E''\to F''$. Dann gilt
+  \begin{align*}
+  T''\big|_{J_E(E)} = J_F\circ T\circ J_E^{-1}
+  \end{align*}
+bzw.
+  \begin{align*}
+  T''\circ J_E = J_F\circ T
+  \end{align*}
+bzw.
+  \begin{align*}
+  J_F^{-1}\circ T''\circ J_E = T.\fishhere
+  \end{align*}
+\end{propenum}
+\end{prop}
+\begin{proof}
+Der Beweis findet sich in Übungsaufgabe (6.3).\qedhere
+\end{proof}
+
+\begin{bsp}
+\label{bsp:6.19}
+\begin{bspenum}
+  \item $(\Id_{E\to E})' = \Id_{E'\to E'} : E'\to E',\quad y'\mapsto y'\circ
+  \Id = y'$.
+  \item $T:\C^n\to \C^n,\; x\mapsto Ax$ mit $A\in M^{n\times n}$. Da
+  $(\C^n)'=\C^n$ gilt,
+\begin{align*}
+T': \C^n \to \C^n,\quad x\mapsto A^\top x.\bsphere
+\end{align*}
+\end{bspenum}
+\end{bsp}
+
+\begin{prop}
+\label{prop:6.20}
+Sei $T\in\LL(E\to F)$. Dann ist $(\im T)^\bot = \ker T'$.\fishhere
+\end{prop}
+\begin{proof}
+Für $y'\in E$ gilt
+\begin{align*}
+y'\in \ker T' &\Leftrightarrow T'y' = 0 \Leftrightarrow \forall x\in E :
+(T'y')(x) = 0 \\ &\Leftrightarrow \forall x\in E : y'\circ Tx  = 0
+\Leftrightarrow \forall y\in \im T : y'(y) = 0\\
+&\Leftrightarrow \im T \subseteq \ker y' \Leftrightarrow y'\in (\im
+T)^\bot.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{lem}
+\label{prop:6.21}
+Sei $T\in \KK(E\to F)$. Dann ist $\im T$ separabel.\fishhere
+\end{lem}
+\begin{proof}
+Es gilt $\im T = \bigcup_{n\in\N} T(K_n(0))$. Da $T$ kompakt ist auch
+$\overline{T(K_n(0))}$ kompakt, also gilt
+\begin{align*}
+\forall l\in \N : \overline{T(K_n(0))} \subseteq \bigcup_{j=1}^{J(l)}
+K_{1/l}(y_j^{(l)}),\qquad y_j^{(l)}\in \overline{T(K_n(0))},\quad J(l) < \infty.
+\end{align*}
+Wähle $\eta_j^{l}\in T(K_n(0))$ mit $\norm{\eta_j^{(l)}-y_j^{(l)}} <
+\frac{1}{l}$, so gilt
+\begin{align*}
+\overline{T(K_n(0))} \subseteq \bigcup_{j=1}^{J(l)} K_{2/l}(\eta_j^{(l)}),\qquad
+\eta_j^{(l)}\in T(K_n(0)).
+\end{align*}
+Setze nun $A:= \bigcup_{l=1}^\infty
+\setd{\eta_1^{(l)},\ldots,\eta_{J(l)}^{(l)}}$, so ist $A$ abzählbar und dicht
+in $\overline{T(K_n(0))}$ und $A\subseteq T(K_n(0))$, also ist $A$ auch dicht
+in $T(K_n(0))$.
+\begin{align*}
+\Rightarrow \bigcup_{n=1}^\infty A_n \text{ ist abzählbar und dicht in
+}\bigcup_{n=1}^\infty T(K_n(0)) = \im T.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{prop}[Satz von Schauder]
+\index{Satz!Schauder}
+\label{prop:6.22}
+Für $T\in \LL(E\to F)$ gilt
+\begin{propenum}
+\item $T\in \KK(E\to F) \Rightarrow T'\in \KK(F'\to E')$.
+\item Falls $F$ Banachraum, dann gilt $T\in \KK(E\to F) \Leftarrow T'\in
+\KK(F'\to E')$.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+``$\Rightarrow$'': Sei also $T\in\KK(E\to F)$, $(y_n')$ beschränkte Folge in
+$F'$, $\norm{(y_n')} \le C$. Zu zeigen ist nun, dass $(T'y_n')$ eine konvergente
+Teilfolge besitzt.
+\begin{proofenum}
+  \item \textit{Konstruktion eines Grenzelements}. Nach Lemma \ref{prop:6.21}
+  ist $\im T$ separierbar, also $\im T = \overline{\setd{y_1,y_2,\ldots}}$.
+
+$(y_n'(y_1))_n$ ist Folge in $\K$ und beschränkt, besitzt also eine konvergente
+Teilfolge $(y_n'^{(1)})$.
+
+$(y_n'^{(1)}(y_2))$ ist Folge in $\K$ \ldots, besitzt also eine konvergente
+Teilfolge $(y_n'^{(2)})$.
+
+Wähle die Diagonalfolge $y_{n_k}' = y_k'^{(k)}$.
+
+\item \textit{$(y_{n_k}')$ konvergiert auf $\lin{y_1,y_2,\ldots}=:L$}. Sei 
+\begin{align*}
+y' : L\to \K,\quad y\mapsto \lim\limits_{k\to\infty} y_{n_k}'(y),
+\end{align*}
+so ist $y'$ linear und beschränkt, denn
+\begin{align*}
+\norm{y'(y)} \le \limsup\limits_{k\to\infty} \norm{y_{n_k}'}\norm{y} \le
+C\norm{y},
+\end{align*}
+also $y'\in L'$. Mit dem Satz von Hahn-Banach setzen wir $y'$ fort zu $y'\in
+F'$.
+\item \textit{Es gilt sogar für $y\in \overline{L} = \overline{\im T}$, dass
+$y_{n_k}'(y) \to y'(y)$}.
+
+Sei $(y_l)$ Folge in $L$ mit $y_l\to y$, so gilt
+\begin{align*}
+&\abs{y_{n_k}'(y)-y'(y)}\\ &
+ \le \underbrace{\abs{y_{n_k}'(y-y_l)}}_{\text{(1)}} +
+\underbrace{\abs{y_{n_k}'(y_l)-y'(y_l)}}_{\text{(2)}} + 
+\underbrace{\abs{y'(y_l)-y'(y)}}_{\text{(3)}}.
+\end{align*}
+(1)$\le \sup\norm{y_{n_k}'}\norm{y-y_l} = c \norm{y-y_l}$,\\
+(3)$\le \norm{y'}\norm{y-y_l}$,\\
+also (1),(3)$\le \ep$ für $l$ hinreichend groß.\\
+(2)$\le \ep$ für $l$ fest und $k$ hinreichend, also
+\begin{align*}
+\abs{y_{n_k}'(y)-y'(y)} \le 3 \ep,
+\end{align*}
+für $k$ hinreichend groß.
+\item \textit{Für eine Teilfolge $(y_{n_j}')$ von $(y_{n_k}')$ gilt
+$T'(y_{n_j}')\to y$}.
+\begin{align*}
+\norm{T'y_{n_k}' - T'y'} = \sup\limits_{\norm{x}=1}
+\abs{(T'y_{n_k}'-T'y')(x)}.
+\end{align*}
+Wähle $(x_k)$ in $E$ mit $\norm{x_k} = 1$ und
+\begin{align*}
+\norm{T'y_{n_k}' - T'y'} = \abs{(T'y_{n_k}'-T'y')(x_k)} + \frac{1}{n_k}.
+\end{align*}
+$T$ ist kompakt also $Tx_{n_j}\to y \in \overline{\im T}$. Somit gilt
+\begin{align*}
+&\norm{T'y_{n_j}' - T'y'} =
+\abs{T'y_{n_j}'(x_{n_j}) - T'y'(x_{n_j})} + \frac{1}{n_j}\\
+&= \abs{y_{n_j}'(Tx_{n_j})-y'(Tx_{n_j})} + \frac{1}{n_j}\\
+&\le \underbrace{\abs{y_{n_j}'(Tx_{n_j}-y)}}_{\text{(1)}} +
+\underbrace{\abs{y_{n_j}'(y)-y'(y)}}_{\text{(2)}} +
+\underbrace{\abs{y'(y)-y'(Tx_{n_j})}}_{\text{(3)}} + \frac{1}{n_j}
+\end{align*}
+(1)$\le \sup\norm{y_{n_j}}\norm{Tx_{n_j}-y} \to 0$,\\
+(3)$\le \norm{y'}\norm{Tx_{n_j}-y}\to 0$,\\
+(2)$ \to 0$ nach b.), also
+\begin{align*}
+\norm{T'y_{n_j}' - T'y'} \to 0,\qquad j\to\infty.
+\end{align*}
+``$\Leftarrow$'': Sei $T'$ kompakt so ist nach ``$\Rightarrow$'' auch $T''\in
+\KK(E''\to F'')$. Mit \ref{prop:6.18} folgt
+\begin{align*}
+T = J_F^{-1}\circ T''\circ J_E.
+\end{align*}
+Sei $(x_n)$ beschränkt in $E$, so ist $(J_E(x_n))$ beschränkt in $E''$ und
+daher
+\begin{align*}
+T'(J_E(x_{n_k}))\to y''\in F''. 
+\end{align*}
+Da $F$ vollständig ist $J_F(F)$
+abgeschlossen und daher $y''\in J_F(F)$, somit
+\begin{align*}
+T(x_{n_k}) = J_F^{-1}\circ T''\circ J_E(x_{n_k}) \to J_F^{-1}(y'').\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Fredholmsche Alternative]
+\index{Fredholmsche!Alternative}
+\label{prop:6.23}
+Sei $E$ normierter Raum, $T\in\KK(E)$. Dann gilt entweder
+\begin{equivenum}
+  \item\label{prop:6.23:1} $\ker (\Id-T)=(0)$. Dann besitzt die Gleichung
+\begin{align*}
+(\Id - T)x = y
+\end{align*}
+für jedes $y\in E$ eine Lösung. Die Lösung ist eindeutig und hängt stetig von
+$y$ ab.
+
+--- oder ---
+\item\label{prop:6.23:2} $\ker(\Id-T)\neq 0$. Dann besitzt 
+\begin{align*}
+(\Id-T)x = y
+\end{align*}
+genau für die $y\in E$ Lösungen, für die
+\begin{align*}
+\forall x' \in \ker (\Id-T') : x'(y) = 0.
+\end{align*}
+Die dadurch gegebene Anzahl von Nebenbedingungen ist endlich. In diesem Fall
+ist $x$ nicht eindeutig.\fishhere
+\end{equivenum}
+\end{prop}
+\begin{proof}
+``\ref{prop:6.23:1}'': Siehe Satz \ref{prop:6.12}.
+
+``\ref{prop:6.23:2}'': Nach Satz \ref{prop:6.12} ist $\im(\Id-T) =
+\overline{\im(\Id-T)}$, also
+\begin{align*}
+&y\in \im(\Id-T) = \bigcap
+\setdef{\ker x'}{x'\in E \land \im (\Id-T) \subseteq \ker (x')}\\
+&\Leftrightarrow
+\forall z'\in \setdef{x'\in E}{\im
+(\Id-T)\subseteq \ker x'} : y\in \ker (z')\tag{*}
+\end{align*}
+$T$ ist kompakt, also folgt mit \ref{prop:6.22}, dass $T'$ kompakt und daher ist
+$\ker(\Id-T')$ endlichdimensional. Sei $\BB=\setd{x_1',\ldots,x_k'}$
+Basis von $\ker(\Id-T')$, so ist (*) äquivalent zu
+\begin{align*}
+\forall j=1,\ldots,k : x_j(y) = 0.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{defn}
+\label{defn:6.24}
+Seien $U$, $V$ lineare Teilräume von $L$ mit
+\begin{defnenum}
+\item $U\cap V = (0)$,
+\item $\forall x\in L : \exists u\in U\exists v\in V : x = u+v$.
+\end{defnenum}
+Dann schreiben wir $L=U\oplus V$ und $U\oplus V$ heißt \emph{direkte
+Summe}\index{Vektorraum!Direkte Summe} von $U$ und $V$.\fishhere
+\end{defn}
+
+Eine leichte Übung zeigt, dass $u$ und $v$ in obiger Definition eindeutig
+bestimmt sind.
+
+Im Gegensatz zur Definition \ref{defn:1.13} muss die Norm auf $U\oplus V$
+\textit{nicht} äquivalent zur Norm auf $L$ sein.
+
+\begin{lem}
+\label{lem:6.25}
+Sei $L=U\oplus V$ und $L=U\oplus \tilde{V}$ mit $\dim V,\dim \tilde{V} <
+\infty$, so ist
+\begin{align*}
+\dim V = \dim \tilde{V}.\fishhere
+\end{align*}
+\end{lem}
+\begin{proof}
+Sei $\BB=\setd{x_1,\ldots,x_n}$ Basis von $V$. Dann gilt
+\begin{align*}
+x_i = u_j + \tilde{v}_j,\qquad u_j\in U,\quad \tilde{v}_j \in \tilde{V}.
+\end{align*}
+$\setd{\tilde{v}_1,\ldots,\tilde{v}_n}$ ist linear unabhängig, denn sei
+\begin{align*}
+\sum_{j=1}^n c_j \tilde{v}_j = 0
+\Rightarrow
+\underbrace{\sum_{j=1}^n c_j x_j}_{\in V} = 
+\underbrace{\sum_{j=1}^n c_j u_j}_{\in U} \overset{U\cap V=(0)}{=} 0
+\end{align*}
+und da $\BB$ Basis, folgt $c_1=\ldots=c_n=0$. Also ist
+$\setd{\tilde{v}_1,\ldots,\tilde{v}_n}$ linear unabhängig und daher $\dim
+\tilde{V}\ge \dim V$. Die Situation ist jedoch vollkommen symmetrisch, also
+gilt auch $\dim V \ge \dim \tilde{V}$ und folglich $\dim V = \dim
+\tilde{V}$.\qedhere
+\end{proof}
+
+\begin{defn}
+\label{defn:6.26}
+Sei $L=U\oplus V$ mit $\dim V < \infty$. Dann heißt
+\begin{align*}
+\codim U := \dim V
+\end{align*}
+die \emph{Kodimension}\index{Vektorraum!Kodimension} von $U$.\fishhere
+\end{defn}
+
+\begin{lem}
+\label{prop:6.27}
+Sei $E$ normierter Raum, $L\subseteq E$ abgeschlossener linearer Teilraum,
+$V\subseteq E$ endlichdimensionaler Teilraum und $L\cap V = (0)$. Dann ist
+$L\oplus V$ abgeschlossener linearer Teilraum.\fishhere
+\end{lem}
+\begin{proof}
+Sei $(x_n)$ Folge in $L\oplus V$ mit $x_n\to x$ in $E$. Zeige $x\in L\oplus V$.
+
+Da $x_n\in L\oplus V$ existiert eine eindeutige Zerlegung,
+\begin{align*}
+x_n = u_n + v_n,\qquad u_n\in L,\quad v_n\in V.
+\end{align*}
+Wir bilden den Quotientenraum
+\begin{align*}
+E/L := \setdef{[x]=x+L}{x\in E}.
+\end{align*}
+Da $L$ abgeschlossen ist
+\begin{align*}
+\norm{[x]}_0 = \inf\setdef{\norm{x-y}}{y\in L} = d(x,L)
+\end{align*}
+Norm auf $E/L$. $[x_n]$ ist konvergent bezüglich dieser Norm, denn
+\begin{align*}
+\norm{[x_n]-[x]}_0 = 
+\inf\setdef{\norm{x_n-x-y}}{y\in L} \le \norm{x_n-x}\to 0.
+\end{align*}
+Außerdem ist $([v_n])$ Cauchyfolge in $[V]:=\setdef{[v]}{v\in V}$, denn
+\begin{align*}
+\norm{[v_n]-[v_m]}_0 &= \inf\setdef{\norm{v_n-v_m-y}}{y\in L}\\
+&\le \norm{v_n+u_n - (v_m+u_m)} = \norm{x_n-x_m} \to 0.
+\end{align*}
+Da $L\cap V = (0)$, ist $\dim [V] = \dim V < \infty$ und daher ist $[V]$
+vollständig und folglich $[v_n]\to [v]$. Insbesondere kann man für den
+Grenzwert ein $v\in V$ als Vertreter wählen. Für dieses $v$ gilt
+\begin{align*}
+\norm{[x]-[v]}_0 = \lim\limits_{n\to\infty} \norm{[x_n]-[v_n]}
+= \lim\limits_{n\to\infty} \norm{[u_n]} = 0, 
+\end{align*}
+denn $u_n\in L$, also ist auch $x-v\in L$. Setze $u:=x-v$, so ist $x=u+v\in
+L\oplus V$.\qedhere
+\end{proof}
+
+Wir haben nicht bewiesen, dass $u_n\to u$ oder $v_n\to v$ sondern lediglich,
+dass $x=u+v$ mit $u\in L$ und $v\in V$. Über die Konvergenz von $(u_n)$ und
+$(v_n)$ lassen sich unter diesen allgemeinen Voraussetzungen keine genaueren
+Aussagen treffen.
+
+\begin{lem}
+\label{prop:6.28}
+Sei $E$ normierter Raum, $L\subseteq E$ abgeschlossener linearer Teilraum
+endlicher Kodimension. Dann gilt
+\begin{align*}
+\codim L = \dim L^\bot.
+\end{align*}
+\end{lem}
+\begin{proof}
+Sei $E=L\oplus\lin{x_1,\ldots,x_n}$ mit $\setd{x_1,\ldots,x_n}$ linear
+unabhängig.
+\begin{align*}
+L_j := L\oplus \lin{x_1,\ldots,x_{j-1},x_{j+1},\ldots,x_n}
+\end{align*}
+ist nach Lemma \ref{prop:6.27} abgeschlossen und $x_j\notin L_j$. Nach
+\ref{prop:4.16} existieren daher $x_j'\in E'$ mit $L_j\subseteq \ker x_j'$ und
+$x_j'(x_j)=1$.
+
+Wir zeigen nun, dass $\setd{x_1',\ldots,x_n'}$ eine Basis von $L^\bot$ bildet.
+\begin{proofenum}
+\item Die lineare Unabhängigkeit ist klar, denn $x_j'(x_k)=\delta_{jk}$.
+\item Sei $x'\in L^\bot$. $x\in E=L\oplus\lin{x_1,\ldots,x_n}$, so besitzt $x$
+eine Darstellung,
+\begin{align*}
+x = u + \sum_{j=1}^n \alpha_j x_j,\qquad u\in L,\; \alpha_j\in\K,
+\end{align*}
+wobei
+\begin{align*}
+x'(x) = \underbrace{x'(u)}_{=0} + \sum_{j=1}^n \alpha_j x'(x_j).
+\end{align*}
+Nun besitzt auch $x_j$ eine Darstellung als
+\begin{align*}
+x_j = \sum_{l=1}^n x_l x_l'(x_j),
+\end{align*}
+also
+\begin{align*}
+x'(x) &= \sum_{j=1}^n \alpha_j x'(x_j)
+= \sum_{j=1}^n \alpha_j \sum_{l=1}^n x_l'(x_j) x'(x_l)\\
+&= \sum_{l=1}^n x'(x_l) \sum_{j=1}^n \alpha_j  x_l'(x_j)
+= \sum_{l=1}^n x'(x_l)  x_l'\left(\underbrace{\sum_{j=1}^n  \alpha_j
+x_j}_{x-u}\right)\\
+&=
+\sum_{l=1}^n x'(x_l)  x_l'(x).\qedhere 
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}
+\label{prop:6.29}
+Sei $T\in\KK(E)$. Dann gilt
+\begin{align*}
+\codim\im(\Id -T) \le \dim\ker (\Id-T).\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+Sei $n=\dim\ker(\Id-T)$. Angenommen es existiert eine linear unabhängige
+Teilmenge $\setd{y_1,\ldots,y_m}$ mit
+$\lin{y_1,\ldots,y_m}\cap \im(\Id-T) = (0)$ und
+ $m\ge n+1$.
+ 
+ Sei $\setd{x_1,\ldots,x_n}$ Basis von $\ker(\Id-T)$, dann folgt mit
+ \ref{prop:4.16}
+ \begin{align*}
+ \exists x_j'\in E' : x_j'(x_k) = \delta_{jk}.
+ \end{align*}
+Setze $\tilde{T}x := Tx + \sum_{j=1}^n x_j'(x)y_j$, so liefert scharfes
+Hinsehen, dass $\tilde{T}$ kompakt. Betrachte nun
+\begin{align*}
+(\Id-\tilde{T})x = 0 
+&\Leftrightarrow (\Id-T)x - \sum_{j=1}^n x_j'(x)y_j = 0
+\Leftrightarrow \underbrace{(\Id-T)x}_{\in \im (\Id-T)} =
+\underbrace{\sum_{j=1}^n x_j'(x)y_j}_{\in \lin{y_1,\ldots,y_n}}\\
+&\Leftrightarrow (\Id-T)x = 0 \text{ und } \sum_{j=1}^n x_j'(x)y_j = 0
+\end{align*}
+Für ein solches $x$ folgt, da die $y_j$ linear unabhängig, $x_j'(x)=0$
+für $j=1,\ldots,n$. Insbesondere
+\begin{align*}
+0 = x_j'(x) = \sum_{k=1}^n \alpha_k x_j'(x_k) = \alpha_j
+\end{align*}
+und daher $x=0$. Somit ist $\ker(\Id-\tilde{T}) = (0)$ und daher nach
+\ref{prop:6.12}, $\im(\Id-\tilde{T}) = E$.
+
+Zeige nun $\im(\Id-\tilde{T}) \subseteq \im (\Id-T)\oplus\lin{y_1,\ldots,y_n}$,
+denn dann folgt
+\begin{align*}
+\im(\Id-T)\oplus \lin{y_1,\ldots,y_n} = E,
+\end{align*}
+im Widerspruch zu $\im(\Id-T)\cap \lin{y_1,\ldots,y_m} = (0)$, da $m\ge n+1$.
+
+Für $x\in E$ gilt jedoch,
+\begin{align*}
+(\Id-\tilde{T})x = \underbrace{(\Id-T)x}_{\in\im (\Id-T)} - 
+\underbrace{\sum_{j=1}^n x_j'(x)y_j}_{\in \lin{y_1,\ldots,y_n}} 
+\in  \im(\Id-T)\oplus \lin{y_1,\ldots,y_n}.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{prop}
+\label{prop:6.30}
+Sei $T\in\KK(E)$. Dann gilt
+\begin{align*}
+\dim \ker(\Id-T) = \codim \im(\Id-T) = \dim \ker (\Id-T').\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+\item\label{proof:6.30:1} $\dim \ker(\Id-T) \le \dim \ker(\Id-T'')$, denn
+$J_E:E\to E''$ ist injektiv und nach \ref{prop:6.18} gilt
+\begin{align*}
+T''\circ J_E = J_E\circ T.
+\end{align*}
+Somit ist $(\Id-T'')\circ J_E = J_E\circ (\Id-T)$. (*)
+
+Sei $\setd{x_1,\ldots,x_n}$ Basis von $\ker(\Id-T)$. In Gleichung (*)
+verschwindet die rechte Seite für jedes Basiselement,
+\begin{align*}
+(\Id-T'')J_E(x_j) = 0 \Rightarrow \setd{J_E(x_1),\ldots,J_E(x_n)} \subseteq
+\ker (\Id-T'').
+\end{align*}
+Da $J_E$ injektiv, ist die Menge linear unabhängig, also 
+\begin{align*}
+\dim \ker(\Id-T)\le\dim \ker(\Id-T'').
+\end{align*}
+\item\label{proof:6.30:2} Aus \ref{prop:6.29} folgt $\codim\im (\Id-T) \le
+\dim\ker(\Id-T)$ also auch
+\begin{align*}
+\codim\im (\Id-T')\le \dim \ker(\Id-T').
+\end{align*}
+\item\label{proof:6.30:3} $\dim \ker(\Id-T') \overset{\ref{prop:6.20}}{=} \dim
+(\im(\Id-T))^\bot \overset{\ref{prop:6.28}}{=} \codim \im (\Id-T)$. Somit
+\begin{align*}
+\dim \ker(\Id-T'') = \codim\im (\Id-T').
+\end{align*}
+\end{proofenum}
+Aus \ref{proof:6.30:1}-\ref{proof:6.30:3} folgt,
+\begin{align*}
+\dim \ker (\Id-T) &\le \dim \ker(\Id-T'') = \codim \im (\Id-T') \le
+\dim \ker(\Id-T') \\ &= \codim \im (\Id-T) \le \ker (\Id-T).
+\end{align*}
+Somit gilt Gleichheit in der gesamten Gleichung.\qedhere
+\end{proof}
+
+\begin{prop}[Fredholmsche Integralgleichung]
+\index{Fredholmsche!Integralgleichung}
+\label{prop:6.31}
+Sei $E=C([a,b]\to\C)$. Zu $g\in E$ ist $f\in E$ gesucht mit
+\begin{align*}
+f(x) - \int_a^b K(x,y)f(y)\dy = g(x),\qquad a\le x\le b,
+\end{align*}
+wobei $K\in C([a,b]\times[a,b]\to \C)$.\fishhere
+\end{prop}
+
+In Übungsaufgabe 4.2 haben wir gezeigt, dass falls
+\begin{align*}
+\max\limits_{a\le x\le b} \int_a^b K(x,y)\dy < 1,\tag{*}
+\end{align*}
+$(\Id-T)^{-1}\in\LL(E)$ existiert, d.h.
+\begin{align*}
+\forall g\in E \exists ! f\in E : (\Id-T)f = g
+\end{align*}
+und die Lösung $f$ hängt stetig von $g$ ab.
+
+Nun ist $T$ ein kompakter Operator und daher die Fredholm Theorie anwendbar.
+Falls $\ker(\Id-T) = (0)$, so gilt dasselbe auch ohne die (*)-Bedingung.
+
+Ist dagegen $\ker(\Id-T)\neq (0)$, so gibt es genau dann Lösungen zu $f$, falls
+\begin{align*}
+\forall h\in \ker(\Id-T') : h'(g) = 0.
+\end{align*}
+Dies ist äquivalent zu
+\begin{align*}
+\forall h\in E : \left(\underbrace{h(x) - \int_a^b \overline{K(y,x)}h(y)\dy =
+0}_{(1)} \right) \Rightarrow \int_a^b g(x)\overline{h}(x)\dx = 0 .
+\end{align*}
+Insbesondere besagt \ref{prop:6.30}, dass (1) genau so viele linear unabhängige
+Lösungen besitzt wie
+\begin{align*}
+f(x)-\int_a^b K(x,y)f(y)\dy = 0.
+\end{align*}
+
+\section{Ausblick}
+
+Sei $H$ ein Hilbertraum, $T\in \KK(H)$ und $T$ symmetrisch, d.h.
+\begin{align*}
+\lin{Tx,y} = \lin{x,Ty}.
+\end{align*}
+
+\begin{prop}
+$\lambda=\norm{T}$ oder $\lambda=-\norm{T}$ ist Eigenwert von $T$.\fishhere
+\end{prop}
+
+Für diesen Satz ist die Symmetrie von $T$ eine notwendige Voraussetzung, denn
+betrachte für $H=l^2$ den modifizierten Shift-Operator
+\begin{align*}
+T(x_1,x_2,\ldots) = (0,\frac{x_1}{2},\frac{x_2}{3}), 
+\end{align*}
+so ist $T$ kompakt (vgl. Übungsaufgabe 10.2). $T$ besitzt aber keine
+Eigenwerte, denn sei $\lambda = 0$ und $Tx = \lambda x$, so ist $x=0$ und sei
+$\lambda \neq 0$ und $Tx = \lambda x$, so ist ebenfalls $x=0$ aber
+$\norm{T}=\frac{1}{2}$.
+
+\begin{prop}
+Sei $T\in \KK(H)$ symmetrisch. Dann existiert ein ONS $(e_j)_{j\in\II}$ mit
+$\II$ höchstens abzählbar und
+\begin{defnenum}
+\item $\forall j\in\II : T e_j = \lambda_j e_j$,\quad $\lambda_j\neq 0$.
+\item $(\lambda_j)$ ist monoton fallend.
+\item In $(\lambda_j)$ kommt jeder Eigenwert so oft vor, wie es seiner
+endlichen Vielfachheit entspricht.
+\item $(e_j)_{j\in\II}$ ist vollständig in $\overline{\im T}$, d.h.
+\begin{align*}
+\forall x\in \overline{\im T} : x = \sum_{j\in\II} \lin{x,e_j}e_j.\fishhere
+\end{align*}
+\end{defnenum}
+\end{prop}

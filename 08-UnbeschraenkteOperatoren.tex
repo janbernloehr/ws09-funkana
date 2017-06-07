@@ -1,0 +1,396 @@
+\chapter{Unbeschränkte Operatoren in Hilberträumen}
+
+\begin{bemn}[Erinnerung.]
+Ein linearer Operator $A: H\to H$ auf dem Hilbertraum $H$ heißt
+\emph{symmetrisch}, falls
+\begin{align*}
+\lin{Ax,y} = \lin{x,Ay},\qquad x,y\in H.\maphere
+\end{align*}
+\end{bemn}
+
+Der folgende Satz zeigt, dass auf ganz $H$ definierte symmetrische Operatoren
+nichts neues ergeben.
+
+\begin{prop}[Satz von Hellinger-Toeplitz]
+\label{prop:8.1}
+\index{Satz!Hellinger-Toeplitz}
+Jeder symmetrische Operator $A:H\to H$ ist beschränkt.\fishhere
+\end{prop}
+\begin{proof}
+Übungsaufgabe 8.4\qedhere
+\end{proof}
+
+\begin{bem}[Vereinbarung.]
+\label{bem:8.2}
+Im Folgenden sei $H$ stets Hilbertraum über $\C$ und $A: D(A)\to H$ mit
+$D(A)\subset H$ linearer Operator.\maphere 
+\end{bem}
+
+\begin{defn}
+\label{defn:8.3}
+\index{Operator!symmetrisch}
+$A$ heißt symmetrisch, wenn für $x,y\in D(A)$ gilt
+\begin{align*}
+\lin{Ax,y} = \lin{x,Ay}.\fishhere
+\end{align*}
+\end{defn}
+
+\begin{bsp}
+\label{bsp:8.4}
+Sei $H=L^2(O)$, $O\subset\R^n$ offen und
+\begin{align*}
+Au = -\Delta u := -\sum_{j=1}^n \D^{2e_j}u
+\end{align*}
+für $u\in D(A) = W^{2,2}(O)\cap W_0^{1,2}(O)$. $A$ ist symmetrisch, denn
+seien $u,v\in D(A)$, so ist
+\begin{align*}
+\lin{Au,v} &= - \sum_{j=1}^n \lin{\D^{2e_j}u,v}
+= \sum_{j=1}^n \lin{\D^{e_j}u,\D^{e_j}v}
+= -\sum_{j=1}^n \lin{u,\D^{2e_j}v}\\
+&= \lin{u,\Delta v}.\bsphere
+\end{align*}
+\end{bsp}
+
+\begin{defn}
+\label{defn:8.5}
+\index{Operator!adjungiert}
+Sei $D(A)$ dicht in $H$. Der Operator
+\begin{align*}
+&\D(A^*) := \setdef{y\in H}{\exists y^*\in H \forall x\in D(A) : \lin{Ax,y} =
+\lin{x,y^*}},\\
+&A^* y = y^*
+\end{align*}
+heißt zu $A$ \emph{adjungierter Operator}.\fishhere
+\end{defn}
+
+\begin{prop}
+\label{prop:8.6}
+\begin{propenum}
+\item $y^*$ ist durch $y$ und die Bedingung
+\begin{align*}
+\forall x\in D(A) : \lin{Ax,y} = \lin{x,y^*}
+\end{align*}
+eindeutig bestimmt.
+\item $A^*$ ist linear.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+\item Sei $\tilde{y}\in H$ und erfülle ebenfalls die Bedingung, dann folgt für
+alle $x\in D(A)$,
+\begin{align*}
+\lin{x,y^*-\tilde{y}} = \lin{x,y^*}-\lin{x,\tilde{y}} = 0
+\end{align*}
+und da $D(A)\subset H$ dicht folgt auch
+\begin{align*}
+\lin{y^*-\tilde{y},y^*-\tilde{y}} = 0.
+\end{align*}
+\item Seien $y_1,y_2\in D(A^*)$ und $\alpha,\beta\in\C$ so gilt
+\begin{align*}
+\lin{Ax,\alpha y_1 + \beta y_2} = \overline{\alpha}\lin{x,y_1^*} +
+\overline{\beta}\lin{x,y_2^*} = \lin{x,\alpha y_1^* + \beta y_2^*}
+\end{align*}
+also ist $\alpha y_1 + \beta y_2\in D(A^*)$ und
+\begin{align*}
+A^*(\alpha y_1 + \beta y_2)= \alpha y_1^* + \beta y_2^*.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}
+\label{prop:8.7}
+Sei $D(A)\subset H$ dicht und $A$ symmetrisch. Dann ist $A^*$ eine Fortsetzung
+von $A$, d.h.
+\begin{align*}
+D(A)\subset D(A^*),\qquad A^*x = Ax\text{ für }x\in D(A).
+\end{align*}
+Schreibe $A\subset A^*$.\fishhere
+\end{prop}
+\begin{proof}
+Sei $y\in D(A)$, so gilt
+\begin{align*}
+\lin{Ax,y} = \lin{x,Ay} = \lin{x,A^*y}.
+\end{align*}
+Also ist $y\in D(A^*)$ und $A^*y = Ay$.\qedhere
+\end{proof}
+
+\begin{defn}
+\label{defn:8.8}
+\index{Operator!selbstadjungiert}
+Sei $D(A)$ dicht. $A$ heißt \emph{selbstadjungiert}, falls
+\begin{align*}
+A = A^*.\fishhere
+\end{align*}
+\end{defn}
+
+\begin{prop}
+\label{prop:8.9}
+Jeder selbstadjungierte Operator ist symmetrisch.\fishhere
+\end{prop}
+\begin{proof}
+Seien $x,y\in D(A)$. Dann gilt
+\begin{align*}
+\lin{Ax,y} = \lin{x,A^*y} =\lin{x,Ay}.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{bsp}
+\label{bsp:8.10}
+Sei $H=L^2((-1,1))$ und $D(A) = C_0^\infty((-1,1)\to\C)$ mit $A\ph = -\ph''$.
+\begin{bspenum}
+\item \text{$A$ ist symmetrisch}. Spezialisierung von Beispiel \ref{bsp:8.4}.
+\item $D(A^*) = W^{2,2}((-1,1))$ und $A^* u = \D^2 u$.
+
+``$\supset$'': Seien $u\in W^{2,2}((-1,1))$ und $\ph\in D(A)$ so gilt
+\begin{align*}
+\lin{A\ph,u} = -\lin{\ph, \D^2 u}.
+\end{align*}
+Da $u\in W^{2,2}$, ist $\D^2u\in L^2$ also $u^* = -\D^2 u$. Somit ist $u\in
+D(A^*)$ und $A^* u = -\D^2 u$.
+
+``$\subset$'': Sei $u\in D(A^*)$, so gilt für $\ph\in D(A)$
+\begin{align*}
+\lin{\ph,A^*u} = \lin{A\ph,u} =  - \lin{\ph'',u} = -\lin{\ph,\D^u}.
+\end{align*}
+Da $\ph$ beliebig gilt $\D^2u = -A^* u \in L^2(\Omega)$. Setzen wir
+\begin{align*}
+v(x)= \int_{-1}^x \D^2u\dmu, 
+\end{align*}
+so ist $v\in L^2((-1,1))$ und $\D^1 v = \D^2 u$. (Übungsaufgabe 13.1)
+
+Da $\D^1(v-\D^1 u) = 0$ folgt $v-\D^1 u = \const$ und somit ist $\D^1 u =
+v-\const\in L^2((-1,1))$ und somit $u\in W^{2,2}((-1,1))$ und $A^* u = -\D^2
+u$.
+\item $A^*$ ist nicht symmetrisch.
+
+Seien $u\equiv 1$ und $v(x)=x^2$, so sind $u,v\in W^{2,2}((-1,1))$ aber
+\begin{align*}
+\lin{Au,v} = 0,\qquad \lin{Av,u} = -\lin{v'',u} = -\lin{2,1} = -4\neq 0.
+\end{align*}
+$A$ ist also insbesondere \textit{nicht} selbstadjungiert.
+\item Wir vergrößern nun $D(A)$ in der Hoffnung, dass $A$ dadurch
+selbstadjungiert wird.
+\begin{align*}
+&D(A_1) := \overline{D(A)}^{W^{2,2}} = W_0^{2,2}((-1,1)),\\
+&A_1 u = \D^2 u.
+\end{align*}
+$A_1$ ist symmetrisch aber $A_1^*=A^*$. Somit ist der Versuch fehlgeschlagen.
+\item Wir vergrößern $D(A)$ noch weiter.
+\begin{align*}
+&D(A_2) := W^{2,2}((-1,1))\cap W_0^{1,2}((-1,1)),\\
+&A_2u = -\D^2 u.
+\end{align*}
+Dieser Operator ist selbstadjungiert (später).
+
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(0,-1.81)(4.8,1.77)
+\psellipse[linecolor=darkblue](2.21,0.19)(2.21,1.58)
+\psellipse[linecolor=purple](1.72,0.19)(1.52,0.86)
+\pscircle[linecolor=yellow](1.52,0.19){0.78}
+\psellipse(1.5,0.2)(0.7,0.31)
+
+\rput(3.63,-1.585){\small\color{darkblue}$D(A_1^*)=D(A^*)$}
+\rput(2.15,1.235){\small\color{purple}$D(A_2)=D(A_2^*)$}
+\rput(2.75,0.195){\small\color{yellow}$D(A_1)$}
+\rput(1.46,0.195){\small\color{gdarkgray}$D(A)$}
+\end{pspicture} 
+\caption{Zur Wahl von $A$, $A_1$ und $A_2$.}
+\end{figure}
+
+Man sagt $A_2$ ist eine selbstadjungierte Erweiterung von $A$.
+Selbstadjungierte Erweiterungen sind im Allgemeinen nicht eindeutig. Operatoren
+bei denen das der Fall ist heißen wesentlich selbstadjungiert.\bsphere
+\end{bspenum}
+\end{bsp}
+
+\begin{defn}
+\label{defn:8.11}
+$A$ heißt \emph{abgeschlossen}\index{Operator!abgeschlossen}, falls der Graph
+$G(A):= \setdef{(x,Ax)}{x\in D(A)}$ in $H\times H$ abgeschlossen ist.\fishhere
+\end{defn}
+
+\begin{prop}
+\label{prop:8.12}
+Jeder selbstadjungierte Operator ist abgeschlossen.\fishhere
+\end{prop}
+\begin{proof}
+Sei $(x_n)$ Folge in $D(A)$ mit $(x_n,Ax_n)\to (x,y)\in H\times H$.
+
+Für $z\in D(A)$ gilt nun
+\begin{align*}
+\lin{Az,x}  =\lim\limits_{n\to\infty}\lin{Az,x_n}
+  =\lim\limits_{n\to\infty}\lin{z,Ax_n} = \lin{z,y}.
+\end{align*}
+Somit ist $x\in D(A*)$ und $A^* x = y$. Insbesondere ist $x\in D(A)$ und $Ax=y$
+also $(x,y) = (x,Ax)\in G(A)$.\qedhere
+\end{proof}
+
+\begin{defn}
+\label{defn:8.13}
+\begin{defnenum}
+\item Die Resolventenmenge\index{Resolventen!-Menge} von $A$ ist gegeben durch
+\begin{align*}
+\rho(A) := \setdef{\lambda\in\C}{\atop{A-\lambda\Id \text{ ist injektiv},\;
+\overline{\im(A-\lambda\Id)}=H}{\text{ und }(A-\lambda\Id)^{-1}\in\LL(H)}}
+\end{align*}
+\item $\sigma(A) =\C\setminus \rho(A)$ heißt \emph{Spektrum}\index{Spektrum}
+von $A$.
+\begin{align*}
+\sigma_p(A) &:= \setdef{\lambda\in \sigma(A)}{A-\lambda\Id\text{ ist
+nicht injektiv}}\\ &= \setdef{\lambda\in\sigma(A)}{\lambda\text{ ist Eigenwert
+von } A}
+\end{align*}
+heißt \emph{Punktspektrum}\index{Spektrum!Punkt-}.
+\begin{align*}
+\sigma_c(A) := \setdef{\lambda\in\sigma(A)}{\atop{A-\lambda\Id\text{ ist
+injektiv},\;
+\overline{\im(A-\lambda\Id)}=H}{\text{aber }(A-\lambda\Id)^{-1}\notin\LL(H)}}
+\end{align*}
+heißt \emph{stetiges (kontinuierliches)
+Spektrum}\index{Spektrum!stetiges}\index{Spektrum!kontinuierliches} von $A$.
+\begin{align*}
+\sigma_r(A) := \setdef{\lambda\in\sigma(A)}{A-\lambda\Id\text{ ist injektiv
+aber }\overline{\im(A-\lambda\Id)}\subsetneq H}
+\end{align*}
+heißt \emph{residuales Spektrum} von $A$\index{Spektrum!residuales}.\fishhere
+\end{defnenum}
+\end{defn}
+
+\begin{prop}
+\label{prop:8.14}
+Falls $A$ abgeschlossen, ist
+\begin{align*}
+\rho(A) &:= \setdef{\lambda\in\C}{A-\lambda\Id\text{ ist injektiv und
+}\im(A-\lambda\Id)=H}\\
+&= \setdef{\lambda\in\C}{A-\lambda\Id\text{ bijektiv}}.\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+``$\subset$'': Sei nun $\lambda\in\rho(A)$. Zeige $\im(A-\lambda\Id)=H$. Zu
+$y\in H$ sei $(x_n)$ in $D(A)$ mit $(A-\lambda\Id)x_n\to y$. Insbesondere ist dann
+$((A-\lambda\Id)x_n)$ Cauchyfolge und da $(A-\lambda\Id)^{-1}$ beschränkt auch
+$(x_n)$, d.h. $x_n\to x$ in $H$.
+\begin{align*}
+Ax_n = \underbrace{(A-\lambda\Id)x_n}_{\to y} + \underbrace{\lambda x_n}_{\to
+\lambda x} \to y +\lambda x.
+\end{align*}
+Somit $(x_n,Ax_n)\to (x,y+\lambda)\in G(A)$ und insbesondere $x\in D(A)$ und
+$Ax = y+\lambda x$ also $y= Ax-\lambda x\in \im (A-\lambda\Id)$. D.h.
+$\im(A+\lambda\Id)=H$.
+
+``$\supset$'': Sei $A-\lambda\Id: D(A)\to H$ bijektiv. Zeige
+$(A-\lambda\Id)^{-1}$ beschränkt. Ist $A$ abgeschlossen, so ist auch
+$A-\lambda\Id$ abgeschlossen und daher $(A-\lambda\Id)^{-1}$ abgeschlossen, da
+$G(A-\lambda\Id)=G((A-\lambda\Id)^{-1})$.
+
+Aus dem closed Graph theorem folgt, dass $(A-\lambda\Id)^{-1}$ beschränkt
+ist.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{lem}
+\label{prop:8.15}
+\begin{propenum}
+\item Ist $A$ selbstadjungiert, so ist $\sigma_p(A)\subset\R$.
+\item Ist $D(A)$ dicht, so gilt für jedes $\lambda\in\C:\im(A-\lambda\Id)^\bot = \ker(A^*-\overline{\lambda}\Id)$.\fishhere
+\end{propenum}
+\end{lem}
+\begin{proof}
+Der Beweis ist eine leichte Übung.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:8.15}
+Sei $A$ selbstadjungiert. Dann gilt
+\begin{propenum}
+\item $\sigma(A)\subset\R$.
+\item $\sigma_r(A)=\varnothing$.\fishhere
+\end{propenum} 
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+\item Sei $\lambda\in\C\setminus\R$. Zeige $\lambda\in\rho(A)$. Für $x\in D(A)$
+rechnet man ohne Umwege nach,
+\begin{align*}
+\norm{(A-\lambda\Id)x}^2 = \norm{(A-(2\Re \lambda)\Id)x}^2 +
+(\Im\lambda)^2\norm{x}^2
+\ge (\Im\lambda)^2\norm{x}^2.
+\end{align*}
+Da $\Im \lambda\neq 0$ ist $\ker(A-\lambda\Id)= (0)$ und daher $\lambda$
+kein Eigenwert. Weiterhin ist für $y=(A-\lambda\Id)x$,
+\begin{align*}
+\norm{(A-\lambda\Id)^{-1}y} \le \frac{1}{\abs{\Im \lambda}}\norm{y},
+\end{align*}
+also ist $(A-\lambda\Id)^{-1}$ beschränkt.
+Nach Lemma \ref{prop:8.15} ist
+\begin{align*}
+\im(A-\lambda\Id)^\bot = \ker(A^*-\overline{\lambda}\Id)
+=\ker(A-\overline{\lambda}\Id) = (0)
+\end{align*}
+und daher $\overline{\im (A-\lambda\Id)}=H$.
+\item Sei $\lambda\in \sigma(A)$, so ist $\lambda\in\R$. Sei $A-\lambda\Id$
+injektiv, so gilt
+\begin{align*}
+\im(A-\lambda\Id)^\bot = \ker(A^*-\overline{\lambda}\Id)
+\overset{\atop{A^*=A}{\lambda=\overline{\lambda}}}{=} \ker(A-\lambda\Id)=(0)      
+\end{align*}
+und daher $\overline{\im (A-\lambda\Id)} = H$, d.h. $\lambda\notin \sigma_r(A)$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{prop}
+\label{prop:8.17}
+Sei $D(A)$ dicht und $A$ symmetrisch. Dann sind äquivalent
+\begin{equivenum}
+\item\label{prop:8.17:1} $A$ ist selbstadjungiert.
+\item\label{prop:8.17:2} $\exists \lambda\in \C : \im(A-\lambda\Id) = H =
+\im(A-\overline{\lambda}\Id)$.\fishhere
+\end{equivenum}
+\end{prop}
+\begin{proof}
+``\ref{prop:8.17:1}$\Rightarrow$\ref{prop:8.17:2}'': Klar, denn ist $A$
+selbstadjungiert, so gilt $(A-\lambda\Id)=H$ für jedes $\lambda\in\rho(A)$.
+
+``\ref{prop:8.17:2}$\Rightarrow$\ref{prop:8.17:1}'': Sei $y\in D(A^*)$. Zeige
+$y\in D(A)$. Nach Voraussetzung existiert ein $x\in D(A)$, so dass
+\begin{align*}
+(A-\lambda\Id)x = (A^*-\lambda\Id)y.
+\end{align*}
+Da $A\subset A^*$ ist
+\begin{align*}
+(A^*-\lambda\Id)(x-y) = 0
+\end{align*}
+und daher gilt für alle $z\in D(A)$,
+\begin{align*}
+\lin{(A-\overline{\lambda}\Id)z,x-y} = 
+\lin{z,(A^*-\lambda\Id)(x-y)} = 0 
+\end{align*}
+und da $\im(A-\overline{\lambda}\Id)=H$ ist $x-y=0$, d.h. $y=x\in\D(A)$.\qedhere
+\end{proof}
+
+\begin{bsp}
+\label{bsp:8.18}
+Wir setzen hier Beispiel \ref{bsp:8.10} fort. $A_2$ ist symmetrisch und
+$W^{2,2}\cap W^{1,2}_0$ dicht in $H=L^2$. Wir zeigen nun für $\lambda=-1$, dass
+\begin{align*}
+\im(A_2-\lambda\Id) = \im(A_2+\Id) = H.
+\end{align*}
+Sei also $f\in L^2$ und $\phi: W_0^{1,2}\to\C,\; u\mapsto \lin{u,f}_2$, so ist
+$\phi\in {W_0^{1,2}}'$ und daher existiert nach dem Lemma von Riesz ein $v\in
+W_0^{1,2}$ mit
+\begin{align*}
+\phi = \lin{\cdot,v}_{1,2} = \lin{\cdot,f}_2.
+\end{align*}
+Für $u\in W_0^{1,2}$ gilt somit
+\begin{align*}
+\lin{u,f}_2 = \lin{u,v}_2 + \lin{\D^1 u,\D^1 v}_2
+= \lin{u,v}_2 - \lin{u,\D^2 v}_2= \lin{u,v-\D^2 v}.
+\end{align*}
+Also ist $v-\D^2 v = f$ und 
+$\D^2 v = v-f\in L^2$. Somit ist $v\in W_0^{1,2}\cap W^{2,2}$ und $(A_2+\Id)v =
+f$.
+
+$A_2$ ist daher nach Satz \ref{prop:8.17} selbstadjungiert.\bsphere
+\end{bsp}

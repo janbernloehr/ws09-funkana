@@ -1,0 +1,1525 @@
+\chapter{Sobolevräume}
+
+\section{Das Lebesgue-Integral}
+
+\begin{defn}
+\label{defn:7.1}
+$\Sigma\in\PP(\R^n)$ heißt $\sigma$-Algebra, falls
+\begin{defnenum}
+\item $\varnothing\in\Sigma$,
+\item $A\in\Sigma\Rightarrow A^c\in\Sigma$,
+\item $A_j\in \Sigma \Rightarrow \bigcup_{j\in\N} A_j \in \Sigma$.\fishhere
+\end{defnenum}
+\end{defn}
+
+Es gibt zahllose $\sigma$-Algebren auf dem $\R^n$. Die $\sigma$-Algebra, die
+die offenen Mengen enthält, heißt \emph{Borel-$\sigma$-Algebra}.
+
+\begin{cor}
+\label{prop:7.2}
+\begin{propenum}
+\item $\R^n\in\Sigma$.
+\item $A_j\in\Sigma \Rightarrow \bigcap_{j\in\N} A_j \in \Sigma$.
+\item $A,B\in\Sigma \Rightarrow A\setminus B\in\Sigma$.\fishhere
+\end{propenum}
+\end{cor}
+
+\begin{defn}
+\label{defn:7.3}
+Eine Abbildung $\mu: \Sigma \to [0,\infty]$ heißt \emph{Maß}, falls
+\begin{defnenum}
+\item $\mu(\varnothing) = 0$.
+\item $\mu$ \emph{$\sigma$-additiv}, d.h. für $A_j\in\Sigma$ mit $A_j\cap A_k =
+\varnothing$ falls $j\neq k$, gilt
+\begin{align*}
+\mu\left(\dot{\bigcup}_{j\in\N} A_j\right) = \sum_{j=1}^\infty
+\mu(A_j).\fishhere
+\end{align*}
+\end{defnenum}
+\end{defn}
+
+Mit $A \dcup B$ bzw. $\dot{\bigcup}_j A_j$ fordern wir implizit, dass $A$ und
+$B$ bzw. die $A_j$ disjunkt sind.
+
+\begin{cor}
+\label{prop:7.4}
+\begin{propenum}
+\item Wenn $A,B\in\Sigma$ und $A\subseteq B$, dann folgt $\mu(A)\le\mu(B)$.
+\item $A_j\in\Sigma$, $A_1\subseteq A_2\subseteq A_3 \subseteq \ldots$,
+\begin{align*}
+\Rightarrow \mu\left(\bigcup_{j\in\N} A_j\right) = \lim\limits_{j\to\infty}
+\mu(A_j).\fishhere
+\end{align*}
+\end{propenum}
+\end{cor}
+
+\begin{prop}
+\label{prop:7.5}
+Es existiert eine $\sigma$-Algebra $\Sigma\subseteq \PP(\R^n)$ und ein Maß
+$\mu$ auf $\Sigma$ mit den Eigenschaften:
+\begin{propenum}
+\item\label{prop:7.5:1} $O\subseteq\R^n$ offen $\Rightarrow O\in\Sigma$.
+\item\label{prop:7.5:2} $\mu\left([a_1,b_1]\times \ldots \times [a_n,b_n]\right)
+=\prod_{j=1}^n (b_j-a_j)$.
+\item\label{prop:7.5:3} $N\in\Sigma$ mit $\mu(N) = 0$ und $M\subseteq N$, so ist
+$M\in\Sigma$ und $\mu(M) = 0$.
+\item\label{prop:7.5:4} $\mu$ ist translationsinvariant, d.h.
+\begin{align*}
+A\in\Sigma,\; x\in\R^n \Rightarrow
+\begin{cases}
+x+A\in\Sigma,\\
+\mu(x+A) =\mu(A).\fishhere
+\end{cases}
+\end{align*}
+\end{propenum}
+\end{prop}
+
+\begin{defn}
+\label{defn:7.6}
+Für das Paar $(\Sigma,\mu)$, das von allen $(\Sigma,\mu)$, die
+\ref{prop:7.5:1}-\ref{prop:7.5:4} aus \ref{prop:7.5} erfüllen, die kleinste
+$\sigma$-Algebra besitzt, heißt $\mu$ \emph{Lebesgue-Maß} und $\Sigma$ die
+$\sigma$-Algebra der \emph{Lebesgue-messbaren} Mengen.\fishhere
+\end{defn}
+
+\begin{bem}
+\label{bem:7.7}
+$A\subseteq\R^n$ abzählbar $\Rightarrow$ $A\in\Sigma$ und $\mu(A) = 0$.\maphere
+\end{bem}
+
+\begin{defn}
+\label{defn:7.8}
+Sei $B\subseteq A$ mit $\mu(A\setminus B) = 0$. Gilt eine Bedingung auf $B$, so
+sagt man die Bedingung gilt auf $A$ \emph{fast überall}.\fishhere
+\end{defn}
+
+\begin{defn}
+\label{defn:7.9}
+\begin{defnenum}
+\item $f: D\to \RA$, $D\subseteq \R^n$, $\RA:=\R\cup\setd{-\infty,\infty}$
+heißt \emph{messbar}, falls
+\begin{align*}
+\forall a\in\RA : f^{-1}([a,\infty]) \in \Sigma.
+\end{align*}
+\item $f: D\to \C$ heißt \emph{messbar}, falls $\Re f$ messbar und $\Im f$
+messbar.\fishhere
+\end{defnenum}
+\end{defn}
+
+\begin{prop}
+\label{prop:7.10}
+\begin{propenum}
+\item Sei $D\in\Sigma$ und $f$ stetig, so ist $f$ messbar.
+\item Falls $f,g$ messbar, dann auch
+\begin{defnenum}
+\item $\min\setd{f,g}$ und $\max\setd{f,g}$.
+\item $f\cdot g$ mit der Konvention $0\cdot \infty = 0$.
+\item $f+g$, falls $f(x) = \pm\infty \Rightarrow g(x)\neq \mp \infty \mufu$.\\
+Insbesondere sind daher $c\cdot f$, $f_+:=\max\setd{f,0}$, $f_-:=
+-\min\setd{f,0}$ und $\abs{f}:= f_++f_-$.
+\end{defnenum}
+\item Sei $f_n$ messbar, dann sind es auch
+\begin{defnenum}
+\item $\sup_n f_n$, $\inf_n f_n$,
+\item $\limsup_n f_n$, $\liminf_n f_n$.
+\end{defnenum}
+\item Sei $f:\R\to\R$ stetig und $g: D\to\RA$ messbar. Setze
+\begin{align*}
+f\circ g(x) :=
+\begin{cases}
+\pm \infty, & g(x) = \pm\infty,\\
+f\circ g(x),& \text{sonst}.
+\end{cases}
+\end{align*}
+So ist auch $f\circ g$ messbar.\fishhere
+\end{propenum}
+\end{prop}
+
+\begin{defn}
+\label{defn:7.11}
+\begin{defnenum}
+\item Sei $A\subseteq \R^n$. Dann heißt
+\begin{align*}
+\chi_A : x\mapsto
+\begin{cases}
+1, & x\in A,\\
+0, & \text{sonst},
+\end{cases}
+\end{align*}
+\emph{charakteristische Funktion} von $A$.
+\item $A_j\in\Sigma$, $\alpha_j\in\R $, $N\in\N$ dann heißt,
+\begin{align*}
+f = \sum_{j=1}^N \alpha_j \chi_{A_j}
+\end{align*} 
+\emph{einfache Funktion}.\fishhere
+\end{defnenum}
+\end{defn}
+
+\begin{prop}
+\label{prop:7.12}
+Sei $A\in\Sigma$, $f: A\to[0,\infty]$ messbar. Dann existiert eine Folge
+einfacher Funktionen $(s_n)$ mit
+\begin{align*}
+\forall x\in A : s_1(x)\le s_2(x)\le \ldots
+\end{align*}
+und $f(x) = \lim\limits_{n\to\infty} s_n(x)$. Falls $f$ beschränkt kann $(s_n)$
+so gewählt werden, dass $s_n\unito g$ auf $A$.\fishhere
+\end{prop}
+
+\begin{prop}
+\label{prop:7.13}
+Sei $A\in\Sigma$.
+\begin{propenum}
+\item Für $A_j\in\Sigma$, $s=\sum_{j=1}^N \alpha_j \chi_{A_j}$ mit $\alpha_j\ge
+0$ setze
+\begin{align*}
+\int_A s \dmu := \sum_{j=1}^N \alpha_j \mu(A_j).
+\end{align*}
+\item Sei $f: A\to [0,\infty]$ messbar. Dann
+\begin{align*}
+\int_A f \dmu := \sup
+\setdef{\int_A s \dmu}{s\text{ einfach, positiv und }s\le f}.
+\end{align*}
+\item Sei $f: A\to\RA$ messbar.
+\begin{align*}
+\int_A f\dmu := \int_A f_+ \dmu - \int_A f_-\dmu,
+\end{align*}
+falls nicht beide Integrale $\infty$. Andernfalls ist das Integral nicht
+definiert.
+\item $f: A\to\RA$ heißt \emph{Lebesgue-integrierbar}, falls
+\begin{align*}
+\int_A f_+\dmu,\quad \int_A f_-\dmu < \infty.
+\end{align*}
+\item $f: A\to \C$ heißt \emph{Lebesgue-integrierbar}, falls $\Re f$ und $\Im
+f$ Lebesgue-integrierbar. Schreibe dann $f\in L^1(A)$ und setze
+\begin{align*}
+\int_A f\dmu = \int_A \Re f \dmu + i\int_A \Im f\dmu.\fishhere
+\end{align*}
+\end{propenum}
+\end{prop}
+
+\begin{prop}[Eigenschaften]
+\label{prop:7.14}
+Seien $A,B\in\Sigma$, $f,g:A\to\RA$ oder $\C$ messbar.
+\begin{propenum}
+\item $f\in L^1(A)$ genau dann, wenn $\abs{f}\in L^1(A)$. Dann gilt
+\begin{align*}
+\abs{\int_A f\dmu} \le \int_A \abs{f}\dmu.
+\end{align*}
+\item Sind $f\in L^1(A)$ und $\abs{g}\le f$, so ist $g\in L^1(A)$ und
+\begin{align*}
+\int_A \abs{g}\dmu \le \int_A f\dmu.
+\end{align*}
+\item Die Abbildung
+\begin{align*}
+L^1(A) \to \R,\quad f\mapsto \int_A f\dmu 
+\end{align*}
+ist linear.
+\item Falls $\mu(A)<\infty$ und $f$ $\mufu$ beschränkt, so ist $f\in L^1(A)$ und
+\begin{align*}
+\int_A \abs{f}\dmu \le \norm{f}_\infty \mu(A).
+\end{align*}
+\item Seien $a,b\in\R$ mit $a\le f(x)\le b\mufu$ auf $A$ und $\mu(A)<\infty$.
+Dann ist $f\in L^1(A)$ und
+\begin{align*}
+a\mu(A) \le \int_A f\dmu \le b\mu(A).
+\end{align*}
+\item Sei $f\le g\mufu$ auf $A$, so ist
+\begin{align*}
+\int_A f\dmu \le \int_A g\dmu,
+\end{align*}
+falls beide Integrale existieren.
+\item Sei $f\in L^1(A)$ und $B\subseteq A$, so ist $f\in L^1(B)$ und
+\begin{align*}
+\int_B \abs{f}\dmu \le \int_A \abs{f}\dmu.
+\end{align*}
+\item Sei $\mu(A) = 0$, so ist $\int_A f\dmu = 0$.
+\item Sei $f\in L^1(A)$ und für jedes $B\in \Sigma$ gelte
+\begin{align*}
+B\subseteq A \Rightarrow \int_B f\dmu = 0,
+\end{align*}
+so ist $f=0\mufu$ auf $A$.
+\item Sei $A\cap B = \varnothing$, $f\in L^1(A)$ und $f\in L^1(B)$, so ist
+$f\in L^1(A\cap B)$ und
+\begin{align*}
+\int_{A\cup B} f \dmu = \int_A f\dmu + \int_B f\dmu.\fishhere
+\end{align*} 
+\end{propenum}
+\end{prop}
+
+\subsection{Konvergenzsätze}
+
+\begin{prop}[Satz von der monotonen Konvergenz]
+\label{prop:7.15}
+Seien $A\in\Sigma$, $f_n : A\to [0,\infty]$ messbar und $0\le f_1(x)\le f_2(x)
+\le \ldots$ auf $A$. Dann gilt
+\begin{align*}
+\lim\limits_{n\to\infty}\int_A f_n\dmu = 
+\int_A \lim\limits_{n\to\infty }f_n \dmu.\fishhere
+\end{align*}
+\end{prop}
+
+\begin{prop}[Lemma von Fatou]
+\label{prop:7.16}
+Seien $A\in\Sigma$, $f_n: A\to [0,\infty]$ messbar. Dann gilt
+\begin{align*}
+\int_A \liminf_n f_n \dmu \le \liminf_n \int_A f_n\dmu.\fishhere
+\end{align*}
+\end{prop}
+
+\begin{prop}[Satz von der majorisierten Konvergenz]
+\label{prop:7.17}
+Seien $A\in\Sigma$, $f_n,f: A\to \RA$ messbar, $f_n\to f$. Existiert ein $g:
+A\to \RA$ messbar mit $\int_A g\dmu < \infty$ und $\abs{f_n}\le g$, so gilt
+\begin{align*}
+\lim\limits_{n\to\infty} \int_A \abs{f_n-f}\dmu = 0.\fishhere 
+\end{align*}
+\end{prop}
+
+\section{$L^p$-Räume}
+
+Für alles Weitere sei $\Omega\subseteq \R^n$ ein Gebiet.
+
+\begin{defn}
+\label{defn:7.18}
+\begin{defnenum}
+\item Für $1\le p < \infty$ sei
+\begin{align*}
+L^p(\Omega) := \setdef{u:\Omega\to\C \text{ messbar}}{\norm{u}_p := \left(
+\int_\Omega \abs{u}^p \dmu
+\right)^{1/p} < \infty}.
+\end{align*}
+Identifizieren wir Funktionen, die sich nur auf Nullmengen unterscheiden, wird
+$\norm{\cdot}_p$ zur Norm (Minkowski Ungleichung).
+\item $u: \Omega\to \C$ heißt \emph{wesentlich beschränkt}, falls
+\begin{align*}
+\exists K > 0 : \abs{u}\le K\mufu
+\end{align*} 
+In diesem Fall heißt
+\begin{align*}
+\esssup(\abs{u}) := \inf\setdef{K>0}{\abs{u}\le K \mufu}
+\end{align*}
+\emph{wesentliches Supremum} von $u$.
+\begin{align*}
+L^\infty(\Omega) := \setdef{u:\Omega \to \C\text{ messbar}}{\norm{u}_\infty :=
+\esssup\abs{u} < \infty}.
+\end{align*}
+Durch die obige Identifikation wird $\norm{\cdot}_\infty$ zur Norm.\fishhere
+\end{defnenum}
+\end{defn}
+
+\begin{prop}
+\label{prop:7.19}
+\begin{propenum}
+\item Für $1\le p\le \infty$ ist $\norm{\cdot}_p$ eine Norm.
+\item Für $1\le p \le \infty$ ist $L^p(\Omega)$ ein Banachraum. $L^2(\Omega)$
+ist mit
+\begin{align*}
+\lin{u,v} = \int_\Omega u\overline{v}\dmu
+\end{align*}
+ein Hilbertraum.\fishhere
+\end{propenum}
+\end{prop}
+
+\begin{prop}
+\label{prop:7.20}
+\begin{propenum}
+\item Die Menge
+\begin{align*}
+C_0^\infty (\Omega \to \C) :=
+\setdef{\ph\in C^\infty(\Omega\to \C)}{\supp \ph := \overline{\setdef{x\in
+\Omega}{\ph(x)\neq 0}}\text{ ist kompakt}}
+\end{align*}
+ist dicht in $L^p(\Omega)$ im Fall $1\le p < \infty$.
+\item $L^p(\Omega)$ ist separabel.\fishhere
+\end{propenum}
+\end{prop}
+
+Damit erhalten wir auch einen alternativen Zugang zum $L^p(\Omega)$ als
+Abschluss von $C_0^\infty(\Omega\to\C)$ bezüglich der $\norm{\cdot}_p$-Norm.
+
+\begin{proof}
+Den Beweis verschieben wir auf später.\qedhere
+\end{proof}
+
+\begin{prop}
+Sei $1\le p < \infty$. Die Abbildung
+\begin{align*}
+\Phi : L^q(\Omega)\to L^p(\Omega)'
+\end{align*}
+mit
+\begin{align*}
+\Phi(u)(f) = F_u(f) = \int_\Omega f\overline{u}\dmu
+\end{align*}
+ist eine isometrische antilineare Bijektion.\fishhere
+\end{prop}
+
+\begin{proof}
+\begin{proofenum}
+\item Seien $f\in L^p(\Omega)$, $u\in L^q(\Omega)$, so folgt mit der
+Hölder-Ungleichung, dass $f\cdot \overline{u}\in L^1(\Omega)$, sowie
+\begin{align*}
+\int_\Omega \abs{f\overline{u}}\dmu \le \norm{f}_p \norm{u}_q.
+\end{align*}
+Somit ist $\Phi(u)$ wohldefiniert und linear, da das Integral linear ist. Es ist
+sofort ersichtlich, dass
+\begin{align*}
+\norm{\Phi(u)} \le \norm{u}_q,
+\end{align*}
+insbesondere ist $\Phi(u)\in L^q(\Omega)$.
+\item Setzen wir
+\begin{align*}
+f(x) = 
+\begin{cases}
+\abs{u(x)}^{\frac{q}{p}-1}u(x), & u(x)\neq 0,\\
+0, & \text{sonst},
+\end{cases}
+\end{align*}
+so ist 
+\begin{align*}
+\norm{f}_p^p = \int_\Omega \abs{f}^p \dmu = \int_\Omega \abs{u}^q \dmu =
+\norm{u}_q^p.
+\end{align*}
+Folglich ist auch
+\begin{align*}
+\abs{\Phi(u)(f)} &= \abs{\int_\Omega f\overline{u}\dmu}
+=
+\abs{\int_\Omega \abs{u}^{\frac{q}{p}-1} u\overline{u}\dmu}
+= 
+\abs{\int_\Omega \abs{u}^{\frac{q}{p}+1}\dmu}\\
+&=
+\int_\Omega \abs{u}^{q}\dmu
+= \norm{u}_q^q \overset{!}{=}\norm{f}_p\norm{u}_q,
+\end{align*}
+denn $\norm{f}_p\norm{u}_q = \norm{u}_q^{\frac{q}{p}+1} = \norm{u}_q^q$, also
+existiert ein $f\in L^p(\Omega)$ mit
+\begin{align*}
+\abs{\Phi(u)(f)} = \norm{f}_p=\norm{u}_q
+\end{align*}
+Somit ist $\Phi$ normerhaltend.
+\item $\Phi(\alpha u + \beta v) = \overline{\alpha}\Phi(u) +
+\overline{\beta}\Phi(v)$ ist klar.
+\item $\Phi$ ist injektiv, da isometrisch. Zur Surjektivität siehe \cite{Alt99}
+Kapitel 4.3. Der Beweis basiert auf dem Satz von Radon-Nikodym.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{cor}
+\label{prop:7.22}
+Für $1<p<\infty$ ist $L^p(\Omega)$ reflexiv.\fishhere
+\end{cor}
+\begin{proof}
+Analoger Beweis zu \ref{prop:5.18}.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:7.23}
+$L^p(\Omega)' = (C_0^\infty(\Omega\to\C),\norm{\cdot}_p)'$.\fishhere
+\end{prop}
+
+Insbesondere ist $F_u$ (mit $u\in L^q(\Omega)$) und damit auch $u\in
+L^q(\Omega)$ eindeutig bestimmt durch die Werte $F_u(\ph)$ für $\ph\in
+C_0^\infty(\Omega\to\C)$.
+
+\begin{proof}
+Zu $F\in L^p(\Omega)'$ ist
+\begin{align*}
+F\Big|_{C_0^\infty(\Omega\to\C)} \in 
+(C_0^\infty(\Omega\to\C),\norm{\cdot}_p)'.
+\end{align*}
+Umkehert existiert zu $f\in (C_0^\infty(\Omega\to\C),\norm{\cdot}_p)'$ nach dem
+Fortsetzungssatz \ref{prop:2.5} eine eindeutige Fortsetzung $F\in
+L^p(\Omega)'$, da $C_0^\infty(\Omega\to\C)$ dicht in $L^p(\Omega)$.\qedhere 
+\end{proof}
+
+\section{Verallgemeinerung der Ableitung I}
+
+Sei wieder $\Omega\subset\R^n$ ein Gebiet.
+
+\begin{bsp}
+\label{bsp:7.24}
+Seien $\Omega=\R^n$, $f\in C^1(\R^n\to \C)$ und $f,\partial_{x_i} f \in
+L^p(\Omega)$. Identifiziere $L^p(\Omega)$ mit $L^q(\Omega)'$, also $F_f$ mit
+$f$. Dann sind $\partial_{x_i} f$ bzw $F_{\partial_{x_i} f}$ eindeutig bestimmt
+durch die Werte auf $C_0^\infty(\Omega\to\C)$.
+\begin{align*}
+F_{\partial_{x_i}f}(\ph) &=
+\int_{\R^n} \ph\overline{\partial_{x_i}f}\dmu = 
+\int_{\supp \ph} \ph\overline{\partial_{x_i}f}\dmu
+\overset{\text{part.int.}}{=}
+-\int_{\supp \ph} \partial_{x_i}\ph\overline{f}\dmu\\
+&= -F_{f}(\partial_{x_i}\ph).\bsphere
+\end{align*}
+\end{bsp}
+
+\begin{defn}
+\label{defn:7.25}
+Seien $1\le p < \infty$, $f\in L^p(\Omega)$, $\alpha\in \N_0^n$ und $u\in
+L^p(\Omega)$ mit
+\begin{align*}
+\forall \ph \in C_0^\infty(\Omega\to \C) : F_u(\ph) =
+(-1)^{\abs{\alpha}}F_f(\nabla^\alpha \ph) 
+\end{align*}
+bzw.
+\begin{align*}
+\int_\Omega \ph\overline{u}\dmu =
+(-1)^{\abs{\alpha}}\int_\Omega \nabla^\alpha \ph \overline{f}\dmu.
+\end{align*}
+Dann heißt $u$ \emph{schwache Ableitung}\index{schwache!Ableitung} von $f$ der
+Ordnung $\alpha$. Schreibweise
+\begin{align*}
+u:= \D^\alpha f.\fishhere
+\end{align*}
+\end{defn}
+Für $\ph\in C_0^\infty(\Omega\to\C)$ gilt also
+\begin{align*}
+\lin{\D^\alpha f,\ph} = 
+\int_\Omega (\D^\alpha f)\overline{\ph} \dmu = 
+(-1)^{\abs{\alpha}}\int_\Omega f \nabla^\alpha \overline{\ph}\dmu = 
+(-1)^{\abs{\alpha}}\lin{f, \nabla^\alpha\ph}.
+\end{align*}
+
+Für alles Folgende seien - sofern nicht anders angegeben -
+$\alpha,\beta\in\N_0^n$.
+
+\begin{cor}
+\label{prop:7.26}
+Sei $f\in C^k(\Omega\to\C)$ mit $\nabla^\alpha f \in L^p(\Omega)$ für
+$\abs{\alpha}\le k$. Dann gilt
+\begin{align*}
+\nabla^\alpha f = \D^\alpha f.\fishhere
+\end{align*}
+\end{cor}
+\begin{proof}
+Sei $\ph\in C_0^\infty(\Omega\to\C)$,
+\begin{align*}
+\int_\Omega \ph \overline{\nabla^\alpha f}\dmu
+\overset{\text{part.int.}}{=}
+ (-1)^{\abs{\alpha}}\int_\Omega \nabla^\alpha \ph \overline{f}\dmu.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{bsp}
+\label{bsp:7.27}
+Sei $\Omega=(a,b)$ mit $0\in (a,b)$ und $f(x) = \abs{x}$. Bestimme $\D^1 f$.
+\begin{align*}
+\int_a^b \ph(x) \overline{D^1 f(x)}\dx
+&= - \int_a^b \ph'(x)\overline{f(x)}\dx \\ &= 
+\int_a^0 x\ph'(x)\dx - \int_0^b x\ph'(x)\dx\\
+&\overset{\text{part.int.}}{=}
+-\int_a^0 \ph(x)\dx + \int_0^b \ph(x)\dx\\
+&= \int_a^b \sign(x)\ph(x)\dx,
+\end{align*}
+wobei
+\begin{align*}
+\sign(x) = 
+\begin{cases}
+-1, & x < 0,\\
+1, &  x > 0.
+\end{cases}
+\end{align*}
+Die Definition von $\sign$ im Nullpunkt ist irrelevant.
+
+Somit ist für jedes $\ph\in C_0^\infty(\Omega\to \C)$
+\begin{align*}
+\int_a^b \ph \overline{\D^1 f}\ph\dmu = 
+\int_a^b \ph \overline{\sign(x)}\ph\dmu 
+\end{align*}
+also $\D^1 f = \sign(x)$ in $L^p(\Omega)$.
+
+$\sign(x)$ ist jedoch in $L^p(\Omega)$ nicht schwach differenzierbar (vgl.
+Distributionentheorie).\bsphere
+\end{bsp}
+
+
+\begin{defn}
+\label{defn:7.28}
+Sei $1\le p < \infty$ und $m\in\N$. Dann heißt
+\begin{align*}
+W^{m,p}(\Omega) := \setdef{u\in L^p(\Omega)}{\D^\alpha u \in L^p(\Omega),\quad
+\forall \abs{\alpha}\le m}
+\end{align*}
+versehen mit der Norm
+\begin{align*}
+\norm{u}_{m,p} = \left(\sum_{\abs{\alpha}\le m} \norm{\D^\alpha
+u}_p^p\right)^{1/p}
+\end{align*}
+\emph{Sobolevraum}\index{Sobolevraum} der Ordnung $m$.\fishhere
+\end{defn}
+
+\begin{prop}
+\label{prop:7.29}
+$W^{m,p}(\Omega)$ ist ein Banachraum. $W^{m,2}(\Omega)$ ein
+Hilbertraum.\fishhere
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+\item Sei $(u_n)$ Cauchyfolge in $W^{m,p}(\Omega)$, so ist für $\abs{\alpha}\le
+m$ auch $(\D^\alpha u)$ Cauchyfolge in $L^p(\Omega)$ und damit konvergent,
+$\D^\alpha u_n \to g_\alpha$.
+
+Wir zeigen nun $\D^\alpha g_0 = g_\alpha$ und $\norm{u_n-g_0}_{m,p} \to 0$.
+
+Für $\ph\in C_0^\infty(\Omega)$ gilt
+\begin{align*}
+F_{g_\alpha}(\ph) &= \lim\limits_{n\to\infty} F_{\D^\alpha u_n}(\ph)
+= \lim\limits_{n\to\infty}(-1)^{\abs{\alpha}}F_{u_n}(\nabla^\alpha \ph)\\
+&= (-1)^{\abs{\alpha}} F_{g_0}(\ph)(\nabla^\alpha \ph) = F_{\D^\alpha g_0}(\ph).
+\end{align*}
+Also ist $g_\alpha = \D^\alpha g_0$ und daher
+\begin{align*}
+\norm{u_n-g_0}_{m,p}^p
+= \sum_{\abs{\alpha}\le m}\norm{\D^\alpha u_n - \D^\alpha g_0}_{p}^p
+=
+\sum_{\abs{\alpha}\le m}\norm{\D^\alpha u_n - g_\alpha}_{p}^p
+\to 0.
+\end{align*}
+\item $W^{2,m}$ ist Hilbertraum mit dem Skalarprodukt
+\begin{align*}
+\lin{u,v} = \sum_{\abs{\alpha}\le m} \lin{\D^\alpha u,\D^\alpha v}.\qedhere
+\end{align*}
+\end{proofenum}
+
+\end{proof}
+
+\begin{prop}
+\label{prop:7.30}
+$W^{m,p}(\Omega)$ ist separabel und reflexiv.\fishhere
+\end{prop}
+\begin{proof}
+Sei $\alpha_1,\ldots,\alpha_k$ eine Nummerierung aller $\alpha$ mit
+$\abs{\alpha}\le m$. Setze
+\begin{align*}
+P : W^{m,p}(\Omega)\to L^p(\Omega)^k,\quad
+u\mapsto (\D^{\alpha_1}u,\ldots,\D^{\alpha_k}u),  
+\end{align*}
+so ist $P$ linear und isometrisch, denn
+\begin{align*}
+\norm{u} = 
+\left(\sum_{j=1}^k \norm{\D^{\alpha_j}u}_p^p \right)^{1/p}
+ = \norm{(\D^{\alpha_1}u,\ldots,\D^{\alpha_k}u)}_{L^p(\Omega)^k}.
+\end{align*}
+Diese Norm ist äquivalent zur Standard-Norm des $L^p(\Omega)^k$ und daher ist
+$L^p(\Omega)^k$ auch bezüglich dieser Norm separabel und reflexiv.
+
+$P$ ist Isometrie, also ist $W^{m,p}(\Omega)\cong \im P \subseteq L^p(\Omega)^k$
+ein Banachraum und damit abgeschlossen. Da $L^p(\Omega)^k$ separabel, ist
+somit auch $W^{m,p}(\Omega)$ separabel. Mit \ref{prop:4.23} folgt außerdem, dass
+$W^{m,p}(\Omega)$ reflexiv.\qedhere
+\end{proof}
+
+Wir wollen nun die Produktregel auf die schwache Ableitung verallgemeinern. Für
+$u,v\in L^p(\Omega)$ ist jedoch nicht zwingend $u\cdot v\in L^p(\Omega)$. Somit
+ist klar, dass die Produktregel nur unter zusätzlichen Voraussetzungen an $u$
+und $v$ gelten kann.
+
+\begin{prop}[Produktregel]
+\index{schwache!Produktregel}
+\label{prop:7.31}
+Sei $m\in\N$, $1\le p < \infty$, $u\in W^{m,p}(\Omega)$ und $f\in
+C_0^\infty(\Omega\to \C)$. Dann gelten
+\begin{propenum}
+\item $f\cdot u\in W^{m,p}$.
+\item $\forall \abs{\alpha}\le m : \D^\alpha (f\cdot u) = \sum_{\beta\le
+\alpha} \binom{\alpha}{\beta} (\nabla^\beta f) (\D^{\alpha-\beta}u)$.\fishhere
+\end{propenum}
+\end{prop}
+
+\begin{proof}
+Sei $m=1$ und $\alpha=e_j$, so gilt für $\ph\in C_0^\infty(\Omega\to\C)$,
+\begin{align*}
+-\lin{f\cdot u,\nabla^{e_j}\ph} &= - \int_\Omega f\cdot u
+\overline{\partial_{x_j}\ph}\dmu\\
+&= - \int_\Omega u
+\partial_{x_j}(f\overline{\ph})\dmu
++ \int_\Omega u
+(\partial_{x_j}f)\overline{\ph}\dmu\\
+&=
+\int_\Omega \D^{e_j} u\,
+f\,\overline{\ph}\dmu
++ \int_\Omega u\,
+\partial_{x_j}f\,\overline{\ph}\dmu\\
+&= \lin{f D^{e_j}u + \partial_{x_j}f u,\ph}
+\end{align*}
+Somit folgt, $\D^{e_j} (f\cdot u) = f\D^{e_j} u + \partial_{x_j}f\, u$ und
+insbesondere, $\D^{e_j}(f\cdot u)\in L^p(\Omega)$, also $f\cdot u\in W^{1,p}$.
+
+Der Rest folgt mit Induktion über $m$.\qedhere
+\end{proof}
+
+\begin{defn}
+\label{defn:7.32}
+Sei die partielle Differentialgleichung
+\begin{align*}
+\sum_{\abs{\alpha}\le m} a_\alpha\, \nabla^\alpha u = f,\qquad
+a_\alpha\in C_0^\infty(\Omega\to\C),\quad f\in L^p(\Omega)
+\end{align*}
+gegeben. Falls $u\in L^p(\Omega)$ und für alle $\ph\in C_0^\infty(\Omega\to\C)$
+gilt,
+\begin{align*}
+\sum_{\abs{\alpha}\le m} (-1)^{\abs{\alpha}}
+\lin{u,\nabla^\alpha(\overline{a_\alpha}\ph)} = \lin{f,\ph},
+\end{align*}
+so heißt $u$ \emph{schwache Lösung}\index{schwache!Lösung} der
+Differentialgleichung.\fishhere
+\end{defn}
+
+In obiger Definition wird nicht $u\in W^{m,p}(\Omega)$ vorausgesetzt, denn
+falls zusätzlich $u\in W^{m,p}(\Omega)$ und $u$ schwache Lösung, gilt sogar
+\begin{align*}
+\sum_{\abs{\alpha}\le m} a_\alpha\, \D^\alpha u = f.
+\end{align*}
+
+\newcommand{\WO}{W_0}
+\begin{defn}
+\label{defn:7.33}
+$\WO^{m,p}(\Omega) :=
+\overline{C_0^\infty(\Omega\to\C)}^{W^{m,p}(\Omega)}$.\fishhere
+\end{defn}
+
+$\WO^{m,p}(\Omega)$ ist als abgeschlossene Teilmenge des Banachraums
+$W^{m,p}(\Omega)$ selbst ein Banachraum und $\WO^{m,2}(\Omega)$ ein Hilbertraum.
+
+
+\begin{prop}[Veranschaulichung]
+\label{prop:7.34}
+Sei $1<p<\infty$ und $u\in W_0^{1,p}((0,1))\cap C([0,1])$. Dann gilt $u(0) =
+u(1)=0$. Allgemeiner: Ist $u\in W_0^{m,p}((0,1))\cap C^{m-1}([0,1])$, so gilt
+\begin{align*}
+\forall j=0,\ldots,m-1 : u^{(j)}(0) = 0 = u^{(j)}(1).\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+$u$ ist stetig auf $[0,1]$, d.h. insbesondere ist
+\begin{align*}
+u(0) =\lim\limits_{h\to0}\frac{1}{h} \int_0^h u(x)\dx
+\end{align*}
+und da $u\in W_0^{1,p}((0,1))$, existiert eine Folge $(u_n)$ in
+$C_0^\infty((0,1)\to\C)$ mit $\norm{u_n-u}_{1,p}\to 0$, wobei
+\begin{align*}
+u_n(x) = \int_0^x u_n'(s)\ds \le
+\left(\int_0^x 1\ds\right)^{1/q}
+\left(\int_0^x \abs{u_n'(s)}^p\ds\right)^{1/p}
+\le C\cdot x^{1/q},
+\end{align*}
+mit $C=\sup\limits_{n\ge 1} \norm{u_n}_p < \infty$. Sei $A\subset[0,1]$
+messbar, so gilt $\norm{(u_n-u)\chi_A}_1 \le
+\underbrace{\norm{\chi_A}_q}_{\const}\underbrace{\norm{u_n-u}_p}_{\to 0}$. Somit
+gilt
+\begin{align*}
+\abs{\int_0^h u(x)\dx} = \lim\limits_{n\to\infty}
+\abs{\int_0^h u_n(x)\dx} \le C \int_0^h x^{1/q}\dx = C\frac{h^{1+1/q}}{1+1/q}.
+\end{align*}
+also
+\begin{align*}
+\abs{u(0)} = \lim\limits_{h\to 0}\frac{1}{h}
+\abs{\int_0^h u(x)\dx} \le
+\lim\limits_{h\to 0}\frac{1}{h}
+C\frac{h^{1+1/q}}{1+1/q} = 0.
+\end{align*}
+$u(1)=0$ folgt analog.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:7.35}
+Das Dirichlet Problem
+\begin{align*}
+-\Delta u + u = f\text{ in }\Omega,\qquad u\big|_{\delta \Omega} = 0
+\end{align*}
+besitzt für $f\in L^2(\Omega)$ in $L^2(\Omega)$ eine eindeutig bestimmte
+schwache Lösung $u$ mit $u\in W_0^{1,2}(\Omega)$, so dass für alle $\ph\in
+C_0^\infty(\Omega\to\C)$ gilt
+\begin{align*}
+-\lin{u,\Delta \ph} + \lin{u,\ph} = \lin{f,\ph}.\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+\textit{Eindeutigkeit}.
+Seien $u,v$ Lösungen der inhomogenen Gleichung, so ist $u-v$ Lösung der
+homogenen Gleichung. Es genügt also sich auf den homogenen Fall zu beschränken.
+
+Sei $u\in W_0^{1,2}(\Omega)$ Lösung von $-\Delta u + u = 0$ und $(u_n)$
+Folge in $C_0^\infty(\Omega\to\C)$ mit $\norm{u_n-u}_{1,2}\to 0$, so gilt
+\begin{align*}
+0 &= -\lin{u,\Delta u_n} + \lin{u,u_n} = \sum_{j=1}^n
+\lin{\D^{e_j}u,\partial_{x_j}u_n} + \lin{u,u_n}\\
+&\to \lin{\D^{e_j}u,\D^{e_j}u} + \lin{u,u} = \norm{u}_{1,2}^2.
+\end{align*}
+Folglich ist $u=0$ und damit die Lösung eindeutig.
+
+\textit{Existenz}. Sei $F: W_0^{1,2}(\Omega)\to \C$ mit
+\begin{align*}
+F(v) = \lin{v,f},
+\end{align*}
+so ist $F\in  W_0^{1,2}(\Omega)'$, denn
+\begin{align*}
+\abs{F(v)} \le \norm{v}_{0,2}\norm{f}_2 \le \norm{f}_2 \norm{v}_{1,2}.
+\end{align*}
+Das Lemma von Riesz besagt nun, dass es genau ein $u\in W_0^{1,2}(\Omega)$
+existiert so dass für alle $v\in W_0^{1,2}(\Omega)$ gilt
+\begin{align*}
+\lin{v,f}_2 = F(v) = \lin{v,u}_{1,2}
+= \sum_{j=1}^n \lin{\D^{e_j}v,\D^{e_j}u} + \lin{v,u}.
+\end{align*}
+Für $v=\ph\in C_0^\infty(\Omega\to\C)$ folgt
+\begin{align*}
+\lin{f,\ph} = \sum_{j=1}^n \lin{\D^{e_j}u,\nabla^{e_j}\ph} + \lin{u,\ph}
+= -\sum_{j=1}^n \lin{u,\Delta\ph} + \lin{u,\ph}.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{bem}
+\label{bem:7.36}
+Offensichtlich gilt
+\begin{align*}
+\sum_{j=1}^n \D^{2e_j}u = f-u \in L^2(\Omega).
+\end{align*}
+Die elliptische Regularitätstheorie zeigt, dass sogar $u\in W^{2,2}(\Omega)$,
+falls $\Omega$ ``genügend gut''.\maphere
+\end{bem}
+
+\begin{prop}
+\label{prop:7.37}
+Sei $1<p<\infty$, $u\in L^p(\Omega)$ mit $\D^\alpha u=0$ für $\abs{\alpha}=1$.
+Dann folgt $u=c$. Falls $\mu(\Omega)=\infty$ oder $u\in W_0^{1p}(\Omega)$ folgt
+sogar $u=0$.\fishhere
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+\item Sei $n=1$, $\Omega=(a,b)$ mit $-\infty\le a < b \le \infty$. Sei $\psi\in
+C_0^\infty((a,b)\to \C)$ mit
+\begin{align*}
+\int_a^b \psi(x)\dx = 1,
+\end{align*}
+so lässt sich jedes $\ph\in C_0^\infty((a,b)\to\C)$ schreiben als
+\begin{align*}
+\ph = \tilde{\ph} + \left(\int_a^b \ph(t)\dt\right)\psi.
+\end{align*}
+Insbesondere ist $\int_a^b \tilde{\ph}\dmu = 0$ und $\tilde{\ph}\in C_0^\infty
+((a,b)\to\C)$. Setze nun
+\begin{align*}
+\Phi(x) := \int_a^x \tilde{\ph}(t)\dt,
+\end{align*}
+so ist $\Phi\in C_0^\infty((a,b)\to\C)$, denn
+\begin{align*}
+\Phi(x) = 0
+\begin{cases}
+\text{für } a<x \le \min\supp\tilde{\ph},\\
+\text{für } \max\supp\tilde{\ph}\le x < b.
+\end{cases}
+\end{align*}
+Damit können wir $\ph$ darstellen durch,
+\begin{align*}
+\ph = \Phi' + \left(\int_a^b \ph(t)\dt\right)\psi. 
+\end{align*}
+
+Sei nun $u$ wie vorausgesetzt, so gilt
+\begin{align*}
+F_u(\ph) &= \lin{u,\ph} = \lin{u,\Phi'}
++ \int_a^b \overline{\ph}(t)\dt \lin{u,\psi}\\
+&= -\underbrace{\lin{D^1u,\Phi}}_{=0} + \int_a^b \overline{\ph}(t)\dt
+\underbrace{\lin{u,\psi}}_{=c} = \lin{c,\ph}.
+\end{align*}
+Und da $\ph$ beliebig war, ist $u=c$.
+\item Wir behandlen exemplarisch den Fall $n=2$, die übrigen Fälle ergeben sich
+dann automatisch.
+\begin{enumerate}[label=\alph{*}),leftmargin=0pt]
+  \item Sei $(x_1,x_2)\in\Omega$ und $W_\ep :=
+  (x_1-\ep,x_1+\ep)\times(x_2-\ep,x_2+\ep)\subseteq \Omega$. Wähle $\psi_j\in
+  C_0^\infty((x_j-\ep,x_j+\ep)\to\C)$ mit
+\begin{align*}
+\int_{x_j-\ep}^{x_j+\ep} \psi_j(x) = 1,\qquad j=1,2.
+\end{align*}
+Wir zeigen nun, dass $u=0$ auf $W_\ep$.
+
+Für festes $y_2\in (x_2-\ep,x_2+\ep)$ besitzt $\ph\in C_0^\infty(W_\ep\to\C)$
+analog zum Vorangegangenen eine Darstellung,
+\begin{align*}
+\ph(y_1,y_2) = F_{y_2}'(y_1) + \underbrace{\int_{x_1-\ep}^{x_1+\ep}
+\ph(t,y_2)\dt}_{:=g(y_2)} \psi_1(y_1)
+\end{align*}
+mit $F_{y_2}\in C_0^\infty((x_1-\ep,x_1+\ep)\to\C)$. Aus dem ersten Teil folgt
+ebenfalls, dass ein $G\in C_0^\infty((x_2-\ep,x_2+\ep)\to\C)$ existiert, so dass
+\begin{align*}
+g(y_2) = G'(y_2) + \int_{x_2-\ep}^{x_2+\ep} g(s)\ds \psi_2(y_2).
+\end{align*}
+Wir können somit $\ph$ schreiben als
+\begin{align*}
+\ph(y_1,y_2) =
+\underbrace{F_{y_2}'(y_1)}_{\partial_1 \Phi_1(y_1,y_2)}
+% \partial_1 \Phi_1(y_1,y_2)
++ \underbrace{G'(y_2)\psi_1(y_1)}_{\partial_2 \Phi_2(y_1,y_2)}
++ \int_{W_\ep} \ph\dmu\, \psi_1(y_1)\psi_2(y_2).
+\end{align*}
+Somit gilt (wobei $\lin{\cdot,\cdot}_\ep$ das Integral über $W_\ep$ beschreibt),
+\begin{align*}
+\lin{u,\ph}_\ep &= \lin{u,\partial_1 \Phi_1}_\ep
++ \lin{u,\partial_2 \Phi_2}_\ep +
+\left(\int_{W_\ep}
+\overline{\ph}\dmu\right)\underbrace{\lin{u,\psi_1\psi_2}_\ep}_{:=c}\\
+&=\lin{u,\partial_1 \Phi_1}_\ep
++ \lin{u,\partial_2 \Phi_2}_\ep + \lin{c,\ph}_\ep
+\end{align*}
+Setzen wir $\Phi_1,\Phi_2$ durch Null auf ganz  $\Omega$ fort, so gilt
+\begin{align*}
+\lin{u,\ph}_\ep &= \lin{u,\partial_1 \Phi_1}
++ \lin{u,\partial_2 \Phi_2} +  \lin{c,\ph}_\ep
+\\ &=
+\underbrace{\lin{\D^{e_1}u, \Phi_1}
++ \lin{\D^{e_2}u,\Phi_2}}_{=0} + 
+  \lin{c,\ph}_\ep.
+\end{align*}
+Also ist $u=c$ auf $W_\ep$.
+\item Seien $x,y\in\Omega$. Da $\Omega$ wegzusammenhängend, existiert ein
+Polygonzug $\Gamma$ von $x$ nach $y$, der ganz in $\Omega$ verläuft. Nun ist
+$\Gamma$ kompakt, also kann ganz $\Gamma$ mit endlich vielen $W_\ep^{(j)}$
+überdeckt werden, $j=1,\ldots,J$. Auf jedem $W_\ep^{(j)}$ ist $u$ konstant.
+
+Da $\Gamma$ alle $W_\ep^{(j)}$ durchläuft und aneinandergrenzende $W_\ep^{(j)}$
+nichtleeren Schnitt haben, ist $u=c$ mit einer einzigen Konstanten für alle
+$W_\ep^{(j)}$. Somit ist $u=c$ auf $\Omega$.
+\end{enumerate}
+\item Sei $u=c$ und $\mu(\Omega)=\infty$, so gilt
+\begin{align*}
+\int_\Omega \abs{u}^p \dmu = \abs{c}^p\mu(\Omega)< \infty,
+\end{align*}
+also ist $c=0$.
+\item Sei $u\in W_0^{1,p}(\Omega)$ und $\mu(\Omega) < \infty$. Eine leichte
+Übung zeigt
+\begin{align*}
+\lin{\D^{e_j}v,u} = -\lin{v,\D^{e_j}u},
+\end{align*}
+für $v\in W^{1,p}(\Omega)$.  Setzen wir $v(x) = \arctan(x_1)$, so ist
+\begin{align*}
+\partial_1 v(x) = \frac{1}{1+x_1^2},\qquad \partial_j v(x) = 0,\quad
+j=2,\ldots,n.
+\end{align*}
+Somit ist $v\in C^1(\Omega\to\R)$ und $v,\nabla v$ sind beschränkt, also ist
+$v\in W^{1,p}(\Omega)$, da $\mu(\Omega)<\infty$.
+
+Nach Voraussetzung ist $\lin{v,\D^{e_j}u} = 0$, also gilt
+\begin{align*}
+0 = -\lin{v,\D^{e_1}u} = \lin{D^{e_1}v,u} = \lin{\partial_1 v, c}
+= \overline{c} \underbrace{\int_\Omega \frac{1}{1+x_1^2}\dx}_{>\mu(\Omega)\neq
+0}
+\end{align*}
+und folglich ist $c=0$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\section{Verallgemeinerung der Ableitung II}
+
+Für alles Weitere sei wieder $\Omega\subseteq\R^n$ ein Gebiet.
+
+\begin{defn}
+\label{defn:7.38}
+\begin{defnenum}
+\item Seien $1\le p<\infty$, $u\in L^p(\Omega)$ und
+$\alpha\in\N_0^n$. Falls eine Folge $(u_n)$ in $C^\infty(\Omega\to\C)$
+existiert mit $u_n\to u$ und $\nabla^\alpha u_n \to v$ in $L^p(\Omega)$,
+so heißt $v$ \emph{starke Ableitung}\index{starke Ableitung} von $u$ der
+Ordnung $\alpha$. Schreibe $\D^\alpha_s u := v$.
+\item $H^{m,p}(\Omega) := \overline{\setdef{\ph\in
+C^\infty(\Omega\to\C)}{\norm{\ph}_{m,p}<\infty}}$ heißt \emph{$m$-ter
+Sobolevraum}\index{Sobolevraum}.
+
+$H_0^{m,p}(\Omega) := W_0^{m,p}(\Omega)$.\fishhere
+\end{defnenum}
+\end{defn}
+
+\begin{prop}
+\label{prop:7.39}
+\begin{propenum}
+\item Sei $u\in L^p(\Omega)$ mit $\D_s^\alpha u\in L^p(\Omega)$ für ein
+$\alpha\in\N_0^n$, so stimmen schwache und starke Ableitung überein,
+\begin{align*}
+\D_s^\alpha u = \D^\alpha u.
+\end{align*}
+\item $H^{m,p}(\Omega) \subseteq W^{m,p}(\Omega)$ und $H^{m,p}(\Omega)$ ist ein
+Banachraum.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+\item Sei $\ph\in C_0^\infty(\Omega\to\C)$ und $u$ wie vorausgesetz, dann
+\begin{align*}
+\lin{\D^\alpha u,\ph} &= (-1)^{\abs{\alpha}}\lin{u,\nabla^\alpha \ph}
+= \lim\limits_{n\to\infty}
+(-1)^{\abs{\alpha}}\lin{u_n,\nabla^\alpha \ph}\\
+&= \lim\limits_{n\to\infty}
+(-1)^{\abs{\alpha}}\int_\Omega u_n \overline{\nabla^\alpha \ph}\dmu
+= \lim\limits_{n\to\infty}
+\int_\Omega \nabla^\alpha u_n \overline{\ph}\dmu\\
+&=\lin{\D_s^\alpha u,\ph}.
+\end{align*}
+Da die rechte Seite existiert, existiert auch die linke und somit ist
+$\D^\alpha u = \D^\alpha_s u$.
+\item Sei $\ph\in C^\infty(\Omega\to\C)$ und $\norm{\ph}_{m,p}< \infty$, so
+ist $\ph\in W^{m,p}(\Omega)$. Also ist $H^{m,p}(\Omega)$ sinnvoll definiert und
+$\subseteq W^{m,p}(\Omega)$. Da $H^{m,p}(\Omega)$ abgeschlossener Teilraum von
+$W^{m,p}(\Omega)$ ist $H^{m,p}(\Omega)$ Banachraum.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Satz von Meyers und Serrin (1964)]
+\index{Satz!Meyers und Serrin}
+Für $1\le p < \infty$ und $m\in\N$ ist
+\begin{align*}
+W^{m,p}(\Omega)=H^{m,p}(\Omega).\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+Zum Beweis siehe \cite{Adams75}.\qedhere
+\end{proof}
+
+\begin{defn}
+\label{defn:7.41}
+Gilt $u\in H^{m,p}(\Omega)$ und
+\begin{align*}
+\sum_{\abs{\alpha}\le m} a_\alpha \D^\alpha u = f,\qquad
+\qquad
+a_\alpha\in C_b(\Omega\to\C),\quad f\in L^p(\Omega).
+\end{align*}
+Dann heißt $u$ \emph{starke Lösung}\index{starke Lösung} der
+Differentialgleichung.
+
+Gilt sogar $u\in C^m(\Omega\to\C)$, so heißt $u$ \emph{klassische
+Lösung}\index{klassische Lösung}.\fishhere
+\end{defn}
+
+\section{Approximation}
+
+Für alles Weitere sei $\Omega\subset O$ offen.
+
+\begin{defn}
+\label{defn:7.42}
+\begin{defnenum}
+\item Seien $M$ und $K$ Mengen mit $K\subset M$ und $K$ kompakt, so schreiben
+wir $K\Subset M$.\index{kompakt enthalten}
+\item Sei $A\subset\R^n$ messbar, dann ist
+\begin{align*}
+L^1_\loc(A) := \setdef{u: A\to\C}{\forall K\Subset A : u\big|_K \in L^1(K)}.
+\end{align*}
+\item Für $u: O\to\C$ sei die Nullfortsetzung\index{Nullfortsetzung} von
+$u$ bezeichnet mit
+\begin{align*}
+\tilde{u}(x) := \begin{cases}
+                u(x), & x\in \Omega,\\
+                0, & \text{sonst}.
+                \end{cases}
+\end{align*}  
+\item Sei $j\in C_0^\infty(\R^n\to\R)$ mit
+\begin{equivenum}
+\item $j(x)\ge 0$ auf $\R^n$,
+\item $j(x) = 0$ für $\abs{x}\ge 1$,
+\item $\int_{\R^n} j\dmu = 1$.
+\end{equivenum}
+Zu $\ep > 0$ sei
+\begin{align*}
+j_\ep(x) := \frac{1}{\ep^n}j\left(\frac{x}{\ep}\right),
+\end{align*}
+so ist
+\begin{equivenum}
+\item $j_\ep(x) = 0$ für $\abs{x}\ge \ep$,
+\item $\int_{\R^n} j_\ep \dmu = 1$.
+\end{equivenum}
+Für $u\in L^1_\loc(\overline{O})$ sei
+\begin{align*}
+J_\ep u(x) := j_\ep * u(x) := \int_{\R^n} j_\ep(x-y)u(y)\dy. 
+\end{align*}
+$J_\ep$ heißt \emph{Glättungsoperator
+(Mollifier)}\index{Glättungsoperator}\index{Mollifier}.\fishhere
+\end{defnenum}
+\end{defn}
+
+Man rechnet leicht nach, dass eine Funktion $j$ mit den obigen Eigenschaften
+gegeben ist durch
+\begin{align*}
+j(x) = \frac{1}{\int_{\R^n} f(x)\dx} f(x),\qquad f(x) = e^{-(1+\abs{x}^2)^{-1}}.
+\end{align*}
+
+\begin{prop}
+\label{prop:7.43}
+Sei $u\in L^1_\loc(\overline{O})$, so ist $J_\ep u \in
+C^\infty(\R^n\to\C)$ und
+\begin{align*}
+\nabla^\alpha J_\ep u(x) = \int_{\R^n} \nabla^\alpha
+j_\ep(x-y)\tilde{u}(y)\dy.\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+\item $j_\ep$ ist stetig differenzierbar und hat kompakten Träger, ist also
+global Lipschitz-stetig mit Konstante $L$.
+
+Sei nun $x\in\R^n$ und $K_\ep(x)$ Umgebung von $x$.
+Da $u\in L^1_\loc(\overline{O})$, wird das Integral über
+$\overline{K_{2\ep}(x)\cap\Omega}$ durch eine
+Konstante $C$ majorisiert. Also gilt für $x'\in K_\ep(x)$,
+\begin{align*}
+\abs{J_\ep u(x)-J_\ep u(x')} &\le 
+\int_{\R^n} \abs{j_\ep(x-y)-j_\ep(x'-y)}\abs{\tilde{u}(y)}\dy\\
+&=\int_{K_{2\ep}(x)} \abs{j_\ep(x-y)-j_\ep(x'-y)}\abs{\tilde{u}(y)}\dy\\
+&\le  L\abs{x-x'} \int_{\overline{K_{2\ep}(x)\cap \Omega}}
+\abs{\tilde{u}(y)}\dy
+\le L\, C\, \abs{x-x'}.
+\end{align*}
+Somit ist $J_\ep u$ sogar lokal lipschitz stetig.
+\item Mit dem verallgemeinerten Mittelwertsatz und dem Satz von der
+majorisierten Konvergenz zeigt man analog,
+\begin{align*}
+\nabla^\alpha J_\ep u(x) = \int_{\R^n} \nabla^\alpha
+j_\ep(x-y)\tilde{u}(y)\dy.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Abschneidefunktion]
+\index{Abschneidefunktion}
+\label{prop:7.44}
+Sei $M\subset\R^n$ und für $\ep > 0$
+\begin{align*}
+M_\ep := \setdef{x\in\R^n}{d(x,M) < \ep} = \bigcup_{x\in M} K_\ep(x),
+\end{align*}
+so ist $M_\ep$ offen und damit messbar. Setze
+\begin{align*}
+\psi = J_\ep \chi_{M_\ep} = \int_{M_\ep} j_\ep(\cdot-y)\dy,
+\end{align*}
+so gelten
+\begin{equivenum}
+\item $0\le \psi(x)\le 1$ auf $\R^n$,
+\item $\psi\in C^\infty(\R^n\to\R)$,
+\item $\psi(x) = 0$,\quad $d(x,M_\ep) > \ep$,
+\item $\psi(x) = 1$ auf $M$.\fishhere
+\end{equivenum}
+\end{prop}
+
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(-0.1,-1.2770555)(6.2682223,1.2511667)
+\psline{<-}(0.38,1.2370555)(0.38,-1.0970556)
+\psline{->}(0,-0.83705556)(6.2541113,-0.83705556)
+\psline(1.7543283,-0.7)(1.7543283,-1)
+\psline(4.3656735,-0.7)(4.3656735,-1)
+\psline[linecolor=darkblue](1.374111,0.58294445)(4.7741113,0.58294445)
+\psline[linecolor=purple](1.8141111,0.5629445)(4.374111,0.5629445)
+\psline[linecolor=purple](5.334111,-0.80705553)(6.034111,-0.80705553)
+\psline[linecolor=purple](0.8741111,-0.80705553)(0.37411112,-0.80705553)
+\psbezier[linecolor=purple](4.374111,0.5629445)(5.054111,0.5629445)(4.7741113,-0.80705553)(5.354111,-0.80705553)
+\psbezier[linecolor=purple](1.8141111,0.5629445)(1.1341112,0.5629445)(1.4741111,-0.80705553)(0.8741111,-0.80705553)
+
+\rput(3.254111,0.7479445){\color{darkblue}$\chi_{M_\ep}$}
+\rput(5.1941113,0.067944445){\color{purple}$\psi$}
+\rput(3.054111,-1.0920556){\color{darkblue}$M$}
+\rput(0.01,0.58205557){\color{gdarkgray}1}
+
+\psline(0.2,0.59705555)(0.52,0.59705555)
+\psline[linestyle=dotted,linecolor=darkblue](1.4,0.58)(1.4,-0.83705556)
+\psline[linestyle=dotted,linecolor=darkblue](4.75,0.58)(4.75,-0.83705556)
+
+\end{pspicture} 
+\caption{Zur Abschneidefunktion.}
+\end{figure}
+
+\begin{prop}
+\label{prop:7.45}
+\begin{propenum}
+\item\label{prop:7.45:1} Sei $u\in L^1_\loc(O)$ und $\supp u \Subset
+O$, dann
+\begin{align*}
+J_\ep u \in C_0^\infty(O\to\C),\qquad \text{für } \ep < d(\supp u,\partial
+O).
+\end{align*}
+\item\label{prop:7.45:2} Für $1\le p <\infty$ und $u\in L^p(O)$ gelten,
+\begin{defnenum}
+\item $J_\ep u \in L^p(O)$,
+\item $\norm{J_\ep u}_p \le \norm{u}_p$,
+\item $\norm{J_\ep u - u}_p \to 0$,\quad für $\ep \downarrow 0$.
+\end{defnenum}
+\item\label{prop:7.45:3} Ist $u\in L^\infty(O)$, so gilt $\abs{J_\ep
+u(x)}\le \norm{u}_\infty$.
+\item\label{prop:7.45:4} Ist $u\in C(O\to\C)$ und $K\Subset O$, dann $J_\ep u
+\unito u$ auf $K$ für $\ep\downarrow 0$.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+``\ref{prop:7.45:1}'': Siehe Skizze, die Details sind eine leichte Übung. 
+
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(0,-1.8093171)(6.1396832,1.7894094)
+\psbezier(0.31968328,-0.5693171)(0.0,0.6307752)(1.7110358,0.120429)(2.4996834,0.21068287)(3.2883308,0.30093673)(4.669233,1.7694094)(4.819683,0.09068287)(4.9701333,-1.5880437)(0.63936657,-1.7694094)(0.31968328,-0.5693171)
+\psbezier(4.239683,-0.32931712)(4.259683,-1.2093171)(3.6469872,-0.65047437)(3.3796833,-0.6293171)(3.1123793,-0.6081599)(2.5596833,-1.5093172)(2.3396833,-0.6093171)(2.1196833,0.29068288)(4.219683,0.55068284)(4.239683,-0.32931712)
+\psbezier[linecolor=darkblue](4.159683,-0.32931712)(4.219683,-1.0693171)(3.6269872,-0.55047435)(3.3196833,-0.5493171)(3.0123794,-0.5481599)(2.5796833,-1.3493171)(2.4196832,-0.5693171)(2.2596834,0.21068287)(4.0996833,0.41068286)(4.159683,-0.32931712)
+
+\rput(0.7096833,-0.34431714){\color{gdarkgray}$O$}
+\psbezier(3.8796833,-0.24931712)(4.3596835,0.05068287)(4.759683,-0.70931715)(5.0596833,-0.12931713)
+
+\rput(5.3796835,0.03568287){\color{darkblue}$\supp u$}
+\psbezier(2.5196834,-0.88931715)(1.9414225,-0.94931716)(2.3196833,-1.5893171)(1.8196833,-1.6293172)
+
+\rput(1.1096833,-1.5843171){\color{gdarkgray}$\supp J_\ep u$}
+\psline[linecolor=purple]{<->}(4.0596833,-0.6893171)(4.219683,-0.9293171)
+
+\rput(5.1396832,-1.1){\color{purple}$d(\supp u,\partialO)$}
+\end{pspicture} 
+\caption{Zum Beweis von Satz \ref{prop:7.45}.}
+\end{figure}
+
+
+``\ref{prop:7.45:3}'': $\abs{J_\ep u}(x) = \abs{\int_{\R^n}
+j_\ep(x-y)\tilde{u}(y)\dy} \le \norm{u}_\infty\underbrace{\norm{j_\ep}_1}_{=1} = \norm{u}_\infty$.
+
+``\ref{prop:7.45:4}'': Für $x\in K$ gilt
+\begin{align*}
+\abs{J_\ep u(x)-u(x)} &= 
+\abs{\int_{\R^n} j_\ep(x-y)(u(y)-u(x))\dy} \\ &
+\le \sup_{\abs{x-y}<\ep}
+\abs{u(y)-u(x)}.
+\end{align*}
+Setzen wir $K_\ep := \overline{\setdef{z\in\R^n}{d(z,K)<\ep}}$, so ist $K_\ep$
+kompakt und Teilmenge von $O$ für $\ep<d(K,\partial O)$. Somit
+ist $u$ dort gleichmäßig stetig, d.h.
+\begin{align*}
+\sup_{\atop{\abs{x-y}<\ep}{x,y\in K_\ep}}
+\abs{u(y)-u(x)} \to 0,\qquad \ep\downarrow0
+\end{align*}
+unabhängig vom speziell gewählten $x\in K$.
+
+``\ref{prop:7.45:2}'':
+Zu $p\neq 1$ sei $\frac{1}{p}+\frac{1}{q}=1$, so gilt
+\begin{align*}
+\abs{J_\ep u(x)} &=
+\abs{\int_{\R^n}j_\ep(x-y)^{\frac{1}{p}+\frac{1}{q}}\tilde{u}(y)\dy}\\
+&\overset{\text{Hölder}}{\le}
+\underbrace{\left(\int_{\R^n} j_\ep(x-y)\dy \right)^{1/q}}_{=1}
+\left(\int_{\R^n}j_\ep(x-y)\abs{\tilde{u}(y)}^p\dy \right)^{1/p}.
+\end{align*}
+Für $p=1$ ist diese Ungleichung trivialerweise ebenfalls erfüllt.
+
+Für $1\le p < \infty$ gilt folglich,
+\begin{align*}
+\int_{O} \abs{J_\ep u(x)}^p \dx
+&\le 
+\int_{O}\int_{\R^n} j_\ep(x-y)\abs{\tilde{u(y)}}^p\dy \dx\\
+&\overset{\text{Fubini}}{=}
+\int_{\R^n} \underbrace{\int_{O}j_\ep(x-y) \dx}_{=1} \abs{\tilde{u(y)}}^p
+\dy = \norm{u}_p^p.
+\end{align*}
+Somit wären (a) und (b) bewiesen. Zum Beweis von (c) benötigen wir noch etwas
+Vorbereitung.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{bem}
+\label{bem:7.46}
+Es ist nicht einfach zu zeigen, dass für $O\subset\R^n$ offen und beschränkt
+auch
+\begin{align*}
+\norm{J_\ep \chi_O - \chi_O}_p \to 0,
+\end{align*}
+denn es gibt solche $O$ mit $\mu(\partial O) > 0$.
+
+Sei z.B. $n=1$ und $(q_j)$ eine Abzählung von $\Q\cap[-2,2]$. Setzen wir
+\begin{align*}
+O := \bigcup_{j\in\N} \left(q_j-\frac{1}{2^j},q_j+\frac{1}{2^j}\right),
+\end{align*}
+so ist $O$ offen und
+\begin{align*}
+\mu(O) \le \sum_{j\in\N} \frac{1}{2^{j-1}} = 2.
+\end{align*}
+Da $\setd{q_j}\subset O$, folgt $[-2,2]\subset O$, d.h. $\mu(\overline{O}) \ge
+4$ also ist
+\begin{align*}
+\mu(\partial O) = \mu(\overline{O}\setminus O) = \mu(\overline{O})-\mu(O) =
+2.\maphere
+\end{align*}
+\end{bem}
+
+\begin{prop}[Satz von Lusin]
+\index{Satz!Lusin}
+\label{prop:7.45}
+Sei $A\subset\R^n$ messbar, $\mu(A) < \infty$ und $f:\R^n\to\R$ messbar,
+$f(x)=0$ für $x\in\R^n\setminus A$. Dann gilt
+\begin{align*}
+\forall \ep > 0 \exists f_\ep \in C_0(A\to\R) : \norm{f_\ep}_\infty
+\le \norm{f}_\infty \land
+\mu\setdef{x\in\R^n}{f_\ep(x)\neq f(x)}< \ep.\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+Siehe \cite{Alt99} Anhang 4.7.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:7.48}
+Sei $1\le p <\infty$.
+\begin{propenum}
+\item\label{prop:7.48:1} Die Menge $\setdef{s_n : O\to\C}{s_n \text{ einfach und
+} \supp s_n \Subset O}$ ist dicht in $L^p(\Omega)$.
+\item\label{prop:7.48:2} $C_0(O\to\C)$ ist dicht in $L^p(\Omega)$.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+Sei $f\in L^p(O)$ gegeben. Ohne Einschränkung ist $f$ reellwertig und positiv
+ansonsten zerlege $f$ in $(\Re f)_\pm$, $(\Im f)_\pm$.
+
+\begin{proofenum}
+\item
+Sei $O_k := \setdef{x\in O}{\abs{x} < k \land d(x,\partial O) > \frac{1}{k}}$.
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(0,-1.08)(5.3,1.08)
+\psbezier[linecolor=darkblue](3.88,0.88)(3.3,0.82)(2.8971407,0.41556767)(2.34,0.32)(1.7828593,0.22443233)(1.32,1.06)(0.66,0.7)(0.0,0.34)(0.48,-0.7)(1.2,-0.82)(1.92,-0.94)(2.76,-0.62)(3.24,-0.72)(3.72,-0.82)(3.78,-1.06)(4.44,-0.68)
+\psline[linecolor=darkblue,linestyle=dotted](3.88,0.88)(4.88,0.98)
+\psline[linecolor=darkblue,linestyle=dotted](4.44,-0.68)(5.28,-0.22)
+\psbezier[linecolor=purple](3.78,0.74)(3.2781081,0.69169813)(2.8569865,0.32068136)(2.36,0.22)(1.8630135,0.11931863)(1.3232433,0.9)(0.72,0.6)(0.11675676,0.3)(0.5902703,-0.62754714)(1.2356757,-0.7316981)(1.8810811,-0.83584905)(2.634054,-0.5181132)(3.08,-0.58)(3.525946,-0.6418868)(3.7083783,-0.96)(4.28,-0.66)
+\psline[linecolor=purple](3.76,0.76)(4.28,-0.68)
+\rput(4.91,-0.035){\color{darkblue}$O$}
+\rput(1.13,-0.275){\color{purple}$O_k$}
+\end{pspicture}
+\caption{Zur Konstruktion von $O_k$.}
+\end{figure}
+
+Setze $f_k = \chi_{O_k}f$, dann ist $f_k$ messbar, $\supp f_k \subset
+\overline{O}_k \Subset O$ und auf $O$ gilt
+\begin{align*}
+0\le f_k(x) \le f(x),\qquad f_k(x)\to f(x).
+\end{align*}
+Mit dem Satz von der majorisierten Konvergenz erhalten wir somit,
+\begin{align*}
+\norm{f_k-f}^p_p = \int_\Omega \abs{f_k-f}^p \dmu \to 0.
+\end{align*}
+Aus der Maßtheorie wissen wir weiterhin dass eine Folge einfacher Funktionen
+$(s_n)$ existiert, die auf $O$ monoton geen $f_k$ konvergiert,
+\begin{align*}
+0\le s_n(x)\le f_k(x),\qquad s_n(x)\to f_k(x).
+\end{align*}
+Ebenfalls mit majorisierter Konvergenz folgt, dass $\norm{s_n-f_k}_p\to 0$.
+
+Somit folgt \ref{prop:7.48:1}.
+\item Sei nun $s=\sum_{j=1}^N a_j \chi_{A_j}$ mit $\norm{f-s}_p < \ep$,
+$\supp s\Subset O$ und $A_j\subset \supp s$.
+Für jedes der endlich vielen $j\in\setd{1,\ldots,N}$ existiert nach dem Satz von
+Lusin ein $g_j\in C_0(A_j\to\C)$ mit $\abs{g_j(x)}\le 1$ auf $A_j$ und
+\begin{align*}
+\mu\setdef{x\in\R^n}{g_j(x)\neq \chi_{A_j}(x)} < \ep.
+\end{align*}
+Somit folgt
+\begin{align*}
+\norm{\chi_{A_j}-g_j}_p^p = \int_{\R^n} \underbrace{\abs{\chi_{A_j}-g_j}}_{\le
+2}^p
+\dmu
+\le 2^p
+\mu\setdef{x\in\R^n}{g_j(x)\neq \chi_{A_j}(x)}
+< 2^p\ep.
+\end{align*}
+Da $g_j$ stetig und $\supp g_j \Subset O$ erhalten wir
+analog für $s$,
+\begin{align*}
+\norm{s-\sum_{j=1}^N a_j g_j}_p^p \le N2^p\ep.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{proof}[Beweis von \ref{prop:7.45} \ref{prop:7.45:2} (c).]
+Zu $u\in L^p(\Omega)$ wähle $g\in C_0(\Omega\to\C)$ mit $\norm{u-g}_p < \ep$.
+Aus \ref{prop:7.45} \ref{prop:7.45:1} wissen wir
+\begin{align*}
+J_\ep g\in C_0^\infty(\Omega\to\C),\qquad \text{für } \ep < \ep_0.
+\end{align*} 
+Für $\ep < \ep_0$ gilt außerdem $J_\ep g \subset \setdef{x\in\Omega}{d(x,\supp
+g)<\ep}\Subset \Omega$. Setzen wir daher
+\begin{align*}
+K:= \setdef{x\in\Omega}{d(x,\supp g)\le \ep_0},
+\end{align*}
+so folgt mit \ref{prop:7.45} \ref{prop:7.45:4}
+\begin{align*}
+J_\ep g(x) - \tilde{g}(x) =
+\begin{cases}
+0, & x\in\R^n\setminus K\\
+\to 0,& \text{gleichmäßig auf }K.
+\end{cases}
+\end{align*}
+Nun gilt
+\begin{align*}
+\norm{J_\ep g - g}_{p}^p = 
+\int_K \abs{J_\ep g - g}^p \dmu
+\le \sup_{x\in K} \abs{J_\ep g(x)-g(x)}^p \mu(K)
+\to 0,\qquad \ep\downarrow 0. 
+\end{align*}
+Zusammenfassend gilt also
+\begin{align*}
+\norm{u-J_\ep u}_p \le \norm{u-g}_p + \norm{g-J_\ep g}_p + \norm{J_\ep(g-u)}_p
+< \delta,
+\end{align*}
+für $\ep$ hinreichend klein.\qedhere
+\end{proof}
+
+\begin{cor}
+\label{cor:7.49}
+Sei $1\le p < \infty$. Dann ist $C_0^\infty(\Omega\to\C)$
+dicht in $L^p(O)$.\fishhere
+\end{cor}
+\begin{proof}
+Aus dem Beweis von \ref{prop:7.45} verwenden wir
+\begin{align*}
+\norm{u-J_\ep g}_p \le \norm{u-g}_p + \norm{g-J_\ep g}_p  < 2\delta,
+\end{align*}
+für $\ep$ hinreichend klein wobei $J_\ep g\in C_0^\infty(O\to\C)$ für $\ep$
+hinreichend.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:7.50}
+Sei $1<p<\infty$, $m\in\N$ und $u\in W^{m,p}(\R^n)$. Dann gilt
+\begin{align*}
+\forall \abs{\alpha} \le m : J_\ep\D^\alpha u = \nabla^\alpha (J_\ep
+u).\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+Sei $\ph\in C_0^\infty(\R^n\to\C)$. Dann gilt
+\begin{align*}
+\lin{J_\ep \D^\alpha u,\ph}
+&= \int_{\R^n}\int_{\R^n} j_\ep(x-y)\D^\alpha u(y) \dy 
+\overline{\ph}\dx\\
+&\overset{\text{Fubini}}
+{=} \int_{\R^n}\D^\alpha u(y)\overline{\int_{\R^n} j_\ep(x-y)\ph(x)\dx} \dy,
+\end{align*}
+da $j_\ep$ reellwertig. Nun ist $j_\ep(x-\cdot)\ph(\cdot)\in
+C_0^\infty(\R^n\to\C)$ wir können somit die Definition der schwachen Ableitung
+anwenden und erhalten,
+\begin{align*}
+\ldots &=
+(-1)^{\abs{\alpha}} \int_{\R^n}u(y) \overline{\int_{\R^n}
+\nabla^\alpha_y j_\ep(x-y)\ph(x)\dx}
+\dy \\ &=
+\int_{\R^n}u(y) \overline{\int_{\R^n}
+(\nabla^\alpha j_\ep)(x-y)\ph(x)\dx}
+\dy\\
+&=
+\int_{\R^n} \int_{\R^n}
+u(y)
+(\nabla^\alpha j_\ep)(x-y)\dy\overline{\ph}(x)
+\dx\\
+&=
+\lin{\nabla^\alpha J_\ep u,\ph}
+\end{align*}
+und da $\ph$ beliebig war, folgt die Behauptung.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:7.51}
+Sei $\Omega=\R^n$, $m\in\N$. Dann gilt
+\begin{align*}
+W_0^{m,p}(\R^n) = W^{m,p}(\R^n).\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+``$\subset$'': $W_0^{m,p}(\R^n)\subset W^{m,p}(\R^n)$ gilt nach Definition.\\
+``$\supset$'': Sei $u\in W^{m,p}(\R^n)$. Zeige
+\begin{align*}
+\forall \ep > 0 \exists \ph\in C_0^\infty(\R^n\to\C) : \norm{\ph-u}_{m,p} < \ep.
+\end{align*}
+\textit{Abschneiden von $u$}. Sei $\psi\in C_0^\infty(\R^n\to\R)$ mit $0\le
+\psi\le 1$ und
+\begin{align*}
+\psi(x) = 
+\begin{cases}
+1, & \abs{x}< 1,\\
+0, & \abs{x} \ge 2.
+\end{cases}
+\end{align*}
+Setzen wir $u_k(x) = \psi(k^{-1}x)u(x)$, dann gilt für $\abs{\alpha}\le m$:
+\begin{align*}
+\norm{\D^\alpha u-\psi(k^{-1}\cdot)\D^\alpha u}_p^p
+&=
+\int_{\R^n} \abs{\D^\alpha u(x)}^p\abs{1-\psi(k^{-1}x)}^p\dmu\\
+&\to 0
+\end{align*}
+nach majorisierter Konvergenz. Nun ist
+\begin{align*}
+\norm{\D^\alpha u - \D^\alpha u_k}_p
+\le \norm{\D^\alpha u - \psi(k^{-1}x)\D^\alpha u}_p
++ \sum_{\atop{\beta\le \alpha}{\beta\neq 0}}
+\binom{\alpha}{\beta}
+\norm{\nabla_x^\beta \psi(k^{-1}x)\D^{\alpha-\beta}u}_p
+\end{align*}
+und $\abs{\nabla_x^\beta \psi(k^{-1}x)} \le
+\frac{1}{k^{\abs{\beta}}}\abs{(\nabla^\beta\psi)(k^{-1}x)}$ also
+\begin{align*}
+\ldots \le
+\norm{\D^\alpha u - \psi(k^{-1}x)\D^\alpha u}_p
++ \frac{1}{k}c \sum_{\beta\le\alpha} \binom{\alpha}{\beta}
+\norm{\D^{\alpha-\beta}u}_p
+\to \infty.
+\end{align*}
+Somit existiert ein $k\in\N$, so dass
+\begin{align*}
+\norm{u-u_k}_{m,p} < \frac{\ep}{2}.
+\end{align*}
+
+Sei $\ph=J_\delta u_k$ mit $\delta$ noch zu bestimmen. Nun ist $\supp
+u_k\subset K_{2k}(0)$, da $\psi$ außerhalb verschwindet. Somit ist $J_\delta
+u_k\in C_0^\infty(\R^n\to\C)$. Für $\abs{\alpha}\le m$ gilt also
+\begin{align*}
+\norm{\D^\alpha(u_k-J_\delta u_k)}_p \overset{\ref{prop:7.50}}{=}
+\norm{\D^\alpha u_k - J_\delta D^\alpha u_k}_p \overset{\ref{prop:7.45}}{\to}0.
+\end{align*}
+Somit existiert ein $\delta_0> 0$, so dass
+\begin{align*}
+\norm{u_k-J_{\delta}u_k}_{m,p}<\frac{\ep}{2},\qquad \delta \ge \delta _0.
+\end{align*}
+Zusammenfassend also
+\begin{align*}
+\norm{u-J_{\delta_0}u_k}_{m,p} < \ep.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{cor}
+\label{prop:7.52}
+Für $m\in\N$ gilt $C_0^m(O\to\C)\subset W_0^{m,p}(O)$.\fishhere
+\end{cor}
+\begin{proof}
+Sei $u\in C_0^m(O\to \C)$. Setze $\ph_\ep:=J_\ep u$, so ist nach
+\ref{prop:7.45} $\ph_\ep\in C_0^\infty(O\to\C)$ für $\ep < d(\supp u,\partial
+O)$. Wie im Beweis von Satz \ref{prop:7.51} sieht man sofort, dass
+\begin{align*}
+\norm{\D^\alpha \ph_\ep - \D^\alpha u}_p = \norm{J_\ep \nabla^\alpha u -
+\nabla^\alpha u}_0 \to 0.
+\end{align*}
+Somit $\norm{\ph_\ep - u}_{m,p}\to 0$.\qedhere
+\end{proof}
+
+\begin{prop}[Produktregel]
+\index{schwache!Produktregel}
+Sei $m\in \N$, $u\in W^{m,p}(O)$ und $f\in C^m(O\to\C)$ mit
+$\norm{\nabla^\alpha f}_\infty \le c$ für $\abs{\alpha}\le m$. Dann gilt
+\begin{align*}
+f\cdot u \in W^{m,p}(O)
+\end{align*}
+und
+\begin{align*}
+\D^\alpha (f\cdot u) = \sum_{\beta\le \alpha} \nabla^\beta f \cdot
+\D^{\alpha-\beta} u.\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+Wir beweisen lediglich den Fall $m=1$, die übrigen Fälle ergeben sich analog.
+Sei $\ph\in C_0^\infty(O\to\C)$, so ist
+\begin{align*}
+\lin{\D^{e_j}(f\cdot u),\ph} &= - \lin{f\cdot u,\nabla^{e_j}\ph}
+= -\lin{u,\overline{f}\nabla^{e_j}\ph}\\ & =
+-\lin{u,\nabla^{e_j}(\overline{f}\cdot u)} + \lin{u,(\nabla^{e_j}f)\ph}.
+\end{align*}
+In Übung 14.1 haben wir bewiesen $-\lin{u,\nabla^{e_j} (\overline{f}\cdot\ph)}
+= \lin{(\D^{e_j}u)f,\ph}$ also gilt
+\begin{align*}
+\lin{\D^{e_j}(f\cdot u),\ph}
+&= \lin{f(\D^{e_j}u),\ph} + \lin{(\nabla^{e_j}f)u,\ph}\\
+&=
+\lin{f(\D^{e_j}u)+(\nabla^{e_j}f)u,\ph}.\qedhere
+\end{align*} 
+\end{proof}

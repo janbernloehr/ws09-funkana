@@ -1,0 +1,386 @@
+\chapter{Lineare Abbildungen}
+
+\begin{defn}
+\label{defn:2.1}
+Seien $(E,\norm{\cdot}_E)$, $(F,\norm{\cdot}_F)$ normierte Räume und $T: E\to
+F$ linear.
+\begin{defnenum}
+  \item $T$ heißt auch \emph{linearer
+  Operator}\index{Operator}\index{Abbildung!linear}. Falls
+  $(F,\norm{\cdot}_F)=(\K,\abs{\cdot}_\K)$, heißt $T$ auch \emph{lineares Funktional}\index{Funktional}.
+  \item $T$ heißt \emph{beschränkt}\index{Abbildung!beschränkt}, falls
+\begin{align*}
+\exists c > 0 \forall x\in E : \norm{x}_E = 1 \Rightarrow \norm{Tx}_F \le c.
+\end{align*}
+\item Sei $T$ beschränkt, dann heißt
+\begin{align*}
+\norm{T} &:= \sup\setdef{\norm{Tx}_F}{\norm{x}_E =1}\\
+&= \inf\setdef{c > 0}{\forall x\in E : \norm{x}_E =1 \Rightarrow \norm{Tx}_F \le
+c}\\
+&= \sup\setdef{\norm{Tx}_F}{\norm{x}_E =1}
+= \sup\setdef{\frac{\norm{Tx}_F}{\norm{x}_e}}{x\in E\setminus\setd{0}}\\
+&= \inf\setdef{c > 0}{\forall x\in E : \norm{Tx}_F \le c\norm{x}_E}
+\end{align*}
+\emph{Operatornorm} von $T$. Insbesondere gilt
+\begin{align*}
+\forall x\in E : \norm{Tx}_F \le \norm{T}\norm{x}_E.
+\end{align*}
+\item Ist $T$ bijektiv und sind sowohl $T$ also auch $T^{-1}$ beschränkt, so
+heißt $T$ \emph{Isomorphie}\index{Abbildung!Isomorphie} oder
+\emph{Isomorphismus}. $(E,\norm{\cdot}_E)$ und $(F,\norm{\cdot}_F)$ heißen
+dann \emph{isomorph}\index{Vektorraum!isomorph}.
+\item Falls $\forall x\in E : \norm{Tx}_F =\norm{x}_E$, so heißt $T$
+\emph{Isometrie}\index{Abbildung!Isometrie}. Jede surjektive Isometrie ist ein
+Isomorphismus.\fishhere
+\end{defnenum}
+\end{defn}
+
+\begin{prop}
+\label{prop:2.2}
+Für $T: E\to F$ linear sind äquivalent
+\begin{equivenum}
+  \item\label{prop:2.2:1} $\exists x_0\in E : T $ ist stetig in $x_0$.
+  \item\label{prop:2.2:2} $\forall x_0\in E : T$ ist stetig in $x_0$. Also $T$
+  ist stetig.
+  \item\label{prop:2.2:3} $T$ ist beschränkt.
+  \item\label{prop:2.2:4} $T$ bildet Cauchyfolgen in $E$ auf Cauchyfolgen in
+  $F$ ab.\fishhere
+\end{equivenum}
+\end{prop}
+\begin{proof}
+\ref{prop:2.2:1}$\Rightarrow$\ref{prop:2.2:2}: Sei $y\in E$ und $(y_n)$ Folge
+in $E$ mit $y_n\to y$,
+\begin{align*}
+\Rightarrow T(y_n) = T(\underbrace{y_n -y+x_0}_{\to x_0})+ T(y-x_0) \to T(x_0)
++ T(y-x_0)  = T(y).
+\end{align*}
+\ref{prop:2.2:2}$\Rightarrow$\ref{prop:2.2:3}: Kontraposition: Sei
+$T$ nicht beschränkt, d.h.
+\begin{align*}
+\forall c > 0 \exists x\in E : \left( \norm{Tx}_F > c \land \norm{x}_E =1
+\right).
+\end{align*}
+Wähle $(x_n)$ mit $\norm{x_n}_E =1$ und $\norm{Tx_n}_F > n$. Setze $y_n:=
+\frac{1}{n}x_n$, dann geht $y_n\to 0$ aber $Ty_n > 1$ also $\neg(Ty_n\to 0)$ und
+daher ist $T$ nicht stetig in $x_0=0$.\\
+\ref{prop:2.2:3}$\Rightarrow$\ref{prop:2.2:4}:
+Sei $(x_n)$ Cauchyfolge in $E$, so gilt
+\begin{align*}
+\norm{Tx_n - Tx_m}_F \le \norm{T}\norm{x_n-x_m}_E \to 0,\qquad n,m\to \infty.
+\end{align*}
+Also ist $(Tx_n)$ Cauchyfolge.\\
+\ref{prop:2.2:4}$\Rightarrow$\ref{prop:2.2:1}:
+Sei $(x_n)$ Folge mit $x_n\to 0$. Setze $y_n := (x_1,0,x_2,0,\ldots)$, dann
+gilt $y_n\to 0$ und $(y_n)$ ist Cauchy. Nach \ref{prop:2.2:4} ist $(Ty_n)$
+ebenfalls Cauchy und besitzt besitzt eine konvergente Teilfolge $(Ty_{2n})\to
+0$. D.h. $(Ty_n)$ ist konvergent gegen $\lim\limits_{n\to\infty} Ty_{2n} = 0$.
+Dann ist aber auch $(Tx_n)$ als Teilfolge konvergent mit demselben
+Grenzwert.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:2.3}
+\begin{propenum}
+  \item Seien $E,F$ isomorph und $E$ Banachraum, dann ist auch $F$ Banachraum.
+  \item Falls $\dim E = n < \infty$, so sind $E$ und $\K^n$ isomorph und $E$
+  Banachraum.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item Sei $T: E\to F$ Isomorphie und $(y_n)$ Cauchy in $F$. $T^{-1}$ ist
+  beschränkt, also ist $(T^{-1}y_n)$ Cauchy in $E$. Da $E$ vollständig,
+  konvergiert $T^{-1}y_n$ gegen $x\in E$. Nun ist $y_n := T(T^{-1}y_n)$ und
+  daher konvergent gegen $Tx\in F$.
+  \item Sei $\setd{b_1,\ldots,b_n}$ Basis von $E$. Setze
+\begin{align*}
+T: E\to\K^n,\; x=\sum\limits_{j=1}^n x_j b_j \mapsto
+\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}.
+\end{align*}
+$T$ ist linear und bijektiv, denn
+\begin{align*}
+T^{-1}: \begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix} \mapsto
+\sum\limits_{j=1}^n x_j b_j.
+\end{align*}
+Wähle als Norm für $\K^n$:
+\begin{align*}
+\norm{\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}} := \sum\limits_{j=1}^n
+\abs{x_j}.
+\end{align*}
+Da auf $E$ alle Normen äquivalent sind, gilt
+\begin{align*}
+\norm{Tx} = \sum\limits_{j=1}^n \abs{x_j} = \norm{x}_1 
+\begin{cases}
+\le c_1 \norm{x}_E,\\
+\ge c_2 \norm{x}_E.
+\end{cases}
+\end{align*}
+Da $\norm{Tx}\le c_1 \norm{x}_E$ ist $T$ beschränkt. Setze $Tx:= y$, so ist $x=
+T^{-1}y$ und es gilt
+\begin{align*}
+\norm{y} \ge c_2 \norm{T^{-1}y}_E \Rightarrow \norm{T^{-1}y}_E \le
+\frac{1}{c_2}\norm{y}.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{bsp}
+\label{bsp:2.4}
+\begin{bspenum}
+  \item $T: (C([0,1]\to\C),\norm{\cdot}) \to \C : f\mapsto f(1)$.
+\begin{propenum}
+  \item $\norm{\cdot} = \norm{\cdot}_\infty$: $\abs{Tf} = \abs{Tf(1)} \le
+  \norm{f}_\infty \Rightarrow \norm{T} \le 1$, also ist $T$ beschränkt. Für
+  $f=1$ gilt weiterhin $\norm{T} \ge 1$, d.h. $\norm{T}=1$.
+  \item $\norm{\cdot} = \norm{\cdot}_1$: Setze $f_n(x) = x^n$,
+\begin{align*}
+\Rightarrow \begin{cases} Tf_n = 1,\\ \norm{f_n}_1 = \frac{1}{n+1}\to
+0,\end{cases}
+\end{align*}
+d.h. $T$ ist nicht beschränkt.
+\end{propenum}
+\item \textit{Multiplikationsoperator}. $E:=(C([0,1]\to\C),\norm{\cdot}_p)$,
+$g\in E$,
+\begin{align*}
+&T: E\to E,\quad f\mapsto g\cdot f,\\
+&\norm{Tf}_p^p = \int\limits_0^1 \abs{g\cdot f}^p\dmu \le \norm{g}_\infty^p
+\norm{f}_p^p\\
+\Rightarrow & \norm{Tf}_p \le \norm{g}_\infty\norm{f}_p.
+\end{align*}
+D.h. $T$ ist beschränkt und $\norm{T}\le \norm{g}_\infty$.
+
+\item \textit{Differentialoperator}. $T:(C^1([0,1]\to\C),\norm{\cdot}) \to
+(C([0,1]\to \C),\norm{\cdot}_\infty)$
+\begin{propenum}
+  \item $\norm{\cdot}=\norm{\cdot}_\infty$: $T$ ist unstetig. Um dies
+  einzusehen, betrachte $f_n(x)=x^n$, so ist $\norm{f}_\infty = 1$ aber
+  $\norm{Tf_n}_\infty = \norm{n\cdot x^{n-1}}_\infty = n$.
+  \item $\norm{f}:=\norm{f}_\infty+\norm{f'}_\infty$: Hier ist 
+ $T$ beschränkt, denn $\norm{Tf}_\infty = \norm{f'}_\infty \le \norm{f}$.
+\end{propenum}
+\item $K=(K_{ij})_{1\le i,j\le n}$, $T:\C^n\to \C^n,\; x\mapsto Kx$.
+\begin{propenum}
+  \item $\norm{x}=\norm{x}_2 = \sqrt{\sum\limits_{j=1}^n \abs{x_j}^2}$: Für $K$
+  normal ($KK^* = K^*K$) existiert eine ONB aus Eigenvektoren. Die Operatornorm
+  heißt hier \emph{Spektralnorm}
+\begin{align*}
+\norm{K} = \max\setdef{\abs{\lambda}}{\lambda\text{ ist
+  Eigenwert von }K}.
+\end{align*}
+\item $\norm{x}=\norm{x}_\infty = \max_j \abs{x_j}$: Die Operatornorm heißt
+hier \emph{Zeilensummennorm},
+\begin{align*}
+&\abs{(Tx)_i} = \abs{\sum\limits_{j=1}^n K_{ij}x_j} \le \sum\limits_{j=1}^n
+\abs{K_{ij}}\abs{x_j} \le \norm{x}_\infty \sum\limits_{j=1}^\infty
+\abs{K_{ij}},\\
+\Rightarrow & \norm{T} \le \max\limits_{1\le i\le n}
+\sum\limits_{j=1}^n\abs{K_{ij}}.
+\end{align*}
+\end{propenum}
+\item $K:\N\times\N \to \C$ mit $\sum\limits_{j=1}^\infty \abs{K(i,j)} \le c$
+für alle $i\in\N$. ``Unendliche Matrix''
+\begin{align*}
+T: l^\infty \to l^\infty,\; (x_n)\mapsto (y_n) = \left(\sum\limits_{j=1}^\infty
+K(n,j)x_j \right)_{n\in\N}.
+\end{align*}
+$y_n$ ist wohldefiniert, denn
+\begin{align*}
+\abs{\sum\limits_{j=1}^\infty K(n,j)x_j } \le \sup\limits_{j\in\N} \abs{x_j}
+\sum\limits_{j=1}^\infty \abs{K(n,j)} \le c \norm{(x_n)}_\infty.
+\end{align*}
+Weiterhin gilt,
+\begin{align*}
+\norm{T(x_n)}_\infty = \sup\limits_{n\in\N} \abs{y_n} \le c\norm{(x_n)}_\infty <
+\infty \Rightarrow (y_n)\in l^\infty,
+\end{align*}
+sowie $\norm{T}\le c$.
+\item $(E,\norm{\cdot}) = (C([0,1]\to\C),\norm{\cdot}_\infty)$,
+\begin{align*}
+Tf = \int\limits_0^1 K(\cdot,y)f(y)\dy,
+\end{align*}
+wobei $K\in C([0,1]\times[0,1]\to\C)$, d.h. $T: E\to E$. Nun ist
+\begin{align*}
+\norm{Tf(x)} &= \max\limits_{0\le x\le 1} \abs{\int\limits_0^1 K(x,y)f(y)\dy}
+\\ 
+&\le \max\limits_{0\le x\le 1}\int\limits_0^1  \abs{K(x,y)f(y)} \dy \le
+\norm{f}_\infty \max\limits_{0\le x\le 1} \int\limits_{0}^1 \abs{K(x,y)}\dy.
+\end{align*}
+Somit ist $\norm{T} \le \max\limits_{0\le x\le 1} \int\limits_0^1
+\abs{K(x,y)}\dy$.\bsphere
+\end{bspenum}
+\end{bsp}
+
+\begin{prop}[Fortsetzungssatz]
+\label{prop:2.5}
+Sei $(E,\norm{\cdot})$ normierter Raum, $\tilde{E}\subseteq E$ dicht,
+$(B,\norm{\cdot})$ Banachraum. $\tilde{T}: \tilde{E}\to B$ linear und
+beschränkt. Dann existiert eine eindeutige lineare beschränkte Fortsetzung,
+\begin{align*}
+T: E\to B,\qquad T\big|_{\tilde{E}} = \tilde{T},
+\end{align*}
+und es gilt $\norm{T} = \norm{\tilde{T}}$.\fishhere
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item Zu $x\in E$ sei $(x_n)$ Folge in $\tilde{E}$ mit $x_n\to x$. $(x_n)$
+  ist Cauchy und daher ist auch $(Tx_n)$ Cauchyfolge. $B$ ist vollständig, d.h.
+  $\tilde{T}x_n \to y\in B$. Setze $Tx:= y = \lim\limits_{n\to\infty}
+  \tilde{T}x_n$.
+  \item \textit{Wohldefiniertheit}. Falls ebenso $x_n'\to x$, so gilt
+  $x_n'-x_n\to 0$ und daher $\tilde{T}(x_n'-x_n) \to 0$, d.h.
+\begin{align*}
+\lim\limits_{n\to\infty} \tilde{T}x_n' = \lim\limits_{n\to\infty} \tilde{T}x_n.
+\end{align*}
+\item \textit{Linearität}. Offensichtlich.
+\item \textit{Einschränkung}. $Tx=\tilde{T}x$ gilt offensichtlich für jedes
+$x\in\tilde{E}$. (Betrachte die konstante Folge $(x_n)=(x,x,x,\ldots)$).
+\item \textit{Beschränktheit}.
+\begin{align*}
+\norm{Tx}_B = \norm{\lim\limits_{n\to\infty} \tilde{T}x_n}_B =
+\lim\limits_{n\to\infty} \norm{\tilde{T}x_n}_B \le 
+\norm{\tilde{T}}\lim\limits_{n\to\infty} \norm{x_n}_E =
+\norm{\tilde{T}}\norm{x}_E.
+\end{align*}
+D.h. $\norm{T}\le \norm{\tilde{T}}$. Andererseits ist $T$ Fortsetzung und daher
+$\norm{T}\ge \norm{\tilde{T}}$. Somit ist $T$ beschränkt und
+$\norm{T}=\norm{\tilde{T}}$.
+\item \textit{Eindeutigkeit}. Seien $T,S: E\to B$ beschränkt und linear mit
+$T\big|_{\tilde{E}} = S\big|_{\tilde{E}} = \tilde{T}$. Sei $x\in E$,
+$(x_n)\in\tilde{E}$ mit $x_n\to x$.
+\begin{align*}
+\Rightarrow Tx = \lim\limits_{n\to\infty} Tx_n = \lim\limits_{n\to\infty}
+\tilde{T}x_n  = \lim\limits_{n\to\infty} Sx_n = Sx.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{bem}
+\label{bem:2.6}
+Wenn $\tilde{E}$ nicht dicht liegt, kann man $\tilde{T}$ dennoch auf
+$\overline{\tilde{E}}$ fortsetzen. Im Allgemeinen lässt sich $\tilde{T}$ jedoch
+nicht weiter fortsetzen. Im Spezialfall $B=\K$ lässt sich jedoch der
+Fortsetzungssatz von Hahn-Banach anwenden.\maphere
+\end{bem}
+
+\begin{cor}
+\label{prop:2.7}
+Die Vervollständigung eines normierten Raumes ist bis auf Isomorphie
+eindeutig.\fishhere
+\end{cor}
+\begin{proof}
+Seien $F,\tilde{F}$ zwei Vervollständigungen. Sei $T: j(E)\to \tilde{j}(E),
+x\mapsto \tilde{j}\circ j^{-1}(x)$.
+\begin{proofenum}
+  \item \textit{$T$ ist Isometrie}. $T$ ist offensichtlich linear und es gilt
+\begin{align*}
+\norm{Tx}_{\tilde{F}} = \norm{\tilde{j}\circ j^{-1}(x)}_{\tilde{F}} =
+  \norm{j^{-1}(x)}_E = \norm{x}_F.
+\end{align*}
+Sei $\tilde{T}:F\to\tilde{F}$ die beschränkte Fortsetzung von $T$, dann
+ist $\tilde{T}$ ebenfalls Isometrie, denn zu $x\in F$ sei $(x_n)$ in $j(E)$ mit
+$x_n\to x$, dann gilt $\tilde{T}x = \lim\limits_{n\to\infty} Tx_n$, also
+\begin{align*}
+\norm{\tilde{T}x}_{\tilde{F}} = \lim\limits_{n\to\infty}\norm{Tx_n}_{\tilde{F}}
+= \lim\limits_{n\to\infty} \norm{x_n}_F = \norm{x}_F.
+\end{align*}
+Insbesondere ist $\tilde{T}$ injektiv.
+\item \textit{$\tilde{T}$ ist surjektiv}. $\tilde{T}$ ist beschränkt und $F$
+Banachraum, daher ist $\tilde{T}(F)$ ebenfalls Banachraum. $\tilde{j}(E)$ liegt
+dicht in $\tilde{F}$, d.h. $\overline{\tilde{T}(F)} = \tilde{F}$. Aber
+$\tilde{T}(F)$ ist Banachraum und daher bereits abgeschlossen, also ist
+$\tilde{T}(F) = \tilde{F}$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{defn}
+\label{defn:2.8}
+Seien $E,F$ normierte Räume über $\K$. Bezeichne
+\begin{align*}
+\LL(E\to F) := \setdef{T:E\to F}{T\text{ linear und beschränkt}}.
+\end{align*}
+$\LL(E):=\LL(E\to E)$\index{Abbildung!$\LL(E\to F)$}.\fishhere
+\end{defn}
+
+\begin{prop}
+\label{prop:2.9}
+\begin{propenum}
+  \item $\LL(E\to F)$ ist linearer Raum über $\K$.
+  \item Die Operatornorm ist eine Norm auf $\LL(E\to F)$.
+  \item Ist $F$ Banachraum, so ist $\LL(E\to F)$ Banachraum.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item Seien $T,S\in\LL(E\to F)$, $\alpha\in \K$.
+\begin{align*}
+\norm{(T+S)(x)}_F =\norm{Tx+Sx}_F \le \norm{Tx}_F + \norm{Sx}_F \le
+\left(\norm{T}+\norm{S}\right)\norm{x}_E,\\
+\norm{(\alpha T)(x)}_F = \norm{\alpha Tx}_F = \abs{\alpha}\norm{Tx}_F \le
+\abs{\alpha}\norm{T}\norm{x}_E.
+\end{align*}
+D.h. $T+S$ und $\alpha\cdot T\in \LL(E\to F)$. Weiterhin gilt,
+\begin{align*}
+\norm{(\alpha T)} = \sup\limits_{\norm{x}=1} \norm{(\alpha T)x}_F = 
+\abs{\alpha}\sup\limits_{\norm{x}=1}\norm{Tx}_F =\abs{\alpha}\norm{T}. 
+\end{align*} 
+  \item (N1) ist klar. (N2): Sei $0=\norm{T} = \sup\limits_{x\neq 0}
+  \frac{\norm{Tx}_F}{\norm{x}_E}$, d.h. $\forall x\neq 0: Tx = 0$ also ist
+  $T=0$. (N3),(N4): Siehe 1.).
+  \item Sei $F$ Banachraum und $(T_n)$ Cauchy in $\LL(E\to F)$. Für $x\in E$
+  gilt somit,
+\begin{align*}
+\norm{T_nx - T_mx}_F = \norm{(T_n-T_m)x}_F \le \norm{T_n-T_m}\norm{x}\to 0.
+\end{align*}
+D.h. $(T_nx)$ ist Cauchy in $F$. Setze $Tx := \lim\limits_{n\to\infty} T_nx$
+punktweise. Offensichtlich ist $T$ linear. Weiterhin gilt,
+\begin{align*}
+\norm{Tx}_F = \lim\limits_{n\to\infty} \norm{T_nx}_F \le
+\left(\lim\limits_{n\to\infty}\norm{T_n}\right)\norm{x}_E.
+\end{align*}
+Der Grenzwert existiert, da $T_n$ Cauchy. Setze
+$\norm{T}=\lim\limits_{n\to\infty}\norm{T_n}$.
+
+Nun ist
+\begin{align*}
+\norm{(T_n-T)x}_F = \lim\limits_{m\to\infty}\norm{T_nx-T_mx} \le
+\lim\limits_{m\to\infty}\norm{T_n-T_m}\norm{x} <\ep\norm{x}_E,
+\end{align*}
+für $n$ hinreichend. Also ist auch $\norm{T_n-T} <\ep$ für $n> N_\ep$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{defn}
+\label{defn:2.10}
+Der Banachraum $\LL(E\to\K)$ heißt \emph{Dualraum}\index{Vektorraum!Dualraum}
+von $E$ und wird meißt mit $E^*$ oder $E'$ bezeichnet.\fishhere
+\end{defn}
+
+Die Frage ob $E'\neq(0)$ wird der Satz von Hahn-Banach positiv beantworten.
+$E'$ ist vom algebraischen Dualraum zu unterscheiden, denn dessen Abbildungen
+sind nicht notwendigerweise beschränkt.
+
+\begin{bem}
+\label{bem:2.11}
+Wenn $T\in \LL(E\to F)$, $S\in\LL(F\to G)$, so ist $T\circ S\in\LL(E\to G)$.
+Auf $\LL(E)$ lässt sich daher ein Produkt definieren $T\cdot S := T\circ
+S$.\maphere
+\end{bem}
+
+\begin{defn}
+\label{defn:2.12}
+Ein Banachraum $E$ heißt \emph{Banachalgebra}\index{Banach!-algebra},
+falls auf $E$ ein Produkt
+\begin{align*}
+E\times E\to E
+\end{align*}
+definiert ist, mit folgenden Eigenschaften:
+\begin{defnenum}
+  \item $x\cdot(y\cdot z) = (x\cdot y)\cdot z$,
+  \item $x\cdot(y+z) = x\cdot y + x\cdot z$,
+  \item $(x+y)\cdot z = x\cdot z + y\cdot z$,
+  \item $\alpha\cdot(x\cdot y) = (\alpha x)\cdot y = x\cdot(\alpha y)$,
+  \item $\norm{x\cdot y}\le \norm{x}\norm{y}$.
+\end{defnenum}
+Insbesondere ist das Produkt stetig, d.h. $x_n\to x$, $y_n\to y$ $\Rightarrow
+x_n\cdot y_n \to x\cdot y$.\fishhere
+\end{defn}

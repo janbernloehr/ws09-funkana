@@ -1,0 +1,743 @@
+\chapter{Hilberträume}
+
+``\ldots sind die schönsten Banach-Räume'' --- B. Kümmerer
+
+\begin{defn}
+\label{defn:5.1}
+Sei $L$ ein linearer Raum über $\K$. Eine Abbildung
+\begin{align*}
+\lin{\cdot,\cdot} : L\times L \to \K
+\end{align*}
+heißt \emph{Skalarprodukt}\index{Skalarprodukt}, falls sie die folgenden
+Eigenschaften erfüllt.
+\begin{defnenum}
+  \item\label{defn:5.1:1} $\lin{\alpha x_1+\beta x_2,y} = \alpha\lin{x_1,y}+
+  \beta\lin{x_2,y}$.
+  \item\label{defn:5.1:2} $\lin{x,y}=\overline{\lin{y,x}}$.
+  \item\label{defn:5.1:3} $\lin{x,x} \ge 0$
+  \item\label{defn:5.1:4} $\lin{x,x}=0\Rightarrow x=0$.
+\end{defnenum}
+Sind nur \ref{defn:5.1:1}-\ref{defn:5.1:3} erfüllt, so heißt
+$\lin{\cdot,\cdot}$ \emph{Semiskalarprodukt}\index{Skalarprodukt!Semi-}.\fishhere
+\end{defn}
+
+Aus \ref{defn:5.1:1} folgt insbesondere, dass $\lin{0,y}=0$.\\
+\ref{defn:5.1:1} und \ref{defn:5.1:2} besagen weiterhin, dass $\lin{x,\alpha
+y_1+\beta y_2}=\overline{\alpha}\lin{x,y_1}+\overline{\beta}\lin{x,y_2}$.\\
+\ref{defn:5.1:3} ist sinnvoll, da nach \ref{defn:5.1:2} $\lin{x,x}\in\R$.
+
+\begin{prop}[Cauchy-Schwarz-Bunjakowski-Ungleichung]
+\index{Skalarprodukt!Cauchy-Schwartz}
+\label{prop:5.2}
+Sei $\lin{\cdot,\cdot}$ ein Semi-Skalarprodukt. Dann gilt
+\begin{align*}
+\abs{\lin{x,y}}^2 \le \lin{x,x}\lin{y,y}.
+\end{align*}
+Falls $\lin{\cdot,\cdot}$ ein Skalarprodukt, dann gilt die Gleichheit genau
+dann, wenn $\setd{x,y}$ linear abhängig.\fishhere
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+\item Der Fall $\lin{x,y}=0$ ist klar, sei also $\lin{x,y}\neq 0$ und
+$\lambda\in\R$, so gilt
+\begin{align*}
+0 &\le \lin{x+\lambda \lin{x,y}y,x+\lambda\lin{x,y}y}\\
+&= \lin{x,x} + \lambda\overline{\lin{x,y}}\lin{x,y} + \lambda\lin{x,y}\lin{y,x}
++ \lambda^2\abs{\lin{x,y}}^2\lin{y,y}\\
+&= \lin{x,x} + 2\lambda\abs{\lin{x,y}}^2 + \lambda^2\abs{\lin{x,y}}^2\lin{y,y}
+=: p(\lambda).
+\end{align*}
+Da $p$ Polynom 2. Grades und $\ge 0$, hat $p$ höchstens eine Nullstelle und
+daher ist die Diskriminante der Mitternachtsformel $\le 0$, d.h.
+\begin{align*}
+&0 \ge 4\abs{\lin{x,y}}^4 - 4 \abs{\lin{x,y}}^2\lin{y,y}\lin{x,x}\\
+\Leftrightarrow\;
+&0 \ge \abs{\lin{x,y}}^2 - \lin{y,y}\lin{x,x}.
+\end{align*}
+\item ``$\Leftarrow$'': Sei $\setd{x,y}$ linear abhängig, d.h. $x = \alpha y$.
+Dann gilt
+\begin{align*}
+&\abs{\lin{x,y}}^2 = \abs{\lin{x,\alpha y}}^2 = \abs{\alpha}^2
+\abs{\lin{y,y}}^2,\\
+&\lin{x,x}\lin{y,y} = \alpha\overline{\alpha}\lin{y,y}^2
+\abs{\alpha}^2\abs{\lin{y,y}}^2.
+\end{align*}
+``$\Rightarrow$'': Seien $\lin{x,y}$ linear unabhängig, dann ist insbesondere
+$x\neq 0$. Nun existiert ein $\alpha\in\K$, so dass
+\begin{align*}
+\lin{y,x}-\alpha\lin{x,x} = 0,
+\end{align*}
+wobei $y-\alpha x \neq 0$ aber
+$\lin{y-\alpha x,x}=0$. Somit ist
+\begin{align*}
+\lin{y,y} &= \lin{y-\alpha x+\alpha x,y-\alpha x + \alpha x}\\
+&= \underbrace{\lin{y-\alpha x,y-\alpha x}}_{>0} + \abs{\alpha}^2 \lin{x,x}.
+\end{align*}
+Es gilt also $\lin{y,y} > \abs{\alpha}^2\lin{x,x}$ und wir erhalten
+\begin{align*}
+&\abs{\lin{x,y}}^2 = \abs{\lin{x,y-\alpha x + \alpha x}}^2 =
+\abs{\alpha}^2\abs{\lin{x,x}}^2 < \lin{x,x}\lin{y,y}.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}
+\label{prop:5.3}
+Sei $\lin{\cdot,\cdot}$ ein (Semi)-Skalarprodukt auf $L$. Dann definiert
+\begin{align*}
+\norm{\cdot}: L\to \R,\quad x\mapsto \sqrt{\lin{x,x}}
+\end{align*}
+eine (Halb)-Norm.\fishhere
+\end{prop}
+\begin{proof}
+Die Abbildung ist wohldefiniert und (N1), (N2) und (N3) sind klar. Zu (N4)
+betrachte,
+\begin{align*}
+\norm{x+y}^2  &=\lin{x+y,x+y} = \lin{x,x} + 2\Re \lin{x,y} + \lin{y,y}\\
+&\le \norm{x}^2 + \norm{y}^2 + 2\abs{\lin{x,y}}
+=  \norm{x}^2 + \norm{y}^2 + 2\sqrt{\lin{x,x}\lin{y,y}}\\
+&\le \norm{x}^2 + \norm{y}^2 + 2\norm{x}\norm{y}
+= \left(\norm{x}+\norm{y}\right)^2.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{bem}[Nota Bene.]
+\label{bem:5.4}
+$\abs{\lin{x,y}}\le \norm{x}\norm{y}$.\maphere
+\end{bem}
+
+\begin{defn}
+\label{defn:5.5}
+Sei $H$ ein linearer Raum, auf dem ein Skalarprodukt $\lin{x,x}$
+existiert, versehen mit der durch das Skalarprodukt induzierten Norm
+\begin{align*}
+\norm{x}_H := \sqrt{\lin{x,x}}. 
+\end{align*}
+Dann heißt $H$ \emph{Prähilbertraum}\index{Hilbertraum!Prä-}. Ist $H$ außerdem
+Banachraum, so heißt $H$ \emph{Hilbertraum}\index{Hilbertraum}. Schreibe auch
+$(H,\lin{\cdot,\cdot})$.\fishhere
+\end{defn}
+
+\begin{bsp}
+\label{bsp:5.6}
+\begin{bspenum}
+  \item $H=\C^n$ mit Skalarprodukt $\lin{x,y}=\sum_{j=1}^n
+  x_j\overline{y_j}$ und der dadurch induzierten Norm $\norm{x}=
+  \left(\sum_{j=1}^n \abs{x_j}^2\right)^{1/2}$ ist ein Hilbertraum.
+  \item $H = l^2$ mit dem Skalarprodukt $\lin{(x_n),(y_n)} =
+  \sum_{j=1}^\infty x_j \overline{y_j}$ und der dadurch induzierten
+  2-Norm $\norm{(x_n)}_2 = \left(\sum_{j=1}^\infty
+  \abs{x_j}^2\right)^{1/2}$ ist ebenfalls ein Hilbertraum.
+  \item $H=C([0,1]\to\C)$ mit dem Skalarprodukt $\lin{f,g} = \int_{[0,1]}
+  f\overline{g}\dmu$ und der dadurch induzierten 2-Norm
+  $\norm{f} = \left(\int_{[0,1]} \abs{f}^2 \dmu\right)^{1/2}$ ist lediglich
+  ein Prähilbertraum. Seine Vervollständigung ist der $L^2([0,1]\to\C)$.\bsphere
+\end{bspenum}
+\end{bsp}
+
+\begin{lem}
+\label{lem:5.7}
+Das Skalarprodukt ist in beiden Argumenten stetig bezüglich der induzierten
+Norm.\fishhere
+\end{lem}
+\begin{proof}
+Seien also $(x_n)$, $(y_n)$ Folgen in $H$, $x,y\in H$ sowie
+$\norm{x_n-x},\norm{y_n-y}\to 0$. Dann gilt
+\begin{align*}
+\abs{\lin{x_n,y_n}-\lin{x,y}} &=\abs{\lin{x_n-x,y_n}- \lin{x,y_n-y}}
+\\ &\le \underbrace{\norm{x_n-x}}_{\to0}\underbrace{\norm{y_n}}_{\le C} +
+\norm{x}\underbrace{\norm{y_n-y}}_{\to0} \to 0.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{prop}
+\label{prop:5.8}
+Ist $H$ ein Prähilbertraum, so ist die Vervollständigung $\overline{H}$ (siehe
+\ref{prop:1.16}) ein Hilbertraum.\fishhere
+\end{prop}
+\begin{proof}
+$H$ wird mit der induzierten Norm zum normierten Raum. Mit Satz \ref{prop:1.16}
+erhalten wir somit die eindeutige Vervollständigung $\overline{H}$. Definiere
+nun für $x,y\in\overline{H}$
+\begin{align*}
+\lin{x,y}_{\overline{H}} := \lim\limits_{n\to\infty}\lin{x_n,y_n}_H, &&
+x_n\to x,\quad y_n\to y.
+\end{align*}
+Der Limes ist unabhängig von den gewählten Folgen $(x_n)$ und $(y_n)$, also ist
+$\lin{\cdot,\cdot}_{\overline{H}}$ ein Skalarprodukt und die Norm auf
+$\overline{H}$ induziert durch ebendieses.\qedhere
+\end{proof}
+
+Der folgende Satz macht eine Aussage darüber, wie man --- falls ein
+Skalarprodukt auf $H$ existiert --- dieses aus der induzierten Norm
+zurückerhält.
+\begin{prop}
+\label{prop:5.9}
+\begin{propenum}
+  \item 
+Sei $H$ ein Prähilbertraum. Dann gilt die \emph{Polarisationsformel}
+\begin{align*}
+\lin{x,y} :=
+%\begin{cases}
+%\frac{1}{4}\left(\norm{x+y}^2 - \norm{x-y}^2\right), & \K=\R,\\
+\frac{1}{4}\left(\norm{x+y}^2 - \norm{x-y}^2 + i\left(\norm{x+iy}^2 -
+\norm{x-iy}^2\right)\right),% & \K=\C,
+%\end{cases}
+\end{align*}
+wobei im Fall eines reellen Hilbertraums der Imaginärteil ignoriert wird.
+
+Außerdem gilt die \emph{Parallelogrammgleichung},
+\begin{align*}
+\norm{x+y}^2 + \norm{x-y}^2 = 2\norm{x}^2 + 2\norm{y}^2.
+\end{align*}
+\item Ist $(E,\norm{\cdot})$ normierter Raum, dann ist $E$ genau dann ein
+Prähilbertraum, wenn $\norm{\cdot}$ die Parallelogrammungleichung
+erfüllt.\fishhere
+\end{propenum}
+\end{prop}
+
+\begin{defn}
+\label{defn:5.10}
+\begin{defnenum}
+  \item $x,y\in H$ heißen \emph{orthogonal}\index{orthogonal}, falls
+  $\lin{x,y}=0$.
+  \item $A,B\subseteq H$ heißen \emph{orthogonal}\index{Menge!orthogonal}, falls
+  \begin{align*}
+  \forall x\in A \forall y\in B : \lin{x,y}  = 0.
+  \end{align*}
+\item Sei $A\subseteq H$, dann heißt $A^\bot := \setdef{y\in H}{\forall x\in A
+: \lin{x,y}=0}$ \emph{orthogonales
+Komplement}\index{Orthogonales Komplement}.\fishhere
+\end{defnenum} 
+\end{defn}
+
+\begin{bem}[Bemerkungen.]
+\label{bem:5.11}
+\begin{bemenum}
+  \item Für $x,y\in H$ mit $x\bot y$ gilt der \emph{Satz des
+  Pythagoras}\index{Satz!Pythagoras},
+\begin{align*}
+\norm{x+y}^2 = \lin{x+y,x+y} = \lin{x,x}+\lin{y,y} = \norm{x}^2 + \norm{y}^2.
+\end{align*}
+\item $A^\bot$ ist abgeschlossener linearer Teilraum von $H$, denn für $y,z\in
+A^\top$, $x\in A$ und $\alpha\in \K$  gilt
+\begin{align*}
+\lin{y+z,x} =\lin{y,x}+\lin{z,x} = 0,\qquad
+\lin{\alpha y,x} = \alpha\lin{y,x} =0.
+\end{align*}
+Sei nun $(y_n)$ Folge in $A^\bot$ mit Grenzwert $y\in H$, dann gilt für $x\in A$
+\begin{align*}
+\lin{y,x} = \lim\limits_{n\to\infty}\lin{y_n,x} = 0.
+\end{align*}
+Also ist $y\in A^\bot$, d.h. $A^\bot$ ist abgeschlossen.\maphere
+\end{bemenum}
+\end{bem}
+
+\begin{prop}
+\label{prop:5.12}
+Sei $H$ Hilbertraum, $K\subseteq H$ abgeschlossen und konvex, $x_0\in H$ dann
+gibt es genau ein $x\in K$, so dass
+\begin{align*}
+\norm{x-x_0} = d(x_0,K).\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+\textit{Existenz}. Sei $(x_n)$ Folge in $K$ mit $\norm{x_n-x_0}\to d(x_0,K)$.
+Dann ist $(x_n)$ Cauchyfolge, denn
+\begin{align*}
+\norm{x_n-x_m}^2 &= \norm{x_n-x_0-(x_m-x_0)}^2 \\ &\overset{\text{PG}}{=}
+2\norm{x_n-x_0}^2 + 2\norm{x_m-x_0}^2 - 4\norm{x_0 - \frac{x_n+x_m}{2}}^2\\
+&\le 2(d(x_0,K)^2 + \ep) + 2(d(x_0,K)^2 + \ep) - 4 d(x_0,K)^2
+= 4\ep.  
+\end{align*}
+Also $x_n\to x$ in $H$, da $K$ abgeschlossen ist $x\in K$ und es gilt
+\begin{align*}
+\norm{x-x_0} = \lim\limits_{n\to\infty} \norm{x_n-x_0} = d(x_0,K).
+\end{align*}
+\textit{Eindeutigkeit}. Seien $x, \tilde{x} \in K$ und
+$\norm{x-x_0}=\norm{\tilde{x}-x_0}=d(x_0,K)$. Betrachte
+$x_n=(x,\tilde{x},x,\tilde{x},\ldots)$, dann ist nach obiger Rechnung $x_n$
+Cauchy und hat daher einen eindeutigen Grenzwert, also $x=\tilde{x}$.\qedhere
+\end{proof}
+
+\begin{bem}[Vereinbarung.]
+\label{bem:5.13}
+Im Folgenden sei $H$ immer ein Hilbertraum.\maphere
+\end{bem}
+
+\begin{prop}[Projektionssatz]
+\label{bem:5.14}
+Sei $M$ abgeschlossener linearer Teilraum von $H$ und $x_0\in H$. Dann gilt
+\begin{propenum}
+  \item Für $y\in M : \norm{y-x_0}=d(x_0,M)$ genau dann, wenn $y-x_0\ \bot\ M$.
+  \item Es gibt genau ein $u\in M$ und genau ein $v\in M^\bot$, so dass $x_0 =
+  u+v$.
+  \item Die Abbildung $P_M: H\to M,\; x_0\mapsto u$ ist linear und stetig.
+  Falls $M\neq(0)$, so ist $\norm{P_M}=1$ und $P_M^2=P_M$. $P_M$ heißt
+  \emph{orthogonale Projektion} auf $M$.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item Betrachte für $z\in M\setminus\setd{0}$, $y+\alpha\frac{z}{\norm{z}}$
+  mit $\alpha:= \lin{x_0-y,\frac{z}{\norm{z}}}$.
+\begin{align*}
+d(x_0,M)^2 &\le \norm{x_0-\left(y+\alpha\frac{z}{\norm{z}}\right)}^2
+= \norm{(x_0-y)-\alpha\frac{z}{\norm{z}}}^2\\
+&= \norm{x_0-y}+\abs{\alpha}^2-2\Re\lin{x_0-y,\alpha\frac{z}{\norm{z}}} \\
+&= \norm{x_0-y}^2 - \abs{\alpha}^2.
+\end{align*}
+Also ist $\norm{x_0-y}^2 = d(x_0,M)$ genau dann, wenn
+\begin{align*}
+&\forall z\in M\setminus\setd{0} : \lin{x_0-y,z} = 0\\
+\Leftrightarrow &
+\forall z\in M : \lin{x_0-y,z} = 0\\
+\Leftrightarrow &
+x_0-y\bot M.
+\end{align*}
+\item $M$ ist linearer Teilraum also insbesondere konvex. Mit \ref{prop:5.12}
+folgt somit, dass genau ein $u\in M$ existiert, so dass
+\begin{align*}
+d(x_0,M) = \norm{u-x_0}.
+\end{align*}
+Mit a.) folgt dann auch  $v=u-x_0\in M^\bot$ und $v$ ist eindeutig, da $u$
+eindeutig.
+\item \textit{Linearität}. Seien $x_1=u_1+v_1$, $x_2=u_2+v_2$ mit der eben
+bewiesenen Zerlegung. Dann ist
+\begin{align*}
+P_M(x_1+x_2) = P_M(u_1+u_2+v_1+v_2),
+\end{align*}
+wobei $u_1+u_2\in M$ und $v_1+v_2\in M^\bot$, also
+\begin{align*}
+\ldots = u_1+u_2 = P_M(x_1)+P(x_2).
+\end{align*}
+\textit{Stetigkeit}. $\norm{P_M(x)}^2 = \norm{u}^2\le \norm{u}^2 + \norm{v}^2
+\overset{\text{Pyth.}}{=} \norm{u+v}^2 = \norm{x}^2$, also $\norm{P_M}\le 1$.
+Sei weiterhin $x\in M\setminus\setd{0}$, dann ist $\norm{P_M(x)} = \norm{x}$,
+also ist $\norm{P_M}=1$.
+
+Sei $x=u+v$, dann ist $P_Mx = u$ und $P_M u = u$, also
+$P_M^2=P_M$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{bem}
+\label{bem:5.15}
+Zu $x\in H$ sei
+\begin{align*}
+\ph_x : H\to \K,\quad y\mapsto \lin{y,x},
+\end{align*}
+dann ist $\ph_x$ offensichtlich linear. $\ph_x$ ist außerdem stetig, denn
+\begin{align*}
+\abs{\ph_x(y)} = \abs{\lin{y,x}}\le \norm{x}\norm{y}.
+\end{align*}
+Da $\lin{x,x}=\norm{x}^2$ gilt sogar $\norm{\ph_x}=\norm{x}$ also ist 
+$\ph_x$ Element von $H'$.\maphere
+\end{bem}
+
+\begin{lem}[Lemma von Riesz]
+\label{prop:5.16}
+Zu jedem $f\in H'$ existiert genau ein $x\in H$, so dass
+\begin{align*}
+f = \ph_x =  \lin{\cdot,x}.\fishhere
+\end{align*} 
+\end{lem}
+\begin{proof}
+\begin{proofenum}
+  \item \textit{Konstruktion von $x$}. Der Fall $f=0$ ist trivial. Sei also
+  $f\neq 0$, dann gibt es ein $\tilde{x}\in H$, so dass $f(\tilde{x})\neq 0$.
+  Wenden wir nun den Projektionssatz an, erhalten wir $\tilde{x}=u+v$ mit
+  $u\in\ker f$ und $v\in \ker f^\bot$.
+  
+  Zu $\lambda > 0$ soll sein
+  \begin{align*}
+  \lambda f(v) = f(\lambda v) \overset{!}{=}\ph_{\alpha v}(\lambda v) =
+  \lin{\lambda v,\alpha v} = \lambda\overline{\alpha}\norm{v}^2.
+  \end{align*}
+Setze also $\alpha = \dfrac{\overline{f(v)}}{\norm{v}^2}$ und $x=\alpha v$ dann
+ist $f(x)\neq 0$.
+
+\item\textit{Zeige $f=\ph_x$}. Sei $y\in H$, so schreibe $y=y-\beta x+ \beta x$,
+wobei $\beta = \frac{f(y)}{f(x)}$, dann ist
+\begin{align*}
+f(y) = f(y-\beta x) + \beta f(x) = f(y-\beta x) + f(y) \Rightarrow f(y-\beta x)
+= 0,
+\end{align*}
+also ist $y-\beta x\in \ker f$ und somit $0=\lin{y-\beta x,x}$.
+\begin{align*}
+f(y) &= \beta f(x) = \beta\lin{x,x} = \lin{y,x}.
+\end{align*}
+\item\textit{Eindeutigkeit}. Seien $x,\tilde{x}\in H$ so , dass
+\begin{align*}
+\forall y\in H : \lin{y,x} = f(y) = \lin{y,\tilde{x}}.
+\end{align*}
+Dann gilt auch
+\begin{align*}
+\forall y\in H : \lin{x-\tilde{x},y} = 0
+\end{align*}
+also $x-\tilde{x}=0$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{bem}[Diskussion.]
+\label{bem:5.17}
+\begin{bemenum}
+  \item Ist $f\in H'$, dann existiert ein $x\in H$, so dass $\ker f =
+  \setd{x}^\bot$.
+  \item Es gilt die \emph{Dimensionsformel},
+\begin{align*}
+\dim \ker f^\bot =  \dim\K = 1.\maphere 
+\end{align*}
+\end{bemenum}
+\end{bem}
+
+\begin{cor}
+\label{prop:5.18}
+\begin{propenum}
+  \item Die Abbildung $H\to H',\; x\mapsto \ph_x$ ist eine bijektive
+  antilineare Isometrie und $H'$ ist ein Hilbertraum mit
+\begin{align*}
+\lin{\ph_x,\ph_y}_{H'} = \lin{y,x}.
+\end{align*}
+Man sagt auch $H$ ist selbstdual.
+\item Jeder Hilbertraum ist reflexiv.\fishhere
+\end{propenum}
+\end{cor}
+\begin{proof}
+\begin{proofenum}
+  \item Die Bijektivität folgt aus \ref{bem:5.15}, \ref{prop:5.16}. Zur
+  Antilinearität betrachte,
+\begin{align*}
+\ph_{\alpha x_1+\beta x_2}(y) &= \lin{y,\alpha x_1+\beta x_2}
+= \overline{\alpha}\lin{y,x_1}  + \overline{\beta}\lin{y,x_2}\\
+&= \overline{\alpha}\ph_{x_1}(y) + \overline{\beta}\ph_{x_2}(y).
+\end{align*}
+Die Isometrieeigenschaft haben wir in \ref{bem:5.17} nachgewiesen.
+
+$H'$ ist stets ein Banachraum, da $\K$ vollständig. $\lin{\cdot,\cdot}_{H'}$
+ist Skalarprodukt, denn die positive Definitheit folgt direkt aus
+$\lin{\cdot,\cdot}$. Zur Linearität betrachte beispielsweise,
+\begin{align*}
+\lin{\alpha \ph_x,\ph_y}_{H'} = \lin{\ph_{\overline{\alpha}x},\ph_y} =
+\lin{y,\overline{\alpha}x} = \alpha\lin{y,x} = \alpha\lin{\ph_x,\ph_y}_{H'}.
+\end{align*} 
+Die Norm auf $H'$ wird durch $\lin{\cdot,\cdot}_{H'}$ induziert, denn
+\begin{align*}
+\lin{\ph_x,\ph_x}_{H'} = \lin{x,x} = \norm{x}^2 = \norm{\ph_x}^2.
+\end{align*}
+\item Zeige $J_H: H\to H''$ ist surjektiv. Da $H$ Hilbertraum, gilt
+\begin{align*}
+J_H(x)(\ph_y) = \ph_y(x) = \lin{x,y}.
+\end{align*}
+$H'$ ist ebenfalls ein Hilbertraum, also folgt für $\phi\in H''$, dass genau ein
+$\ph_x\in H'$ existiert, so dass gilt
+\begin{align*}
+\forall \ph_y\in H' : \phi(\ph_y) = \lin{\ph_y,\ph_x}_{H'}.
+\end{align*}
+$x$ ist dadurch eindeutig bestimmt und für $\ph_y\in H'$ folgt,
+\begin{align*}
+J_H(x)(\ph_y) = \ph_y(x) = \lin{x,y} = \lin{\ph_y,\ph_x}_{H'} =
+\phi(x,y).\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(0,-1.69)(5.98,1.71)
+\pscircle(0.76,0.27){0.76}
+\pscircle(3.02,0.27){0.76}
+\pscircle(5.22,0.27){0.76}
+\psbezier[linecolor=darkblue]{->}(0.9,0.81)(1.24,1.35)(2.02,1.49)(2.6,0.95)
+\psbezier[linecolor=darkblue]{->}(3.14,0.81)(3.48,1.35)(4.26,1.49)(4.84,0.95)
+
+\rput(0.76,0.255){\color{gdarkgray}$H$}
+\rput(3.02,0.255){\color{gdarkgray}$H'$}
+\rput(5.22,0.255){\color{gdarkgray}$H''$}
+\psbezier[linecolor=purple]{->}(0.82,-0.25)(1.76,-1.67)(3.9,-1.43)(4.68,-0.33)
+\rput(1.74,1.515){\color{darkblue}$F:x\mapsto \ph_x$}
+\rput(3.99,1.515){\color{darkblue}$G:f\mapsto\ph_f$}
+\rput(2.8,-0.945){\color{purple}$J_H=G\circ F$}
+\end{pspicture} 
+\caption{Zum Reflexivitätsbeweis.}
+\end{figure}
+
+\begin{corn}[Schwache Konvergenz]
+In einem Hilbertraum gilt
+\begin{align*}
+x_n\wto x \Leftrightarrow \forall y\in H: \lin{x_n,y}\to \lin{x,y}.\fishhere
+\end{align*}
+\end{corn}
+
+\begin{defn}
+\label{defn:5.19}
+Sei $H$ ein Prä-Hilbertraum. Eine Menge $\setd{e_i}_{i\in\II}\subseteq H$ mit 
+Indexmenge $\II$, heißt \emph{Orthonormalsystem (ONS)}\index{orthogonal!ONS},
+falls
+\begin{align*}
+\forall i,j\in\II : \lin{e_i,e_j} = \delta_{ij}.\fishhere
+\end{align*}
+\end{defn}
+
+\begin{bsp}
+\label{bsp:5.20}
+\begin{bspenum}
+  \item $H=l^2$ besitzt das ONS $\setd{e_1,e_2,\ldots}$ mit
+  $e_k=(0,\ldots,0,1,0,\ldots)$.
+  \item Betrachte $H=L^2([-1,1])$ mit dem Skalarprodukt $\lin{f,g}=\int_{[-1,1]}
+  f\overline{g}\dmu$.
+  
+  Orthonormalisiere die Folge $x^n$ mit Hilfe des Gram-Schmidtschen
+  Orthonormalisierungsverfahren. Hierbei ergeben sich die
+  Legendre-Polynome.\bsphere
+\end{bspenum}
+\end{bsp}
+
+\begin{prop}
+\label{prop:5.21}
+Sei $H$ ein Hilbertraum, $\setd{e_i}_{i\in\II}$ ein ONS,
+$M:=\overline{\lin{e_i\ :\ i\in \II}}$. Dann gelten
+\begin{propenum}
+  \item Für $x\in H$ ist
+\begin{align*}
+I_x := \setdef{i\in I}{\lin{x,e_i}\neq0} 
+\end{align*}
+höchstens abzählbar und es gilt,
+\begin{align*}
+\sum\limits_{i\in\II} \abs{\lin{x,e_i}}^2 := \sum\limits_{i\in I_x}
+\abs{\lin{x,e_i}}^2 \le \norm{x}^2,\qquad\text{\emph{Besselsche Ungleichung}}.
+\end{align*}
+\item Die orthogonale Projektion\index{orthogonal!Projektion} $P_M$ auf $M$ ist
+gegeben durch,
+\begin{align*}
+P_M x := \sum\limits_{i\in\II_x} \lin{x,e_i}e_i
+\end{align*}
+und unabhängig von der Reihenfolge in der Reihe. Die $\lin{x,e_i}$ heißen
+\emph{Fourierkoeffizienten}\index{Fourierkoeffizienten} von $x$.\fishhere
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item \text{Sei $\II=\setd{1,\ldots,n}$ endlich}. Dann hat $M$ die Form,
+\begin{align*}
+M := \setdef{\sum\limits_{j=1}^n \alpha_j e_j}{\alpha_j\in\K}. 
+\end{align*} 
+Für $x\in M$ und $j\in\II$ gilt dann
+\begin{align*}
+\lin{x-\sum\limits_{i=1}^n \lin{x,e_i}e_i,e_j} = \lin{x,e_j}- \lin{x,e_j} = 0.
+\end{align*}
+Also ist $x-\sum_{i=1}^n \lin{x,e_i}e_i\in M^\bot$, da aber auch
+\begin{align*}
+x = \underbrace{x-\sum\limits_{i=1}^n \lin{x,e_i}e_i}_{\in M^\bot} +
+\underbrace{\sum\limits_{i=1}^n \lin{x,e_i}e_i}_{\in M}
+\end{align*}
+folgt nach dem Projektionssatz, $P_Mx=\sum\limits_{i=1}^n
+\lin{x,e_i}e_i$. Somit ist
+\begin{align*}
+\norm{x}^2 &\ge \norm{P_M x}^2 = \lin{\sum\limits_{i=1}^n
+\lin{x,e_i}e_i,\sum\limits_{j=1}^n \lin{x,e_j}e_j}\\
+&= \sum\limits_{i,j=1}^n \lin{x,e_i}\overline{\lin{x,e_j}}\lin{e_i,e_j}
+= \sum\limits_{i=1}^n \abs{\lin{x,e_i}}^2.
+\end{align*}
+und es folgen 1.) und 2.).
+\item \textit{Sei $\II$ unendlich}. Setze
+\begin{align*}
+I_n(x) := \setdef{i\in \II}{\abs{\lin{x,e_i}}^2\ge\frac{1}{n}},
+\end{align*}
+dann ist $\card I_n(x) \le n \norm{x}^2$, denn falls $\card I_n(x)\ge m >
+n\norm{x}^2$, so existieren $i_1,\ldots,i_m\in\II$ mit $\abs{\lin{x,e_{i_k}}}^2
+\ge \frac{1}{n}$ und dann gilt
+\begin{align*}
+\sum\limits_{k=1}^m \abs{\lin{x,e_{i_k}}}^2 \ge \frac{m}{n} > \norm{x}^2
+\end{align*}
+im Widerspruch zur Besselschen Ungleichung angewandt auf das endliche ONS
+$(e_{i_1},\ldots,e_{i_m})$.
+
+Somit ist $I(x) = \bigcup_{n\in\N} I_n(x)$ höchstens abzählbar. Sei nun
+$I(x)=\setd{e_{i_1},e_{i_2},\ldots}$, dann folgt aus 1.) für jedes
+$n\in\N$,
+\begin{align*}
+\sum\limits_{j=1}^n \abs{\lin{e_{i_j},x}}^2 \le \norm{x}^2.
+\end{align*}
+Die rechte Seite ist nun unabhängig von $n$, der Übergang zu $n\to\infty$
+liefert die Besselsche Ungleichung.
+
+Mit der Besselschen Ungleichung und dem Satz von Pythagoras, folgt nun
+\begin{align*}
+\norm{\sum\limits_{j=n}^m \lin{x,e_{i_j}}e_{i_j}}^2 = 
+\sum\limits_{j=n}^m \abs{\lin{x,e_{i_j}}}^2 < \ep,
+\end{align*}
+für $n,m>N_\ep$, somit ist die Reihe Cauchy, also konvergent.
+
+$H$ ist Hilbertraum, also ist $y=\sum\limits_{j=1}^\infty
+\lin{x,e_{i_j}}e_{i_j}\in H$ und es gilt,
+\begin{align*}
+\lin{x-y,e_k}
+=
+\begin{cases}
+0, & \text{falls } \forall j\in I(x) : k\neq j,\\
+\lin{x,e_k}-\lin{y,e_k}, & \text{sonst},
+\end{cases}
+\end{align*}
+wobei auch
+\begin{align*}
+\lin{x,e_k}-\lin{y,e_k}&=
+\lin{x,e_k}-\lin{\sum\limits_{j=1}^\infty\lin{x,e_{i_j}}e_{i_j},e_k}\\
+&= \lin{x,e_k}-\lin{x,e_k} = 0.
+\end{align*}
+Somit ist $x=(x-y)+y$, mit $y\in M$ und $x-y\in M^\bot$.
+Aufgrund des Projektionssatzes ist $P_M(x) = y$ und die Projektion ist
+unabhängig von der Abzählung der $e_{i_j}$, also auch $y$ und man darf in der
+Reihe umsortieren.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{prop}
+\label{prop:5.22}
+Sei $(e_i)_{i\in\II}$ ein ONS im Hilbertraum $H$, dann sind äquivalent
+\begin{propenum}
+  \item\label{prop:5.22:1} $\lin{e_i : i\in \II}$ liegt dicht in $H$,
+  \item\label{prop:5.22:2} $\forall x\in H : x=\sum_{i\in\II}
+  \lin{x_i,e_i}e_i$,
+  \item\label{prop:5.22:3} $\forall x\in H : \norm{x}^2 = \sum_{i\in\II}
+  \abs{\lin{x,e_i}}^2$,\qquad \emph{Parsevallsche Gleichung},
+  \item\label{prop:5.22:4} $\forall x,y\in H : \lin{x,y} = \sum_{i\in\II}
+  \lin{x,e_i}\lin{e_i,y}$.
+\end{propenum}
+Ist eine der obigen Aussagen erfüllt, heißt das ONS $(e_i)$
+\emph{vollständig (VONS)}\index{orthogonal!VONS} oder
+\emph{Orthonormalbasis}\index{orthogonal!Basis}.\fishhere
+\end{prop}
+
+Orthonormalbasen in unendlichdimensionalen Räumen unterscheiden sich von denen
+in endlichdimensionalen Räumen insbesondere dadurch, dass \textit{nicht} jedes
+Element als \textit{endliche} Linearkombination von Basisvektoren dargestellt werden
+kann, sondern durchaus unendliche Reihen zugelassen sind.
+
+\begin{proof}
+``\ref{prop:5.22:1}$\Leftrightarrow$\ref{prop:5.22:2}'': Sei $M:=
+\overline{\lin{e_i:i\in\II}}$, dann ist
+\begin{align*}
+\text{\ref{prop:5.22:1}} \Leftrightarrow M = H \Leftrightarrow
+\forall x\in H : P_Mx = x
+\overset{\ref{prop:5.21}}{\Leftrightarrow}
+\forall x\in H : \sum\limits_{i\in\II} \lin{x,e_i}e_i = x \Leftrightarrow
+\text{\ref{prop:5.22:2}}.
+\end{align*}
+``\ref{prop:5.22:2}$\Rightarrow$\ref{prop:5.22:3}'': Sei also $x\in H$, so
+gilt
+\begin{align*}
+&x = \sum\limits_{k=1}^\infty \lin{x,e_{i_k}}e_{i_k}
+=
+\lim\limits_{K\to\infty} \sum\limits_{k=1}^K \lin{x,e_{i_k}}e_{i_k},\\
+\Rightarrow & 
+\norm{x}^2 =  \lim\limits_{K\to\infty} \norm{\sum\limits_{k=1}^K
+\lin{x,e_{i_k}}e_{i_k}}^2 \overset{\text{Pyth.}}{=}
+\lim\limits_{K\to\infty} 
+\sum\limits_{k=1}^K \abs{\lin{x,e_{i_k}}}^2.
+\end{align*}
+``\ref{prop:5.22:3}$\Rightarrow$\ref{prop:5.22:2}'':
+Analog zur obigen Rechnung folgt,
+\begin{align*}
+\norm{P_Mx}^2 = \sum\limits_{k=1}^\infty \abs{\lin{x,e_{i_k}}}^2
+\end{align*}
+und somit insbesondere $\norm{x}^2 =
+\norm{P_Mx}^2$. Der Projektionssatz liefert eine Zerlegung $x=u+v$, wobei
+$u=P_Mx\in M$, $v\in M^\bot$. Nun ist 
+\begin{align*}
+\norm{v}^2 =
+\norm{x}^2-\norm{u}^2=0\Rightarrow x = u = \sum\limits_{k=1}^\infty
+\lin{x,e_{i_k}}e_{i_k}.
+\end{align*}
+
+``\ref{prop:5.22:3}$\Rightarrow$\ref{prop:5.22:4}'': Aus \ref{prop:5.22:3}
+folgt für $x,y\in H$ die Darstellung,
+\begin{align*}
+x = \sum\limits_{k=1}^\infty \lin{x,e_{i_k}}e_{i_k},\qquad
+y=\sum\limits_{k=1}^\infty \lin{y,e_{i_k}}e_{i_k}.
+\end{align*}
+Mit der Stetigkeit des Skalarproduktes folgt schließlich
+\begin{align*}
+\lin{x,y} = \sum\limits_{k=1}^\infty\sum\limits_{l=1}^\infty
+\lin{x,e_{i_k}}\overline{\lin{y,e_{i_l}}}\underbrace{\lin{e_{i_k},e_{i_l}}}_{\delta_{il}}
+= \sum\limits_{k=1}^\infty \lin{x,e_{i_k}}\lin{e_{i_k},y}.
+\end{align*}
+
+``\ref{prop:5.22:4}$\Rightarrow$\ref{prop:5.22:3}'': Klar.\qedhere
+\end{proof}
+
+\begin{prop}
+\label{prop:5.23}
+Ist $H\neq(0)$ ein Hilbertraum, so besitzt $H$ ein VONS.\fishhere
+\end{prop}
+\begin{proof}
+Sei $\AA:= \setdef{E\subseteq H}{E\text{ ist ONS}}$. Dann gilt
+\begin{proofenum}
+  \item $\AA\neq \varnothing$, denn $\exists x\in H\setminus\setd{0}$ also
+  $\setd{\frac{x}{\norm{x}}}\in\AA$.
+  \item $\AA$ ist durch $\subseteq$ halbgeordnet.
+  \item Sei $\KK\subseteq\AA$ eine Kette (d.h. durch $\subseteq$ total
+  geordnet). Setze $E_0 := \bigcup_{E\in\KK} E$, dann ist $E_0$ trivialerweise ein ONS und
+  offensichtlich obere Schranke.
+\end{proofenum}
+Anwendung des Lemmas von Zorn ergibt, dass $\AA$ mindestens ein maximales
+Element $E_1$ besitzt, d.h.
+\begin{align*}
+\forall E\in \AA : E_1\subseteq E \Rightarrow E=E_1.
+\end{align*}
+Wir haben nun zu zeigen, dass das ONS $E_1$ auch vollständig ist. Angenommen es
+gibt ein $x\in H\setminus\overline{\lin{E_1}}$, dann ist $x\neq 0$. Mit dem
+Projektionssatz erhalten wir die Zerlegung,
+\begin{align*}
+x = u+v,\qquad u\in \overline{\lin{E_1}},\quad v\in \overline{\lin{E_1}}^\bot.
+\end{align*}
+Dann ist $v\neq 0$ und $\tilde{E}=E_1\cup\setd{\frac{v}{\norm{v}}}$ ein ONS,
+d.h. es gibt ein $\tilde{E}\in \AA$ mit $E_1\subseteq \tilde{E}$ und
+$\tilde{E}\neq E_1$. Dies ist eine Widerspruch zur Maximalität von $E_1$.
+
+Somit ist $E_1$ vollständig. Wir haben tatsächlich mehr gezeigt, 
+denn jedes maximale Element von $\AA$ ist liefert ein VONS und umgekehrt ist
+jedes VONS ein maximales Element von $\AA$.\qedhere
+\end{proof}
+
+\begin{bsp}
+\label{bsp:5.24}
+\begin{bspenum}
+  \item Sei $H=l^2$ und $e_k = (0,\ldots,0,1,0,\ldots)$, dann ist
+  $(e_k)_{k\in\N}$ ein VONS.
+  \item Sei $H=L^2([-1,1])$ und $e_k : x\mapsto \frac{1}{2\pi}e^{ikx\pi}$, dann
+  ist $(e_k)_{k\in\N}$ ein VONS.\bsphere
+\end{bspenum}
+\end{bsp}
+
+\begin{bem}[Bemerkungen.]
+\label{bem:5.25}
+Sei $H$ ein Hilbertraum.
+\begin{bemenum}
+  \item $H$ ist genau dann separierbar, wenn $H$ ein abzählbares VONS besitzt.
+\begin{proof}
+``$\Rightarrow$'': Sei $H=\overline{\lin{x_1,x_2,\ldots}}$. Wende das
+Gram-Schmidtsche Orthonormalisierungsverfahren auf $\setd{x_1,x_2,\ldots}$ an.
+
+``$\Leftarrow$'': Sei $\setd{e_1,e_2,\ldots}$ abzählbares VONS, dann ist
+\begin{align*}
+M := \bigcup_{n\in\N} \setdef{\sum\limits_{j=1}^n (\alpha_j + i
+\beta_j)e_j}{\alpha_j,\beta_j\in\Q}
+\end{align*}
+abzählbar und dicht.\qedhere 
+\end{proof}
+  \item Falls $H$ separierbar, existiert ein Hilbertraumisomorphismus
+\begin{align*}
+\ph: H\to l^2.
+\end{align*}
+\begin{proof}
+Wir erhalten wie in 1.) ein VONS $\setd{e_1,e_2,\ldots}$. Setze dann
+\begin{align*}
+\phi: x=\sum\limits_{j=1}^\infty \lin{x,e_j}e_j \mapsto
+\left(\lin{x,e_j}\right)_{j\in\N} \in l^2.
+\end{align*}
+Aus \ref{prop:5.22} folgt, $\lin{x,y}_H =
+\lin{\phi(x),\phi(y)}_{l^2}$.\qedhere\maphere
+\end{proof}
+\end{bemenum}
+\end{bem}

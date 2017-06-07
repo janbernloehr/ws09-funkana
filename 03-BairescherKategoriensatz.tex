@@ -1,0 +1,332 @@
+\chapter{Bairescher Kategoriensatz}
+
+\begin{defn}
+\label{defn:3.1}
+Sei $M$ Menge. $d: M\times M\to \R$ heißt
+\emph{Metrik}\index{Metrik}, falls für $x,y,z\in M$
+\begin{defnenum}
+  \item $d(x,y) \ge 0$,\qquad Positivität,
+  \item $d(x,x) = 0\Leftrightarrow x = 0$,\qquad Definitheit,
+  \item $d(x,y)=d(y,x)$,\qquad Symmetrie,
+  \item $d(x,z)\le d(x,y)+d(y,z)$,\qquad Dreiecksungleichung.
+\end{defnenum}  
+$(M,d)$ bezeichnet man als \emph{metrischen
+Raum}\index{Metrischer Raum}.\fishhere
+\end{defn}
+
+\begin{bem}
+\label{bem:3.2}
+\begin{bemenum}
+  \item\label{bem:3.2:1} $x_n\to x \Leftrightarrow d(x_n,x)\to 0$. $(x_n)$ ist
+  genau dann Cauchy, wenn
+\begin{align*}
+\forall \ep > 0 \exists N\in\N \forall n,m\ge N : d(x_n,x_m) < \ep.
+\end{align*}
+$x\in M$ ist genau dann innerer Punkt, falls
+\begin{align*}
+\exists r > 0 : K_r(x):=\setdef{y\in M}{d(x,y)<r}\subseteq M.
+\end{align*}
+Häufungspunkte, offene und abgeschlossene Mengen sowie Vollständigkeit sind wie
+üblich definiert. Folgen- und Überdeckungskompaktheit sind hier äquivalent.
+\item Ist $(E,\norm{\cdot})$ normierter Raum, so wird durch
+$d(x,y):=\norm{x-y}_E$ eine Metrik induziert. Die Begriffe in
+\ref{bem:3.2:1} sind unabhänig davon, ob eine Norm oder die durch sie
+induzierte Metrik zugrundegelegt wird.\maphere
+\end{bemenum}
+\end{bem}
+
+\begin{defn}
+\label{defn:3.3}
+Sei $N\subseteq M$, $d$ Metrik auf $M$ und $x\in M$.
+\begin{align*}
+d(x,N) := \inf\setdef{d(x,y)}{y\in N}.\fishhere
+\end{align*}
+\index{Abstand}
+\end{defn}
+
+\begin{prop}
+\label{prop:3.4}
+Sei $(M,d)$ metrischer Raum, $N\subseteq M$ abgeschlossen und $x\in M\setminus
+N$.
+\begin{propenum}
+  \item $d(x,N)> 0$.
+  \item Falls $N$ kompakt, $\exists y\in N : d(x,N)=d(x,y)$.\fishhere
+\end{propenum}
+\end{prop}
+
+\begin{proof}
+\begin{proofenum}
+  \item \textit{Kontraposition}. Angenommen $d(x,N)=0$, dann existiert eine
+  Folge $(y_n)$ in $N$, so dass $d(x,y_n)\to 0$, d.h. $y_n\to x$. $N$ ist
+  abgeschlossen also ist $x\in N$.
+  \item Sei $d(x,N)=c$, so existiert eine Folge $(y_n)$ in $N$, so dass
+  $d(x,y_n)\to c$. $N$ ist kompakt, d.h. es existiert eine konvergente
+  Teilfolge $y_{n_k}\to y\in N$. Dann ist
+  $d(x,y)=\lim\limits_{k\to\infty} d(x,y_{n_k})=c$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Bairescher Kategoriensatz]
+\label{prop:3.5}
+\index{Satz!Bairescher Kategorien-}
+Sei $(M,d)$ vollständiger metrischer Raum, $(A_k)$ Folge abgeschlossener Mengen
+in $M$ mit
+\begin{align*}
+M= \bigcup_{n\in\N} A_n.
+\end{align*}
+Dann existiert ein $k\in\N$, so dass $A_k^\circ \neq \varnothing$.
+($A_k^\circ:=\setd{\text{innere Punkte von }A_k}$)\fishhere
+\end{prop}
+\begin{proof}
+Angenommen $\forall k\in \N : A_k^\circ = \varnothing$. Dann ist $M\setminus
+A_1$ offen und nichtleer.
+\begin{align*}
+\Rightarrow \exists \overline{K_{r_1}(x_1)} \subseteq K_{2r_1}(x_1) \subseteq
+M\setminus A_1,\qquad && r_1 < 1.
+\end{align*}
+Dann ist $K_{r_1}(x_1)\setminus A_2$ offen und nichtleer (sonst
+$K_{r_1}(x_1)\subseteq A_2^\circ$).
+\begin{align*}
+&\Rightarrow \exists \overline{K_{r_2}(x_2)}\subseteq K_{2r_2}(x_2)\subseteq
+K_{r_1}(x_1)\setminus A_2, && r_2< \frac{1}{2},\\
+&\ldots\\
+&\Rightarrow \exists \overline{K_{r_n}(x_n)}\subseteq K_{2r_n}(x_n)\subseteq
+K_{r_{n-1}}(x_{n-1})\setminus A_{n}, && r_n< \frac{1}{2^{n-1}},\\
+\end{align*}
+Nun ist $x_n\in K_{r_n}(x_n)\subseteq K_{r_{n-1}}(x_{n-1})\subseteq \ldots
+\subseteq K_{r_l}(r_l)$, wobei
+\begin{align*}
+r_l < \frac{1}{2^l} \Rightarrow d(x_n,x_l) < \frac{1}{2^l}.
+\end{align*}
+Somit ist $(x_n)$ Cauchy und, also $x_n\to x\in M$. Insbesondere ist
+\begin{align*}
+\forall k\in \N : x\in \overline{K_{r_k}(x_k)}\subseteq M\setminus A_k
+\Rightarrow x\notin A_k\forall k\in\N.
+\end{align*}
+Aber $x\in\bigcup_{k\in\N}A_k$ \dipper.\qedhere
+\end{proof}
+
+\begin{bem}
+\label{bem:3.6}
+Eine alternative Formulierung des Baireschen Kategoriensatz ist, dass $M$ von
+2. Kategorie ist.\maphere
+\end{bem}
+
+\begin{prop}[Satz von Banach-Steinhaus (uniform boundedness principle)]
+\index{Satz!Banach-Steinhaus}
+\label{prop:3.7}
+Sei $B$ Banachraum, $E$ normierter Raum und
+\begin{align*}
+\TT\subseteq \LL(B\to E)
+\end{align*}
+mit $\forall x\in B: \sup\limits_{T\in\TT}\norm{Tx}_E<\infty$. Dann gilt
+\begin{align*}
+\sup\limits_{T\in\TT}\norm{T} <\infty.\fishhere
+\end{align*}
+\end{prop}
+
+Punktweise Beschränktheit einer Familie von Operatoren impliziert also die
+gleichmäßige Beschränktheit.
+
+\begin{proof}
+Setze
+\begin{align*}
+A_n := \setdef{x\in B}{\sup\limits_{T\in\TT} \norm{Tx}_E \le n}
+= \bigcap_{T\in\TT}\setdef{x\in B}{\norm{Tx}_E\le n}.
+\end{align*}
+\begin{proofenum}
+  \item Zeige $B=\bigcup_{n\in\N} A_n$. Sei dazu $x\in B$, dann folgt
+\begin{align*}
+\sup\limits_{T\in\TT}\norm{Tx}_E = R<\infty
+\Rightarrow x\in A_n \text{ für }n\ge R.
+\end{align*}
+\item Zeige $A_n$ ist abgeschlossen. Betrachte dazu
+\begin{align*}
+B\setminus A_n = \bigcup_{T\in\TT} \setdef{x\in B}{\norm{Tx}_E > n}.
+\end{align*}
+Diese Menge ist als Urbild von $(n,\infty)$ unter der stetigen
+Abbildung $\norm{\cdot}_E\circ T$ offen.  Mit dem Satz von Baire folgt nun
+\begin{align*}
+\exists n_0\in\N \exists K_r(x_0)\subseteq A_{n_0}.
+\end{align*}
+\item Sei $x\in B$ und $\norm{x}_B=1$, so gilt
+\begin{align*}
+\norm{Tx}_E &= \frac{2}{r}\norm{T\left(\frac{r}{2}x\right)}_E =
+\frac{2}{r}\norm{T\left(\frac{r}{2}x+x_0\right)-Tx_0}_E\\
+&\le
+\frac{2}{r}\left(\norm{T\left(\frac{r}{2}x+x_0\right)}_E+\norm{Tx_0}_E\right)\\
+&\le \frac{2}{r}\left(n_0 + \sup\limits_{T\in\TT} \norm{Tx_0}_E\right)\\
+\Rightarrow \norm{T} &\le \frac{2}{r}\left(n_0 + \sup\limits_{T\in\TT}
+\norm{Tx_0}_E\right)\\
+ \Rightarrow \sup\limits_{T\in\TT}\norm{T} &\le \frac{2}{r}\left(n_0 +
+\sup\limits_{T\in\TT} \norm{Tx_0}_E\right).\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Satz (open mapping principle)]
+\index{Satz!open mapping}
+\label{prop:3.8}
+Seien $B,\tilde{B}$ Banachräume, $T:B\to\tilde{B}$ linear, beschränkt und
+surjektiv. Dann ist $T$ offen, d.h. für $O\subseteq \BB$ offen ist
+$T(O)\subseteq \tilde{B}$ offen.\fishhere
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item \textit{Anwendung des Satzes von Baire}. Da $T$ surjektiv, gilt
+\begin{align*}
+B=\bigcup_{n\in\N} K_n(0) \Rightarrow \tilde{B} = \bigcup_{n\in\N}
+\overline{T(K_n(0))}^\sim.
+\end{align*}
+Aufgrund der Vollständigkeit von
+ $\tilde{B}$ folgt nun mit dem Satz von Baire
+\begin{align*}
+\exists n_0\in\N : \exists \tilde{K}_r(y_0)\subseteq
+\overline{T(K_{n_0}(0))}^\sim.
+\end{align*}
+\item
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(0,-1.48)(5.3,1.52)
+\psellipse(2.42,-0.01)(2.42,1.47)
+\pscircle[linecolor=purple](1.63,-0.01){1.29}
+\psdots(1.64,0.02)
+ 
+\psline[linecolor=darkblue]{->}(3.32,0.06)(2.64,0.06)
+\pscircle[linecolor=darkblue](4.03,0.05){0.63}
+
+\rput(1.79,-0.195){\color{gdarkgray}$0$}
+\rput(4.03,0.065){\color{darkblue}$\tilde{K}_r(y_0)$}
+\rput(4.51,1.325){\color{gdarkgray}$\overline{T(K_{n_0}(0))}$}
+
+\end{pspicture}
+\caption{Zum Verschieben von $\tilde{K}_r(y_0)$}
+\end{figure}
+
+\textit{Verschieben von $\tilde{K}_r(y_0)$}. Sei $y\in\tilde{K}_r(0)$ und damit
+$\norm{y}_\sim < r$, dann gilt
+\begin{align*}
+&y+y_0\in \tilde{K}_r(y_0) \subseteq \overline{T(K_{n_0}(0))}^\sim.
+\end{align*}
+Betrachte nun eine Folge $(x_n)$ in $K_{n_0}(0)$ mit
+\begin{align*}
+Tx_n\to y+y_0,
+\end{align*}
+und eine Folge $\xi_n$ in $K_{n_0}(0)$ mit $T\xi_n \to y_0$,
+%Sei nun $x_0\in K_{n_0}(0)$ mit $Tx_0 = y_0$, 
+so gilt
+\begin{align*}
+T(x_n-\xi_n) = Tx_n-T\xi_n \to y+y_0-y_0 = y,
+\end{align*}
+% wobei $\norm{x_n-x_0} \le \norm{x_n}+\norm{x_0} < 2n_0$.
+% $y_0$ ist kein Häufungspunkt, denn für eine Folge $(\xi_n)$ in $K_{n_0}(0)$ mit
+% $T\xi_n\to y_0$ folgt,
+% \begin{align*}
+% T(x_n-\xi_n) = Tx_n-T\xi_n \to y + y_0-y_0 = y,
+% \end{align*}
+wobei $\norm{x_n-\xi_n} \le \norm{x_n}+\norm{\xi_n} < 2n_0$. Also ist $y\in
+\overline{T(K_{2n_0}(0)}^\sim$.
+
+Somit ist auch $\tilde{K}_r(0)\subseteq \overline{T(K_{2n_0}(0)}^\sim$.
+\item \textit{Skalieren}. Für $a > 0$ ist
+\begin{align*}
+\tilde{K}_{ar}(0) \subseteq \overline{T(K_{a2n_0}(0))}^\sim,
+\end{align*}
+denn sei $\norm{y}_\sim < ar$, so ist $\norm{\frac{y}{a}}_\sim < r$ und daher
+\begin{align*}
+\frac{y}{a}\in \overline{T(K_{2n_0}(0))}^\sim.
+\end{align*}
+Es existiert also eine Folge $(x_n)$ in $K_{2n_0}(0)$ mit $Tx_n\to
+\frac{y}{a}$. Somit  existiert eine Folge $(ax_n)$ in $K_{2an_0}(0)$ mit
+$Tax_n\to y$ und daher ist $y\in \overline{T(K_{2an_0}(0)}^\sim$.
+
+Insbesondere $\exists \delta > 0 : \tilde{K}_\delta(0) \subseteq
+\overline{T(K_1(0))}^\sim$.
+\item \textit{Einbetten} $\overline{T(K_1(0))}^\sim \subseteq T(K_3(0))$. Sei
+$y\in \overline{T(K_1(0))}^\sim$.
+\begin{align*}
+&\Rightarrow \exists x_0\in K_1(0) : \norm{y-Tx_0}_\sim < \frac{\delta}{2}
+\end{align*}
+also $y-Tx_0\in\tilde{K}_{\delta/2}(0)\subseteq
+\overline{T(K_{1/2}(0))}^\sim$.
+\begin{align*}
+&\Rightarrow \exists x_1\in K_{1/2}(0) : \norm{y-Tx_0-Tx_1}_\sim <
+\frac{\delta}{4},
+\end{align*}
+also $y-Tx_0-Tx_1\in\tilde{K}_{\delta/4}(0)\subseteq \overline{T(K_{1/4}(0))}$,
+usw. 
+Wir erhalten somit eine Folge $(x_n)$ mit
+\begin{align*}
+&\norm{y-\sum_{j=0}^n Tx_j} < \frac{\delta}{2^n},\qquad
+\norm{x_j} < \frac{1}{2^j}\\
+\Rightarrow
+&\sum_{j=0}^n Tx_j = T\left(\sum\limits_{j=0}^n x_j\right) \to y
+\end{align*}
+Weiterhin gilt
+\begin{align*}
+&\norm{\sum\limits_{j=0}^n x_j} \le
+\sum\limits_{j=0}^n \norm{x_j} < \sum\limits_{j=1}^\infty \frac{1}{2^j} =
+\frac{1}{1-\frac{1}{2}} = 2.
+\end{align*}
+Nun ist $B$ Banachraum und daher ist $x=\sum\limits_{j=0}^\infty x_j\in B$ mit
+$\norm{x}\le 2$, also $x\in \overline{K_2(0)}\subseteq K_3(0)$. $T$ ist
+beschränkt also stetig und daher gilt,
+\begin{align*}
+&y=\sum\limits_{j=0}^\infty Tx_j = T\left(\sum_{j=0}^\infty x_j\right) = T(x),\\
+\Rightarrow &\overline{T(K_1(0))}^\sim \subseteq T(K_3(0)). 
+\end{align*}
+\item \textit{Skalieren}. Aus $\tilde{K}_\delta(0)\subseteq T(K_3(0))$ folgt:
+\begin{align*}
+\tilde{K}_{\tilde{\delta}}(0) \subseteq T(K_\ep(0)),\qquad
+\text{mit } \tilde{\delta} = \delta\frac{\ep}{3}.
+\end{align*}
+\item \textit{Abschluss (Offenheit)}. Sei $O\subseteq B$ offen und $y\in
+T(O)$ ($y=Tx$, $x\in O$). Zeige nun
+\begin{align*}
+\exists \tilde{\delta} > 0 : K_{\tilde{\delta}}(y) \subseteq T(O).
+\end{align*}
+$O$ ist offen, also $\exists \ep > 0 : K_\ep(0)\subseteq O$.
+\begin{align*}
+\Rightarrow
+\tilde{K}_{\tilde{\delta}}(T(x)) &= T(x) + \tilde{K}_{\tilde{\delta}}(0)
+\subseteq T(x)+T(K_\ep(0)) = T(x+K_\ep(0)) \\ &= T(K_\ep(x)) \subseteq
+T(O).\qedhere
+\end{align*} 
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Satz (inverse mapping theorem)]
+\index{Satz!inverse mapping}
+\label{prop:3.9}
+Seien $B,\tilde{B}$ Banachräume, $T:B\to\tilde{B}$ linear, beschränkt und
+bijektiv. Dann ist $T^{-1}$ beschränkt.\fishhere
+\end{prop}
+
+``$T$ stetig $\Rightarrow$ $T^{-1}$ beschränkt''.
+
+\begin{proof}
+Zeige $T^{-1}$ ist stetig in $y=0$, d.h.
+\begin{align*}
+\forall \ep > 0 \exists \delta_\ep > 0 : \norm{y}_{\tilde{B}} < \delta_\ep
+\Rightarrow \norm{T^{-1}y}_B < \ep.
+\end{align*}
+Dies ist äquivalent zu
+\begin{align*}
+\forall \ep > 0 \exists \delta_\ep > 0 : \tilde{K}_{\delta_\ep}(0)\subseteq
+T(K_\ep(0)).
+\end{align*}
+Dies folgt aber direkt aus der Offenheit von $T$.\qedhere
+\end{proof}
+
+\begin{cor}
+\label{prop:3.10}
+Sei $B$ vollständig bezüglich $\norm{\cdot}$ und $\norm{\cdot}_\sim$ und
+$\norm{\cdot}$ feiner als $\norm{\cdot}_\sim$. Dann sind die Normen
+äquivalent.\qedhere
+\end{cor}
+\begin{proof}
+Die Abbildung $\Id : (B,\norm{\cdot}) \to (B,\norm{\cdot}_\sim), x\mapsto x$
+ist beschränkt (also stetig). Mit Satz \ref{prop:3.9} folgt, dass auch
+$\Id^{-1}$ beschränkt (also stetig) ist. Damit ist $\norm{\cdot}_\sim$ feiner als
+$\norm{\cdot}$.\qedhere
+\end{proof}

@@ -1,0 +1,1413 @@
+% ==============================================================
+% ================== Lineare Funktionale ===========================
+% ==============================================================
+\chapter{Lineare Funktionale}
+
+Im Folgenden wollen wir zu einem normierten Raum $(E,\norm{\cdot})$ den Dualraum
+\begin{align*}
+E'=\LL(E\to\K)
+\end{align*}
+und dessen Elemente $T\in E'$, die
+\emph{Funktionale} genauer betrachten.
+
+% ==============================================================
+% ================== Verallg. Koords        ===========================
+% ==============================================================
+\section{Lineare Funktionale als verallgemeinerte Koordinaten}
+
+Ist $v=0$ der Nullvektor, so sind alle Koordinaten von $v$ Null. Sind $v$ und
+$w$ identische Vektoren, so sind auch alle Koordinaten identisch.
+
+\begin{bsp}
+\label{bsp:4.1}
+$E$ sei endlichdimensional mit Basis $\BB=\setd{b_1,\ldots,b_n}$. Somit ist
+\begin{align*}
+e_k' : E\to \K,\; x =\sum\limits_{j=1}^n x_j b_j \mapsto x_k
+\end{align*}
+linear und beschränkt, denn
+\begin{align*}
+\norm{e_k'(x)} = \abs{x_k} \le \sum\limits_{j=1}^m \abs{x_j} = \norm{x}_1
+\le c\norm{x}_E.
+\end{align*}
+$\setd{e_1',\ldots,e_n'}$ ist Basis von $E'$, die \emph{duale Basis} zu
+$\setd{b_1,\ldots,b_n}$. (Insbesondere haben $E$ und $E'$ die gleiche
+Dimension). Sei $T\in E'$, so gilt
+\begin{align*}
+&T(x) = T\left(\sum\limits_{j=0}^n x_j b_j\right)
+= \sum\limits_{j=1}^n x_j T(b_j) = \sum\limits_{j=1}^n e_j'(x)T(b_j)
+= \left(\sum\limits_{j=1}^n T(b_j)e_j' \right)(x)\\
+\Rightarrow& T = \sum\limits_{j=1}^n T(b_j)e_j'.
+\end{align*}
+
+\textit{Eindeutigkeit}. Sei $T=\sum\limits_{j=1}^n t_j e_j' \Rightarrow T(b_k)
+= \sum\limits_{j=1}^n t_j\delta_{jk} = t_k$.
+
+Insbesondere gilt:
+\begin{align*}
+0=x\in E &\Leftrightarrow \forall j=1,\ldots,n : x_j = 0
+\Leftrightarrow \forall j=1,\ldots,n : e_j'(x) = 0 \\ 
+& \Leftrightarrow \forall T\in E' : T(x) = 0.
+\end{align*}
+
+$T\in E'$ kann also als verallgemeinerte Koordinate betrachtet werden.\bsphere
+\end{bsp}
+
+\begin{bsp}
+\label{bsp:4.2}
+Sei $E=C([0,1]\to\C)$ mit $\norm{\cdot}_E=\norm{\cdot}_\infty$. Zu $x\in[0,1]$
+sei 
+\begin{align*}
+\delta_x : E\to \C : f\mapsto f(x),
+\end{align*}
+so ist $\delta_x$ linear sowie
+\begin{align*}
+\abs{\delta_x f} = \abs{f(x)} \le \norm{f}_\infty \Rightarrow \norm{\delta_x}
+\le 1.
+\end{align*}
+Also ist $\delta_x \in E'$.
+\begin{align*}
+f=0\Leftrightarrow \forall x\in[0,1] : \delta_x(f) = 0
+\Leftrightarrow \forall T\in E' : T(f) = 0.
+\end{align*}
+
+Es stellt sich nun natürlich die Frage, ob $f=0\Leftrightarrow \forall T\in E'
+: T(f) = 0$ in jedem normierten Raum. Zum Beweis benötigen wir jedoch noch
+etwas Vorbereitung.\bsphere
+\end{bsp}
+
+% ==============================================================
+% ================== Hyperebenen  ================================
+% ==============================================================
+\section{Lineare Funktionale als Hyperebene}
+
+\begin{defn}
+\label{defn:4.3}
+Sei $L$ ein linearer Raum. Ein linerarer Teilraum $M\subseteq L$ heißt
+\emph{Hyperebene}\index{Hyperebene}, falls $\dim L/M = 1$.\fishhere
+\end{defn}
+
+$M$ ist also genau dann Hyperebene, wenn eine lineare, bijektive Abbildung $\ph:
+L/M\to \K$ existiert.
+
+\begin{prop}
+\label{prop:4.4}
+\begin{propenum}
+  \item Für einen linearen Teilraum $M$ von $L$ sind äquivalent:
+  \begin{equivenum}
+    \item $M$ ist Hyperebene.
+    \item $\exists \ph: L\to \K$ linear, so dass gilt: $M=\ker\ph$ und $\ph\neq
+    0$.
+  \end{equivenum}
+  \item Für $\ph,\psi : L\to\K$ linear sind äquivalent:
+  \begin{equivenum}
+    \item $\ker\ph = \ker \psi$.
+    \item $\exists \lambda\neq 0 : \ph=\lambda\psi$.\fishhere
+  \end{equivenum}
+  \end{propenum} 
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item ``$\Rightarrow$'': Betrachte die Quotientenabbildung $q: L\to L/M :
+  x\mapsto [x]$. $q$ ist offensichtlich linear. Weitherhin gilt $\dim L/M = 1$, nach
+Definition \ref{defn:4.3} existiert also eine lineare bijektive Abbildung $\psi
+: L/M\to \K$.
+Setze nun $\ph=\psi\circ q$, dann gilt
+\begin{align*}
+&\ph(x) = 0 \Leftrightarrow \psi(q(x)) = 0 \Leftrightarrow
+q(x) = [0] \Leftrightarrow [x] = [0] \\ & \Leftrightarrow x\in [0]
+\Leftrightarrow x\in M.
+\end{align*}
+Also ist $\ker \ph = M$ und offensichtlich ist $\ph\neq 0$.
+
+``$\Leftarrow$'': Setze $M:=\ker \ph$ und $\psi: L/M\to \K,\; [x]\mapsto
+\ph(x)$. $\psi$ ist offensichtlich wohldefiniert und linear. Außerdem ist $\psi$
+injektiv, denn falls $\ph(y)=\ph(x)$, so ist $\ph(x-y)=0$, d.h. $x-y\in M
+\Leftrightarrow [x]=[y]$. Weiterhin ist $\psi$ surjektiv, da $\ph$ surjektiv.
+
+Also ist $M$ Hyperebene.
+\item Für den Spezialfall $\ph=0$ folgt die Behauptung trivialerweise.
+
+ ``$\Rightarrow$'': Sei $x_0\in L$ mit $\ph(x_0) = 1$, dann gilt 
+ $\psi(x_0) \neq 0$.
+ 
+ Sei $x\in L\setminus \ker \ph$, dann gilt
+ \begin{align*}
+ \ph(x-\ph(x)x_0) = \ph(x)-\ph(x)\ph(x_0) = 0.
+ \end{align*}
+Somit ist $x-\ph(x)x_0\in \ker \ph = \ker \psi$. Insbesondere gilt also,
+\begin{align*}
+&0 = \psi(x-\ph(x)x_0) = \psi(x) - \ph(x)\psi(x_0)\\
+\Rightarrow &\psi(x) = \ph(x)\psi(x_0)\\
+\Rightarrow &\ph = \frac{1}{\psi(x_0)}\psi.
+\end{align*}
+
+``$\Leftarrow$'': Trivial.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{prop}
+\label{prop:4.5}
+Für $\ph: E\to \K$ linear sind äquivalent
+\begin{equivenum}
+  \item\label{prop:4.5:1} $\ph$ ist stetig (also beschränkt),
+  \item\label{prop:4.5:2} $\ker \ph$ ist abgeschlossen.
+\end{equivenum}
+\end{prop}
+
+\begin{proof}
+``\ref{prop:4.5:1}$\Rightarrow$\ref{prop:4.5:2}'': $\ker\ph =
+\ph^{-1}(\setd{0})$. $\setd{0}$ ist abgeschlossen und daher auch $\ker\ph$.
+%  und
+% \begin{align*}
+% \ph(x) = \lim\limits_{n\to\infty} \ph(x_n) = 0\Rightarrow x\in\ker \ph.
+% \end{align*}
+
+``\ref{prop:4.5:2}$\Rightarrow$\ref{prop:4.5:1}'':
+  Sei $M=\ker \ph$. Der Fall
+$M=L$ ist trivial. Sei also $M\subsetneq L$. Betrachte  erneut die Quotientenabbildung $q: E\to
+E/M,\; x\mapsto [x]$. Mit \ref{prop:4.4} folgt, dass eine bijektive Abbildung
+$\psi: E/M\to \K$ existiert. Sei
+\begin{align*}
+\tilde{\ph} := \psi\circ q \overset{\text{Bew. }\ref{prop:4.4}}{\Rightarrow}
+\ker \tilde{\ph} = M = \ker \ph \overset{\ref{prop:4.4}}{\Rightarrow} \ph =
+\lambda\tilde{\ph}.
+\end{align*}
+Zeige nun $\tilde{\ph}$ ist stetig. $q$ ist stetig, denn
+\begin{align*}
+\norm{q(x)}_{E/M} = \inf\limits_{y\in M}\norm{x+y}_E \le \norm{x}_E \Rightarrow
+\norm{q} \le 1.
+\end{align*}
+$\psi$ ist stetig, denn sei $\psi([x_0]) = 1$ und $[x]\in E/M$, so gilt
+\begin{align*}
+\psi(\psi([x])[x_0]) = \psi([x])\psi([x_0]) \overset{\psi\text{
+bij}}{\Rightarrow} \psi([x])[x_0] = [x].
+\end{align*}
+Insbesondere ist $\setd{[x_0]}$ Basis von $E/M$ und daher $\psi(\alpha[x_0]) =
+\alpha\psi([x_0]) =\alpha$, also gilt
+\begin{align*}
+&\abs{\psi([x])} = \abs{\psi(\alpha[x_0])} = \abs{\alpha} = 
+\abs{\alpha}\frac{\norm{[x_0]}_{E/M}}{\norm{[x_0]}_{E/M}}
+= \frac{\norm{\alpha[x_0]}_{E/M}}{\norm{[x_0]}_{E/M}}
+= \frac{\norm{[x]}_{E/M}}{\norm{[x_0]}_{E/M}}\\
+\Rightarrow& \norm{\psi} = \frac{1}{\norm{[x_0]}_{E/M}}.
+\end{align*}
+Also ist $\psi$ beschränkt. Somit ist $\psi\circ q$ stetig.
+
+\textit{Einfacher}. Betrachte den Spezialfall $T: E\to F$ bijektiv und $E,F$
+endlichdimensional. Definiere
+\begin{align*}
+\norm{x}:=\norm{Tx}_F
+\end{align*}
+ist Norm auf $E$. Es folgt mit \ref{prop:1.11}, dass
+\begin{align*}
+&c_1\norm{x}_E \le \norm{x}\le c_2\norm{x}_E\\
+\Rightarrow & \norm{Tx}_F = \norm{x} \le c_2 \norm{x}_E.
+\end{align*}
+Ist also $T:E\to F$ linear und bijektiv und $E,F$ endlichdimensonal, so ist
+$T$ Isometrie.\qedhere
+\end{proof}
+
+\section{Existenz linearer Funktionale}
+
+\begin{defn}
+\label{defn:4.6}
+Sei $L$ reeller linearer Raum,
+\begin{align*}
+p : L\to\R
+\end{align*}
+heißt \emph{sublinear}\index{Abbildung!sublinear}, falls für $x,y\in L$ und
+$\lambda > 0$ gilt,
+\begin{defnenum}
+  \item $p(x+y)\le p(x)+p(y)$,
+  \item $p(\lambda x) = \lambda p(x)$.\fishhere
+\end{defnenum}
+\end{defn}
+
+Eine sublineare Abbildung erfüllt also die Dreiecksungleichung und ist homogen
+für positive Skalare.
+
+\begin{bem}
+\label{bem:4.7}
+Jede Halbnorm (und damit auch jede Norm) ist sublinear.\\
+$p(x) < 0$ ist erlaubt.\maphere
+\end{bem}
+
+\begin{prop}[Satz von Banach]
+\label{prop:4.8}
+Sei $L$ reeller linearer Raum, $p:L\to\R$ sublinear, $M\le L$ linearer
+Teilraum und $f: M\to \R$ linear mit
+\begin{align*}
+\forall x\in M : f(x)\le p(x).
+\end{align*}
+Dann existiert eine lineare Fortsetzung
+\begin{align*}
+F: L\to\R,\qquad F|_M = f,
+\end{align*}
+so dass
+\begin{align*}
+\forall x\in L : F(x)\le p(x).\fishhere
+\end{align*}
+\end{prop}
+
+\begin{bem}
+\label{bem:4.9}
+Im Allgemeinen ist der Nachweis der Existenz einer beliebigen Fortsetzung
+einfach, der Nachweis einer $p$-beschränkten Fortsetzung schwierig.\maphere
+\end{bem}
+
+\begin{proof}[Beweis von Satz \ref{prop:4.8}.]
+\begin{proofenum}
+  \item \textit{Fortsetzung auf ``$\dim M+1$''}.\\ Sei $x_0\in L/M$. Angenommen
+  es existiert eine Fortsetzung $g$ von $f$ auf $\lin{M,x_0}$, dann hat diese
+  die Eigenschaften
+  \begin{defnenum}
+    \item $g|_M = f$.
+    \item $g(y) = g(x+\lambda x_0) = f(x) + \lambda g(x_0)$. Ist die
+    Darstellung $y=x+\lambda x_0$ eindeutig, so ist $g$ eindeutig durch $g(x_0)$
+    bestimmt.
+    
+    Sei also $y\in \lin{M,x_0}$ mit $y=x+\lambda x_0$ und
+    $y=\tilde{x}+\tilde{\lambda}x_0$, dann ist
+\begin{align*}
+0 = \underbrace{x-\tilde{x}}_{\in M} + (\lambda-\tilde{\lambda})x_0.
+\end{align*}
+Da $x_0\notin M$ ist $(\lambda-\tilde{\lambda})x_0$ nur dann Element von $M$,
+wenn $\lambda-\tilde{\lambda}=0$, d.h. $\lambda=\tilde{\lambda}$ und
+$x=\tilde{x}$.
+\end{defnenum}
+Sei $g_r : y = x+\lambda x_0 \mapsto f(x) + \lambda r$ für festes $r\in\R$, so
+ist $g_r$ linear und Fortsetzung von $f$. Zu zeigen ist nun, dass $r$ so gewählt
+werden kann, dass $g_r(y)\le p(y)$, was äquivalent ist zu
+\begin{align*}
+f(x)+\lambda r \le p(x+\lambda x_0).\tag{*}
+\end{align*}
+  
+\begin{defnenum}
+  \item Sei $\lambda = 0$, dann nimmt (*) die Form
+\begin{align*}
+f(x) \le p(x)
+\end{align*}
+an und ist nach Voraussetzung erfüllt.
+\item Sei $\lambda > 0$, so gilt
+\begin{align*}
+(*) &\Leftrightarrow f(x)+\lambda r \le p(x+\lambda x_0)\\
+&\Leftrightarrow r \le \frac{1}{\lambda}\left(p(x+\lambda x_0) - f(x) \right)\\
+&\;\qquad = p\left(\frac{1}{\lambda}p(x)+ x_0\right) -
+f\left(\frac{1}{\lambda}x\right)\\
+&\Leftrightarrow
+r\le \inf\setdef{p(z+x_0)-f(z)}{z\in M}.
+\end{align*}
+\item Sei $\lambda < 0$, so gilt
+\begin{align*}
+(*) &\Leftrightarrow f(x)+\lambda r \le p(x+\lambda x_0)\\
+&\Leftrightarrow r \ge \frac{1}{\lambda}\left(p(x+\lambda x_0) - f(x) \right)\\
+&\;\qquad = -p\left(\frac{1}{-\lambda}p(x)- x_0\right) +
+f\left(\frac{1}{-\lambda}x\right)\\
+&\Leftrightarrow
+r\ge \sup\setdef{-p(z-x_0)+f(z)}{z\in M}.
+\end{align*}
+\end{defnenum}
+Es existiert also ein $p$-beschränktes $g_r$, falls
+\begin{align*}
+\inf\setdef{p(z+x_0)-f(z)}{z\in M} \ge \sup\setdef{-p(z-x_0)+f(z)}{z\in
+M}.\tag{**}
+\end{align*}
+Seien $x',x''\in M$, dann gilt
+\begin{align*}
+-p(x'-x_0)+f(x')
+&= f(x'+x'')-f(x'') - p(x'-x_0)\\
+&\le
+p(x'+x'') - f(x'') - p(x'-x_0)\\
+&\le
+p(x'-x_0)+p(x''+x_0) - f(x'')-p(x'-x_0)\\
+&= p(x''+x_0)-f(x'')\Rightarrow (**).
+\end{align*}
+$g_r$ ist also genau dann $p$ beschränkt, wenn
+\begin{align*}
+r\in R=\left[\sup_{z\in M}\setd{-p(z-x_0)+f(z)},\inf_{z\in
+M}\setd{p(z+x_0)-f(z)}\right].
+\end{align*}
+Falls $R^\circ\neq \varnothing$, so existieren unendlich viele Fortsetzungen.
+\item \textit{Es gibt einen ``größten'' linearen Teilraum $N$ von $L$, auf dem
+eine lineare, $p$-beschränkte Fortsetzung existiert}.
+
+Wir zeigen dies durch eine Anwendung des Lemmas von Zorn (engl.
+``zornification''). Sei dazu
+\begin{align*}
+\AA :=
+\setdef{(N,g)}{M\leq N \leq L\text{ und $g$ ist $p$-beschr. lin. FS von
+$f$ auf $N$}}.
+\end{align*}
+\begin{defnenum}
+  \item $\AA\neq \varnothing$, da $(M,f)\in\AA$.
+  \item $\AA$ wird halbgeordnet durch $(N_1,g_1)\le (N_2,g_2)$, falls
+\begin{align*}
+N_1\le N_2\text{ und } g_2 \text{ FS von } g_1.
+\end{align*}
+Eine Teilmenge $\BB\subseteq \AA$ heißt \emph{aufsteigende Kette}, wenn $\BB$
+durch $\le$ totalgeordnet ist.
+\item \textit{Für jede aufsteigende Kette $\BB\subseteq \AA$ existiert eine
+obere Schranke in $\AA$}.
+
+Sei $\BB=\setdef{(N_i,g_i)}{i\in\II}$ eine solche Kette. Definiere
+\begin{align*}
+N:= \bigcup_{i\in\II} N_i,
+\end{align*}
+so ist $N\leq L$. Setze nun
+\begin{align*}
+g(x):= g_i(x),\qquad \text{falls } x\in N_i. 
+\end{align*}
+$g$ ist wohldefiniert, linear und $p$-beschränkt und Forsetzung von $f$, denn
+\begin{align*}
+\forall i\in\II : g_i\text{ linear und $p$-beschr.},\; g_i|_M = f.
+\end{align*}
+Also ist $(N,g)\in\AA$. Weiterhin gilt, dass
+\begin{align*}
+\forall i\in\II : N_i\le N,\quad g|_{N_i} = g_i
+\end{align*}
+also ist $(N_i,g_i)\le (N,g)$ für jedes $i\in\II$.
+\end{defnenum}
+(a)-(c) und das Lemma von Zorn ergeben, dass $\AA$ ein maximales Element
+enthält, d.h.
+\begin{align*}
+\exists (N,g)\in \AA : \forall (\tilde{N},\tilde{g})\in \AA :
+(\tilde{N},\tilde{g})\le (N,g).
+\end{align*}
+\item
+\textit{Sei $(N,g)$ das maximale Element, dann ist $N=L$}. Angenommen
+$N\subsetneq L$, dann $\exists x_0\in L/N$. Mit 1.) folgt, es existiert eine
+lineare, $p$-beschränkte Fortsetzung von $g_r$ von $g$ auf $\lin{N,x_0}$. Da
+aber $\lin{N,x_0}\le L$ und $g_r$ FS von $g$ ist $(\lin{N,x_0},g_r)\in\AA$ und
+$(N,g)\le (\lin{N,x_0},g_r)$.\dipper\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Fortsetzungssatz von Hahn-Banach]
+\index{Satz!Hahn-Banach}
+\label{prop:4.10}
+Sei $(E,\norm{\cdot})$ normierter Raum $M\le E$ linearer Teilraum, $f\in M'$.
+Dann existiert eine Fortsetzung $F\in E'$ von $f$ mit $\norm{F}=\norm{f}$. (Im
+Allgemeinen ist diese Fortsetzung nicht eindeutig).\fishhere
+\end{prop}
+
+Für den Beweis benötigen wir noch etwas Vorbereitung.
+
+\begin{lem}
+\label{lem:4.11}
+Sei $L$ linearer Raum über $\C$. Dann gilt:
+\begin{propenum}
+  \item\label{lem:4.11:1} Äquivalent sind:
+  \begin{equivenum}
+    \item $g: L\to \C$ ist linear und $f=\Re(g)$.
+    \item $f:L\to\R$ reell linear, d.h.
+\begin{align*}
+&\forall \lambda \in\R : f(\lambda x) = \lambda f(x)\\
+&\forall x,y\in L: f(x+y) = f(x)+f(y)
+\end{align*}
+und $g:L\to \C,\; x\mapsto f(x)-if(x)$.
+  \end{equivenum}
+  \item\label{lem:4.11:2} Sei $\norm{\cdot}^\sim : L\to\R$ Halbnorm, $g:
+  L\to\C$ linear. Dann sind äquivalent
+\begin{equivenum}
+  \item $\forall x\in L : \abs{g(x)}\le \norm{x}^\sim$.
+  \item $\forall x\in L : \abs{\Re g(x)} \le \norm{x}^\sim$.
+\end{equivenum}
+\item\label{lem:4.11:3} Ist $(E,\norm{\cdot})$ normierter Raum über $\C$, $g\in
+E'$ so gilt:
+\begin{align*}
+\norm{g} = \sup\limits_{x\neq 0} \frac{\abs{\Re g(x)}}{\norm{x}}.\fishhere
+\end{align*}
+\end{propenum}
+\end{lem}
+
+\begin{proof}
+\begin{proofenum}
+  \item ``$\Rightarrow$'': Sei also $f:=\Re g$, so ist $f$ trivialerweise reell
+  linear. Weiterhin gilt $\Im g(x) = -\Re ig(x) = -\Re g(ix)$, also
+\begin{align*}
+g(x) = \Re g(x) + i\Im g(x) = f(x)-if(ix). 
+\end{align*}
+``$\Leftarrow$'': Setze $g(x) := f(x) -if(ix)$, so ist $\Re g(x) = f(x)$ und
+für $x,y\in L$, $g(x+y) = g(x) + g(y)$. Sei nun $\lambda=\alpha+i\beta \in \C$
+mit $\alpha,\beta\in\R$, so ist
+\begin{align*}
+g(\lambda x) &= f(\lambda x) - if(i\lambda x) \\ &= \alpha f(x) + \beta f(ix) -
+i\alpha f(ix) -i\beta f(-x)\\
+&= (\alpha+i\beta)(f(x)-if(ix)) = \lambda g(x).
+\end{align*}
+\item ``$\Rightarrow$'': $\abs{\Re g(x)}\le \abs{g(x)} \le \norm{x}^\sim$.\\
+``$\Leftarrow$'': Setze $\ph=\arg g(x)$, so gilt
+\begin{align*}
+\abs{g(x)} = e^{-i\ph}g(x) = \underbrace{g(e^{i\ph}x)}_{\in\R}
+= \Re g(e^{i\ph}x) \le \norm{e^{-i\ph}x}^\sim = \norm{x}^\sim.
+\end{align*}
+\item Für $g\equiv 0$ folgt die Aussage sofort. Sei $g\neq 0$, so folgt mit
+\ref{lem:4.11:1}, $\Re g(x) \neq 0$. Definiere nun
+\begin{align*}
+&\norm{x}^\sim := \norm{g}\norm{x},\\
+&\norm{x}^{\approx} := \norm{\Re g}\norm{x},
+\end{align*}
+so sind $\norm{\cdot}^\sim$ und $\norm{x}^\approx$ Normen auf $E$.\\
+``$\Rightarrow$'': Sei $x\in
+E$, so gilt
+\begin{align*}
+\abs{g(x)} \le \norm{x}^\sim &\overset{\ref{lem:4.11:2}}{\Rightarrow}
+\abs{\Re g(x)} \le \norm{x}^\sim  = \norm{g}\norm{x}\\
+&\Rightarrow \sup\limits_{x\neq 0} \frac{\abs{\Re g(x)}}{\norm{x}} \le
+\norm{g}.
+\end{align*}
+``$\Leftarrow$'': Analog erhalten wir,
+\begin{align*}
+\abs{\Re g(x)}\le \norm{x}^\approx 
+&\Rightarrow \abs{g(x)} \le \norm{x}^\approx = \norm{\Re g}\norm{x}\\
+&\Rightarrow
+\sup\limits_{x\neq 0}
+\frac{\abs{g(x)}}{\norm{x}} \le \norm{\Re g}.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Satz von Hahn-Banach für Halbnormen]
+\index{Satz!Hahn-Banach für Halbnormen}
+\label{prop:4.12}
+Sei $L$ linearer Raum über $\K$,\\ $\norm{\cdot}^\sim: L\to\R$ Halbnorm, $M\le
+L$ und $f:M\to\K$ linear mit
+\begin{align*}
+\forall x\in M : \abs{f(x)}\le \norm{x}^\sim.
+\end{align*}
+Dann existiert eine lineare Fortsetzung $F:L\to\K$ mit
+\begin{align*}
+\forall x\in L : \abs{F(x)} \le \norm{x}^\sim.\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+\textit{Fall 1}. Sei $\K=\R$ und $p(x) := \norm{x}^\sim$, dann existiert nach
+\ref{prop:4.8} eine lineare Fortsetzung $F:L\to\R$, so dass
+\begin{align*}
+\forall x\in L : F(x)\le \norm{x}^\sim,
+\end{align*}
+wobei
+\begin{align*}
+\forall x\in L : -F(x) = F(-x) \le \norm{-x}^\sim = \norm{x}^\sim.
+\end{align*}
+\textit{Fall 2}. Sei $\K=\C$. Betrachte zunächst $L$ als linearen Raum über
+$\R$ und setze
+\begin{align*}
+g : M\to\R,\quad x\mapsto \Re f(x),
+\end{align*}
+so ist $g$ linear und $\abs{g(x)}\le \abs{f(x)} \le \norm{x}^\sim$. Wenden wir
+Fall 1 an, erhalten wir eine lineare Fortsetzung $G: L\to\R$, so dass
+\begin{align*}
+\forall x\in L : \abs{G(x)}\le \norm{x}^\sim.
+\end{align*}
+Betrachte $L$ nun wieder als Raum über $\C$ und
+setze $F(x) := G(x) - iG(ix)$, so ist $F$ linear und da
+\begin{align*}
+\forall x\in L : \abs{\Re F(x)} = \abs{G(x)} \le \norm{x}^\sim,
+\end{align*}
+gilt ebenfalls $\abs{F(x)} \le \norm{x}^\sim$.
+
+$F$ ist auch Fortsetzung vn $f$, denn für $x\in M$ gilt,
+\begin{align*}
+F(x) = G(x) - i G(ix) = g(x) - ig(ix) = \Re f(x) - i\Re f(ix) = f(x).\qedhere
+\end{align*}
+\end{proof}
+
+\begin{proof}[Beweis von Satz \ref{prop:4.10}]
+Für $f=0$ folgt die Behauptung trivialerweise. Sei also $f\neq 0$ und
+\begin{align*}
+\norm{x}^\sim := \norm{f}\norm{x},
+\end{align*} 
+so ist $\norm{\cdot}^\sim$ Norm auf $E$ und $\abs{f(x)} \le \norm{x}^\sim$ für
+$x\in M$. Nach \ref{prop:4.12} existiert somit eine lineare Fortsetzung $F:E\to
+\K$, so dass
+\begin{align*}
+\forall x\in E : \abs{F(x)} \le \norm{x}^\sim = \norm{f}\norm{x}
+\Rightarrow \norm{F}\le \norm{f}.
+\end{align*}
+$F$ ist aber Fortsetzung und daher $\norm{f}\le\norm{F}$, also
+$\norm{f}=\norm{F}$.\qedhere
+\end{proof}
+
+\begin{cor}
+\label{prop:4.13}
+\begin{propenum}
+  \item $\forall x_0\in E\setminus\setd{0} \exists f \in E' : \norm{f} = 1,
+  f(x_0) = \norm{x_0}$.
+  \item Seien $\setd{x_1,\ldots,x_n}$ linear unabhängig und seien
+  $\alpha_1,\ldots,\alpha_n\in \K$, dann
+\begin{align*}
+\exists f\in E' \forall j=1,\ldots,n : f(x_j) = \alpha_j.\fishhere
+\end{align*}
+\end{propenum}
+\end{cor}
+\begin{proof}
+\begin{proofenum}
+  \item 
+Sei $M:=\lin{x_0}$ und $g: M\to \K,\; \alpha x_0\mapsto \alpha\norm{x_0}$. $g$
+ist offensichtlich linear und $\abs{g(\alpha x_0)} = \abs{\alpha}\norm{x_0}$,
+also
+\begin{align*}
+\norm{g} = \sup\limits_{y\neq 0}\frac{\abs{g(y)}}{\norm{y}}
+= \sup\limits_{\alpha\neq 0}\frac{\abs{g(\alpha x_0)}}{\norm{\alpha x_0}} = 1.
+\end{align*}
+Durch Anwendung des Satzes von Hahn-Banach erhalten wir eine lineare
+Fortsetzung $G\in E'$ mit $\norm{G}=1$ und $G(x_0) = \norm{x_0}$.
+\item $M=\lin{x_1,\ldots,x_n}$ ist endlich dimensional. Aus der linearen
+Algebra wissen wir, es existier eine lineare Abbildung
+\begin{align*}
+g : M \to \K,\qquad g(x_j) = \alpha_j.
+\end{align*}
+Da $\dim M <\infty$, ist $g$ beschränkt. Wir können also den Fortsetzungssatz
+anwenden.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{bem}[Diskussion.]
+\label{bem:4.14}
+Falls $E\neq 0$, so $\exists x_0\in E\setminus\setd{0}$, so dass
+\begin{align*}
+\exists f\in E' : f(x) = \norm{x}\neq 0.
+\end{align*}
+Somit ist der Dualraum $E'=\LL(E\to\K)$ nicht leer. Außerdem gilt
+\begin{align*}
+x=y \Leftrightarrow x-y=0 \Leftrightarrow \forall f\in E' : f(x-y) =0
+\Leftrightarrow \forall f\in E' : f(x) = f(y).
+\end{align*}
+Man sagt, der Dualraum trennt die Elemente von $E$. Statt $f(x)$ schreibt man
+auch $\lin{f,x}$ (Dualitätsprodukt).
+
+\textit{Erklärung}. Betrachte $1< p,q < \infty$ mit
+$\frac{1}{p}+\frac{1}{q}=1$.
+Sei $E=L^p([a,b])$, so ist $E'=L^q([a,b])$
+(später). Dann gilt für $f\in L^p$ und $g\in L^q$,
+\begin{align*}
+g(f) = \int\limits_a^b f\cdot g \dmu = \lin{f,\overline{g}}.\maphere
+\end{align*}
+\end{bem}
+
+\begin{cor}
+\label{prop:4.15}
+Für $x\in E$ gilt,
+\begin{align*}
+\norm{x} = \sup\setdef{\abs{f(x)}}{f\in E' \land \norm{f}\le 1},
+\end{align*}
+und das Supremum wird angenommen.\fishhere
+\end{cor}
+\begin{proof}
+$f\in E'$ ist beschränkt, d.h.
+$\abs{f(x)}\le \norm{f}\norm{x} \le \norm{x}$. Mit \ref{prop:4.13} folgt
+\begin{align*}
+\exists f\in E' : \norm{f} = 1 \land f(x) = \norm{x}.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{cor}
+\label{prop:4.16}
+Sei $M\le E$ abgeschlossen, $x_0\in E\setminus M$. Dann existiert ein $f\in E'$
+mit
+\begin{align*}
+f\big|_M = 0 \text{ und } f(x_0)\neq 0.\fishhere 
+\end{align*}
+\end{cor}
+\begin{proof}
+Betrachte die Quotientenabbildung
+\begin{align*}
+\pi : E\to E/M,\quad x\mapsto [x].
+\end{align*}
+Setzen wir $\norm{[x]}_{E/M} := \inf\limits_{y\in M} \norm{x+y}$, so ist $\pi$
+stetig (siehe Beweis \ref{prop:4.5}). Weiterhin ist $\pi(x) = [0]$, falls $x\in
+M$ und $\pi(x_0)\neq 0$. Mit \ref{prop:4.13} folgt nun
+\begin{align*}
+\exists \ph\in (E/M)' : \ph([x_0]) = \norm{\pi(x_0)}_{E/M}\neq 0.
+\end{align*}
+Sei $f=\ph\circ\pi$, so ist $f$ beschränkt und linear, also $f\in E'$, sowie
+\begin{align*}
+f(x_0) = \ph(\pi(x_0)) \neq 0,\qquad
+f(x) = \ph(\pi(x))=0\text{ falls } x\in M.\qedhere
+\end{align*}
+\end{proof}
+
+\begin{cor}
+\label{prop:4.17}
+Sei $M\le E$, dann gilt
+\begin{propenum}
+  \item $\overline{M}=\bigcap \setdef{\ker f}{f\in E'\land M\le \ker f}$.
+  \item $M$ liegt genau dann dicht in $E$, wenn
+\begin{align*}
+\forall f\in E' : \left(f\big|_M=0\Rightarrow f=0\right).\fishhere
+\end{align*}
+\end{propenum}
+\end{cor}
+\begin{proof}
+\begin{proofenum}
+  \item $M\le \ker f$, also ist $\overline{M}\le \ker f$ und da $f$ beliebig
+\begin{align*}
+\overline{M}\le K:=\bigcap \setdef{\ker f}{f\in E'\land M\le \ker f}.
+\end{align*}
+$\overline{M}\supseteq K$ ist äquivalent zu $E/\overline{M}\subseteq E/K$. Sei
+also $x_0\in E/\overline{M}$, dann folgt mit \ref{prop:4.16}
+\begin{align*}
+\exists f\in E' : f\big|_{\overline{M}}  = 0\land f(x_0)\neq 0.
+\end{align*}
+Für dieses $f$ gilt nun $M\le\ker f$ und $x_0\notin \ker f$, also ist
+$x_0\notin K$, d.h. $x_0\in E/K$.
+\item ``$\Rightarrow$'': Sei $x\in E$, $(x_n)$ in $M$, $x_n\to x$. Für $f\in
+E'$ mit $f\big|_M=0$ gilt
+\begin{align*}
+f(x) = \lim\limits_{n\to\infty} f(x_n) = 0.
+\end{align*}
+``$\Leftarrow$'': $\overline{M}=\bigcap \setdef{\ker f}{f\in E'\land M\le \ker
+f}=E$.\qedhere
+\end{proofenum}
+\end{proof}
+
+% ==============================================================
+% ================== Reflexive Räume ==============================
+% ==============================================================
+\section{Reflexive Räume}
+
+Auf $\R$ lässt sich der \textit{Satz von Bolzano-Weierstraß} beweisen, der
+besagt, dass jede beschränkte Folge eine konvergente Teilfolge besitzt. Dieser
+Satz lässt sich dann auf $\C$, $\R^n$ oder allgemeiner jeden
+normierten Raum $V$ mit $\dim V < \infty$ ohne zusätzliche Voraussetzungen oder
+Abschwächung der Aussage verallgemeinern. Nun stehen in der Funktionalanalysis
+die unendlichdimensionalen Räume im Mittelpunkt, jedoch kennen wir hier
+bereits Gegenbeispiele, bei denen die Aussage des Satzes falsch wird. Man
+betrachte zum Beispiel eine Abzählung der Einheitsvektoren,
+\begin{align*}
+e_k = (0,\ldots,0,1,0,\ldots),\qquad e_{kn} = \delta_{nk}.
+\end{align*}
+Diese ist beschränkt, enthält aber sicher keine konvergente Teilfolge.
+
+Ziel dieses Abschnitts ist es nun, den Satz dahingehend auf unendlich
+dimensionale Räume zu verallgemeinern, dass jede beschränkte Folge eine
+in einem noch zu definierenden Sinne ``schwach konvergente'' Teilfolge enthält.
+
+\begin{defn}
+\label{defn:4.18}
+$E'' = (E')'$ heißt \emph{Bidualraum}\index{Vektorraum!Bidualraum} von
+$E$.\fishhere
+\end{defn}
+
+$E''$ ist stets ein Banachraum, da $\K=\R$ oder $\C$ vollständig ist.
+
+\begin{prop}[Einbettung]
+\index{Vektorraum!Einbettung}
+\label{prop:4.19}
+Es existiert eine Isometrie $J_E : E\to E''$.\fishhere
+\end{prop}
+\begin{proof}
+Für $E=(0)$ ist die Aussage trivial, sei also $E\supsetneq (0)$.
+Zu $x\in E$ sei
+\begin{align*}
+T_x : E'\to \K,\; f\mapsto f(x).
+\end{align*}
+$T_x$ ist offensichtlich
+linear und beschränkt, denn
+\begin{align*}
+\abs{T_x(f)} = \abs{f(x)} \le \norm{x}_E\norm{f}_{E'}.
+\end{align*}
+Also ist $T_x\in E''$. Da $x\neq 0$,  folgt mit
+\ref{prop:4.13} die Existenz einer Abbildung $f_0\in E'$ mit $\norm{f_0}=1$ und
+$f_0(x)=\norm{x}$. Für diese gilt,
+\begin{align*}
+\abs{T_{x}(f_0)} = \abs{f_0(x)} = 1\cdot\norm{x_0}_E,
+\end{align*}
+also ist $\norm{T_{x}}_{E''}=\norm{x}_E$. Setze nun
+\begin{align*}
+J_E : E\to E'',\quad x\mapsto T_x,
+\end{align*}
+so ist $J_E$ Isometrie.\qedhere
+\end{proof}
+
+Im Allgemeinen ist jedoch $\im J_E \subsetneq E''$, die Gleichheit gilt nur in
+einer speziellen Klasse von Räumen. 
+
+\begin{defn}
+\label{defn:4.20}
+$E$ heißt \emph{reflexiv}\index{Vektorraum!reflexiv}, falls $J_E$ surjektiv
+ist.\fishhere
+\end{defn}
+
+\begin{bem}[Bemerkungen.]
+\label{bem:4.21}
+\begin{bemenum}
+\item $E''$ ist vollständig und damit auch $\overline{\im J_E}$. Man erhält
+durch diese Einbettung also auch eine Vervollständigung von $E$, denn $\im
+J_E$ liegt dicht in $\overline{\im J_E}$ und $\im J_E$ ist isometrisch
+isomorph zu $E$ (schreibe $J_E\cong E$).
+\item Ist $E$ reflexiv, so ist $E=J_E^{-1}(E'')$ ein Banachraum.
+\item Jeder Hilbertraum ist reflexiv.
+\item Sei $1<p<\infty$, dann sind $l^p$ und $L^p([a,b])$ reflexiv.\maphere
+\end{bemenum}
+\end{bem}
+
+\begin{prop}
+\label{prop:4.22}
+$l^1$ ist \textit{nicht} reflexiv.\fishhere
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item 
+\textit{$(l^1)'\cong l^\infty$}. Setze dazu
+\begin{align*}
+\ph: l^\infty\to (l^1)',\quad (a_n)\mapsto \ph(a_n)\text{ mit } \ph(a_n)(x_n) :=
+\sum\limits_{n=1}^\infty a_n x_n.
+\end{align*}
+$\ph(a_n)$ ist offensichtlich linear und beschränkt, denn
+\begin{align*}
+\abs{\ph(a_n)(x_n)} \le \sum\limits_{n=1}^\infty \abs{a_n}\abs{x_n}
+\le \sup_n \abs{a_n} \sum\limits_{n=1}^\infty \abs{x_n}
+= \norm{(a_n)}_\infty\norm{(x_n)}_1 < \infty.
+\end{align*}
+Somit ist $\ph(a_n)\in (l^1)'$ mit $\norm{\ph(a_n)}_{(l^1)'} \le
+\norm{(x_n)}_1$, man prüft leicht nach, dass sogar die Gleichheit gilt, also
+ist $\ph : l^\infty\to (l^1)'$ Isometrie.
+
+\textit{$\ph$ ist  surjektiv}. Sei $f\in (l^1)'$, $e_k:=(\delta_{nk})_n\in
+l^1$. Setze $a_k = f(e_k)$ für $k\in\N$, so gilt
+\begin{align*}
+\ph(a_n)(e_k) = f(e_k) \Rightarrow
+\ph(a_n)(x_l) = f(x_l),
+\end{align*}
+da $\ph(a_n)$ und $f$ linear und stetig und $l_\text{abb}$ dicht in $l^1$. Also
+ist $\ph: l^\infty\to (l^1)'$ bijektive Isometrie.
+\item Konstruiere $F\in (l^1)''\setminus J_{l^1}(l^1)$.
+
+Sei $M:=\setdef{(a_n)\in l^\infty}{(a_n)\text{ konvergent}},$ dann ist $M\le
+l^\infty$. Setze
+\begin{align*}
+\lim : M \to \C,\quad (x_n)\mapsto \lim\limits_{n\to\infty} a_n,
+\end{align*}
+so ist $\lim\in (l^\infty)'$ mit $\norm{\lim}_{M'}\le 1$. Eine Anwendung des
+Satzes von Hahn-Banach liefert eine lineare Fortsetzung $\Lim: l^\infty\to \C$
+mit $\norm{\Lim}\le 1$.
+\begin{figure}[!htbp]
+\centering
+\begin{pspicture}(-0.7,-0.97)(3.7,1.1)
+
+\rput(0.5,0.615){\color{gdarkgray}$(l^1)'$}
+\rput(2.8,0.635){\color{gdarkgray}$l^\infty$}
+\rput(1.58,-0.805){\color{gdarkgray}$\C$}
+
+\psline[linecolor=darkblue]{->}(0.9,0.61)(2.5,0.61)
+\psline[linecolor=darkblue]{->}(0.5,0.4)(1.46,-0.61)
+\psline[linecolor=darkblue]{->}(2.68,0.4)(1.74,-0.61)
+
+\rput(1.7,0.855){\color{gdarkgray}$\ph^{-1}$}
+\rput(2.72,-0.125){\color{gdarkgray}$\Lim$}
+\rput(0.1,-0.125){\color{gdarkgray}$\Lim\circ\ph^{-1}$}
+\end{pspicture} 
+\caption{Zur Konstruktion von $\Lim$.}
+\end{figure}
+
+Nun ist $\Lim\circ\ph^{-1}\in (l^1)''$. Zeige, dass $\Lim\circ\ph^{-1}\notin
+J_{l^\infty}(l^\infty)$.
+
+Angenommen $\Lim\circ\ph^{-1}\in
+J_{l^\infty}(l^\infty)$, d.h.
+\begin{align*}
+&\exists (x_n)\in l^1 : T_{(x_n)} = \Lim\circ\ph^{-1},\\
+\Rightarrow &
+\forall f\in (l^1)' : f(x_n) = T_{(x_n)}(f) =
+\Lim\circ\underbrace{\ph^{-1}(f)}_{:=a_n}.
+\end{align*}
+Dann ist $f(x_n)= \ph(a_n)(x_n)$
+\begin{align*}
+\Leftrightarrow
+\forall (a_n)\in l^\infty : \ph(a_n)(x_n) = \Lim(a_n)
+\end{align*}
+Setze also $(a_n):=e_k$, so gilt
+\begin{align*}
+\ph(e_k)(x_n) = x_k = \Lim((\delta_{nk})_n) = \lim((\delta_{nk})_n) = 0. 
+\end{align*}
+Somit ist $x_n\equiv 0$ und $\Lim(a_n)\equiv 0$, $\forall (a_n)\in l^\infty$.
+Dies ist offensichtlich ein Wiederspruch.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{lem}
+\label{prop:4.23}
+\begin{propenum}
+  \item Sind $E\cong F$ und $E$ reflexiv, so ist $F$ reflexiv.
+  \item Ist $E$ reflexiv und $M\le E$ abgeschlossen, so ist auch $M$ reflexiv.
+  \item Sei $E$ Banachraum, so ist $E$ genau dann reflexiv, wenn $E'$ reflexiv
+  ist. Insbesondere ist $E$ genau dann reflexiv, wenn $E''$ reflexiv ist.
+\end{propenum}
+\end{lem}
+
+\begin{proof}
+\begin{proofenum}
+  \item Zu $x''\in F''$ setze
+\begin{align*}
+p^{**}(x'')(y':E\to\K) := x''(y'\circ\ph),
+\end{align*}
+so ist $\ph^{**}(x''): E'\to\K$ linear und beschränkt, denn
+\begin{align*}
+\abs{\ph^{**}(x'')(y')} \le \norm{x''}_{F''}\norm{y'\circ\ph}_{F'}
+\le \norm{x''}_{E''}\norm{\ph}_{F\to E}\norm{y'}_{E'}.
+\end{align*}
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(-0.2,-1.45)(2.9,1.45)
+
+\rput(0.24,1.095){\color{gdarkgray}$F$}
+\rput(2.43,1.095){\color{gdarkgray}$E$}
+
+\rput(1.3,1.315){\color{gdarkgray}$\ph$}
+\psline[linecolor=darkblue]{->}(0.48,1.07)(2.26,1.07)
+
+%\rput{-270.0}(1.5500001,-3.3700001){\rput(2.46,-0.925){$\supseteq$}}
+
+\psline[linecolor=darkblue]{->}(0.24,0.91)(0.24,-0.35)
+\psline[linecolor=darkblue]{->}(2.43,0.93)(2.43,-0.35)
+
+
+\psline[linecolor=darkblue]{->}(0.7,-0.61)(2,-0.61)
+
+\rput(0.24,-0.625){\color{gdarkgray}$J_F(F)$}
+\rput{-270.0}(0.24,-0.96){$\subseteq$}
+
+\rput(2.43,-0.605){\color{gdarkgray}$J_E(E)$}
+\rput{-270.0}(2.43,-0.96){$\subseteq$}
+
+\rput(1.3,-1.02){\color{gdarkgray}$\ph^{**}$}
+\psline[linecolor=darkblue]{->}(0.48,-1.27)(2.22,-1.27)
+
+\rput(0.24,-1.285){\color{gdarkgray}$F''$}
+\rput(2.43,-1.285){\color{gdarkgray}$E''$}
+
+
+
+%\rput{-270.0}(-0.66999996,-1.23){\rput(0.28,-0.965){$\supseteq$}}
+\end{pspicture} 
+\caption{Zur Konstruktion von $\ph^{**}$.}
+\end{figure}
+
+Also ist $\ph^{**}(x'')\in E''$. $E$ ist reflexiv, d.h. $\exists y\in
+E:\ph^{**}(x'') = J_E(y)$.
+
+Wir zeigen nun, dass $x''=J_F(\ph^{-1}(y))$.
+
+Für $x'\in F'$ gilt,
+\begin{align*}
+x''(x') &= x''(x\circ\ph^{-1})(\ph)
+= \ph^{**}(x'')(x\circ \ph^{-1})\\
+&= J_E(y)(x'\circ\ph^{-1})
+= x'\circ\ph^{-1}(y)
+= J_F(\ph^{-1}(y))(x'),
+\end{align*}
+d.h. $\forall x''\in F'' \exists x\in F : x'' = J_F(x)$.
+\item Sei $x''\in M''$ wir haben zu zeigen, dass ein $x\in M$ existiert so dass
+$J_M(x) = x''$, d.h. $T_x(f) = x''(f)$, $\forall f\in M'$.
+
+Zu $y'\in E'$, dann ist $y\big|_M \in M'$, setze $y''(y') := x''(y'\big|_M)$,
+so ist $y''$ offensichtlich linear und beschränkt, denn
+\begin{align*}
+\abs{y''(y')} = \abs{x''(y'\big|_M)} \le \norm{x''}_{M''}\norm{y'\big|_M}_{E'}
+\le \norm{x''}_{M''}\norm{y'}_{E'},
+\end{align*}
+also ist $y''\in E''$.
+
+$E$ ist reflexiv, also existiert ein $y\in E$, sodass
+$J_E(y) = T_y = y''$.
+
+Sei nun $y'\in E'$ mit $y\big|_M=0$, dann ist
+\begin{align*}
+y'(y) = T_y(y') = y''(y') = x''(y'\big|_M) = 0.
+\end{align*}
+Also ist $y\in \ker y'$. \ref{prop:4.17} besagt
+\begin{align*}
+\overline{M} := \bigcap\setdef{\ker f}{f\in E'\land M\le \ker f}
+\end{align*}
+also ist $y\in \overline{M}=M$, da es in jedem dieser Kerne enthalten ist.
+
+Sei nun $x'\in M'$, dann lässt sich $x'$ mit dem Satz von Hahn-Banach
+fortsetzen zu $\xi'\in E'$ mit $\norm{\xi'}_{E'}=\norm{x'}_{M'}$. Dann ist
+\begin{align*}
+&x'(y) = \xi'(y) = T_y(\xi') = y''(\xi) = x''(\xi\big|_M) = x''(x'),\\
+\Rightarrow & 
+\forall x'\in M' : x''(x')=x'(y) = J_M(y)(x').
+\end{align*}
+\item
+``$\Rightarrow$'': Sei $x'''\in E'''$. Wir haben zu zeigen, dass ein $x'\in E'$
+existiert mit $J_{E'}(x') = x'''$. Die Komposition
+\begin{align*}
+x'''\circ J_{E} : E\to\K 
+\end{align*}
+ist ein Element in $E'$. Da $E$ reflexiv, ist $J_E$ invertierbar. Für $x''\in
+E''$ ist daher,
+\begin{align*}
+x'''(x'') = x'''(J_E\circ J_E^{-1}(x''))
+= \left(x'''\circ J_E\right)( J_E^{-1}(x'')).
+\end{align*}
+Setze $x:= J_E^{-1}(x'')\in E$ und $f:=x'''\circ J_E\in E'$, dann ist
+\begin{align*}
+\ldots = f(x)
+= T_x(f) = J_{E}(x)(f) = x''(f) = T_{f}(x'') = J_{E'}(f)(x'')
+\end{align*}
+Also ist $x'''=J_{E'}(f)\in J_{E'}(E')$ und damit ist $J_{E'}$ surjektiv.
+
+``$\Leftarrow$'': $E'$ ist reflexiv, also ist mit dem eben bewiesenen auch
+$E''$ reflexiv. $J_E(E)\le E''$ ist als Bild des Banachraumes $E$ unter einer
+Isometrie ebenfalls Banachraum und damit abgeschlossen. Also ist $J_E(E)$
+reflexiv aber $J_E(E)$ und $E$ sind isometrisch isomorph, also ist auch $E$
+reflexiv.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{defn}
+\label{defn:4.24}
+Eine Folge $(x_n)$ in $E$ heißt \emph{schwach
+konvergent}\index{schwache!Konvergenz} gegen $x\in E$, falls
+\begin{align*}
+\forall f\in E' : f(x_n-x)\to 0.
+\end{align*}
+Wir schrieben in diesem Fall $x_n\wto x$.\fishhere
+\end{defn}
+
+\begin{bsp}
+\label{bsp:4.25}
+\begin{bspenum}
+  \item Sei $E=l^2$ und $e_k = (0,\ldots,0,1,0,\ldots)$.\\ Sei $f\in E'=l^2$,
+  d.h. es gibt eine Folge $(a_n)\in l^2$, so dass
+\begin{align*}
+\forall (x_n)\in l^2 : f((x_n)) := \sum\limits_{n=1}^\infty a_nx_n.
+\end{align*}
+Somit gilt $f(e_k) = a_k \to 0$, da $\sum_{k\ge 1} \abs{a_k}^2 < \infty$
+unabhängig vom gewählten $f$, d.h.
+\begin{align*}
+\forall f\in E'  : f(e_k) \to 0,
+\end{align*}
+also $e_k\wto 0$ obwohl $\norm{e_k}_2 = 1$ also $\neg (e_k\to 0)$. Hier gilt
+also
+\begin{align*}
+\norm{0}_2 < \lim\limits_{k\to\infty}\norm{e_k}_2.
+\end{align*}
+\item
+Sei $E=C([0,1]\to\C)$ mit $\norm{\cdot}_\infty$.\\
+Man kann zeigen, dass
+\begin{align*}
+f_n\wto f \Leftrightarrow f_n(x) \to f(x),\qquad \forall x\in[0,1].
+\end{align*}
+Schwache Konvergenz bezüglich $\norm{\cdot}_\infty$ entspricht also der
+punktweisen Konvergenz, während Konvergenz bezüglich $\norm{\cdot}_\infty$ der
+gleichmäßigen Konvergenz entspricht. (Siehe \cite{Werner07} S.
+107)
+
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(-0.2,-1.5)(3.54,1.28)
+\psline{->}(0.32,-1.02)(0.32,1.2)
+\psline{->}(0.12,-0.84)(3.52,-0.84)
+\psline(1.1,-0.72)(1.1,-0.96)
+\psline(1.9,-0.72)(1.9,-0.96)
+\psline(3.1,-0.72)(3.1,-0.96)
+\psline(0.2,0.98)(0.44,0.98)
+
+\rput(0.01,0.98){\color{gdarkgray}$1$}
+
+\rput(1.06,-1.2){\color{gdarkgray}$\frac{1}{2n}$}
+
+\rput(1.87,-1.2){\color{gdarkgray}$\frac{1}{n}$}
+
+\rput(3.07,-1.2){\color{gdarkgray}$1$}
+
+\psline[linecolor=darkblue](0.34,0.98)(1.1,-0.84)(1.92,0.98)(3.12,0.98)
+\end{pspicture}
+\caption{Zur Konstruktion von $f_n$.}
+\end{figure}
+
+Definiere $f_n$ wie in Skizze, dann $f_n\to 1$ punktweise, d.h. $f_n\wto 1$ mit
+\begin{align*}
+\norm{f_n}_\infty = 1 = \norm{f}_\infty
+\end{align*}
+aber $\norm{f-f_n}_\infty = 1$, d.h. $\neg(f_n\to f)$.\bsphere
+\end{bspenum}
+\end{bsp}
+
+\begin{prop}
+\label{prop:4.26}
+\begin{propenum}
+  \item Der schwache Grenzwert ist eindeutig.
+  \item $x_n\to x$ impliziert $x_n\wto x$ und $\norm{x_n}\to\norm{x}$.
+  \item Ist $(x_n)$ schwach konvergent, so ist $(x_n)$ beschränkt.
+  \item Konvergiert $x_n\wto x$, so gilt
+\begin{align*}
+\norm{x} \le \liminf\limits_{n\to\infty} \norm{x_n}.\fishhere
+\end{align*}
+\end{propenum}
+\end{prop}
+\begin{proof}
+\begin{proofenum}
+  \item Sei $(x_n)$ Folge in $E$ mit schwachen Grenzwerten $x,y$, d.h.
+\begin{align*}
+\forall f\in E' : f(x_n-x)\to 0\land f(x_n-y)\to 0,
+\end{align*}
+d.h. $f(x)-f(y) = \lim\limits_{n\to \infty} f(x-x_n)+f(x_n-y) = 0$, $\forall
+f\in E'$. Mit \ref{bem:4.14} folgt somit, dass $x=y$.
+\item Übung.
+\item Sei $x_n\wto x$, d.h.
+\begin{align*}
+\forall f\in E' : f(x_n)\to f(x) 
+\Leftrightarrow
+\forall f\in E' : T_{x_n}(f)\to T_{x}(f). 
+\end{align*}
+Da $T_{x_n}\to T_x$ punktweise, ist für jedes $f$ die Folge $T_{x_n}(f)$
+beschränkt. Der Satz von Banach-Steinhaus sagt somit, dass
+$\sup\limits_{k\in\N} \norm{T_{x_n}} =: c < \infty$, d.h. $\forall n\in\N :
+\norm{T_{x_n}}=\norm{x_n}<c$.
+\item Nach Voraussetzung konvergiert $T_{x_n}(f)\to T_x (f)$, wobei
+\begin{align*}
+\norm{T_{x_n}(f)} \le \norm{T_{x_n}}\norm{f} = \norm{x_n}\norm{f}.
+\end{align*}
+Somit gilt für $n\in\N$, $\norm{x} = \norm{T_x} \le \norm{x_n}$ und damit
+\begin{align*}
+\norm{x} \le \liminf\limits_{n\to\infty}\norm{x_n}.\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}[Beobachtung]
+\label{prop:4.27}
+Sei $E$ reflexiv und $(x_n)$ Folge in $E$. Dann ist
+\begin{align*}
+M := \overline{\setd{\lin{x_1,\ldots,x_k}}} = \overline{\setd{\text{ endliche
+Linearkombinationen }}} \le E
+\end{align*}
+abgeschlossen und daher reflexiv. Weiterhin liegt
+\begin{align*}
+M_\Q := 
+\setdef{\sum\limits_{j=1}^n (\alpha_j + i\beta_j) x_j}{n\in\N,\;
+\alpha_j,\beta_j\in\Q}
+\end{align*}
+dicht in $M$ und ist abzählbar.\fishhere
+\end{prop}
+
+\begin{defn}
+\label{defn:4.28}
+$E$ heißt \emph{separabel}\index{Vektorraum!separabel}, wenn $E$ eine abzählbare
+dichte Teilmenge besitzt.~\fishhere
+\end{defn}
+
+\begin{lem}
+\label{prop:4.29}
+Ist $E'$ separabel, so ist $E$ separabel.\fishhere
+\end{lem}
+\begin{proof}
+Sei $\setd{x_1',x_2',\ldots}\subseteq E'$ dicht. Zu $n\in\N$ wähle
+$x_n \in E$ mit $\norm{x_n}=1$ und $\abs{x_n'(x_n)} \ge
+\frac{1}{2}\norm{x_n'}$, dann ist
+\begin{align*}
+M:=\lin{\setd{x_1,\ldots}}\le E
+\end{align*}
+Zu zeigen ist nun, dass $\overline{M}=E$.
+Sei $x'\in E'$ mit $x'\big|M=0$, dann gilt
+\begin{align*}
+\norm{x'-x_n'} &\ge \abs{(x'-x_n')(x_n)} = \abs{x_n'(x_n)}
+\ge \frac{1}{2}\norm{x_n'} = \frac{1}{2}\norm{x_n'-x'+x'}\\
+&\ge \frac{1}{2}\left(\norm{x'} - \norm{x_n'-x'}\right).
+\end{align*}
+Somit ist
+\begin{align*}
+&\norm{x'} \le 3\norm{x_n'-x'}, && n\in\N\\
+\Rightarrow
+&\norm{x'} \le 3\inf_n \norm{x_n'-x'} = 0,
+\end{align*}
+Somit ist $x'=0$, mit \ref{prop:4.17} folgt nun, dass $\overline{M}=E$. Nun ist
+$M_\Q$ abzählbar und dicht in $E$, also ist $E$ separabel.\qedhere
+\end{proof} 
+
+\begin{prop}
+\label{prop:4.30}
+Sei $E$ reflexiv, dann besitzt jede beschränkte Folge in $E$ eine schwach
+konvergente Teilfolge.\fishhere
+\end{prop}
+\begin{proof}
+Sei also $(x_n)$ beschränkte Folge in $E$ mit $\sup_n \norm{x_n}_E = c <
+\infty$.
+\begin{proofenum}
+\item Setze $M=\overline{\lin{x_1,x_2,\ldots}}$, dann ist $M\le E$
+abgeschlossen, separabel und nach \ref{prop:4.23} außerdem reflexiv, d.h.
+$M''=J_M(M)$. Somit ist $M''$ als Bild eines separablen Raumes unter einer
+Isometrie ebenfalls separabel und daher ist nach \ref{prop:4.29} auch $M'$
+separabel, d.h. $M'=\overline{\setd{y_1',y_2',\ldots}}$.
+\item \textit{Konstruktion einer konvergenten Teilfolge von $J_M(x_n)$}. Für
+jedes $j\in\N$ gilt
+\begin{align*}
+\abs{J_M(x_n)(y_j')} \le \norm{J_M(x_n)}_{E''}\norm{y_j'}_{E'} =
+\norm{x_n}_{E}\norm{y_j'}_{E'},
+\end{align*} 
+d.h. die Folge $\left(J_M(x_n)(y_j')\right)$ ist beschränkt in $\K$. Somit
+existiert zu $y_1'$ eine konvergente Teilfolge $(J_M(x_n^{(1)})(y_1'))$. Nun ist auch
+$(J_M(x_n^{(1)})(y_2'))$ beschränkt und besitzt daher ebenfalls eine Konvergente
+Teilfolge $(J_M(x_n^{(2)})(y_2'))$ usw.
+Dies können wir nun \textit{ad
+infinitum} fortführen.
+
+Setze $\xi_n=x_n^{(n)}$, so ist diese Diagonalfolge
+ebenfalls Teilfolge von $(x_n)$ und daher beschränkt und für jedes $j\in\N$ konvergiert
+$(J_M(\xi_n)(y_j'))$ für $n\to\infty$.
+\item \textit{Definition des Grenzelementes}. Sei
+\begin{align*}
+x'' : \setd{y_1',y_2',\ldots} \to \K,\quad y_j' \mapsto
+\lim\limits_{n\to\infty} J_M(\xi_n)(y_j'),
+\end{align*}
+so lässt sich $x''$ linear auf die lineare Hülle $\lin{y_1',y_2',\ldots}$ wie
+folgt fortsetzen,
+\begin{align*}
+x''\left(\sum\limits_{k=1}^K \lambda_k y_{j_k}'\right)
+:= \sum\limits_{k=1}^K \lambda_k\lim\limits_{n\to\infty} J_M(\xi_n)(y_{j_k}').
+\end{align*}
+Die Fortsetzung ist ebenfalls beschränkt, denn für $x=\sum_{k=1}^K \lambda_k
+y_{j_k}'$ gilt
+\begin{align*}
+\abs{x''(x)} &= 
+\abs{\lim\limits_{n\to\infty} J_M(\xi_n)(x)}
+\le \limsup\limits_{n\to\infty} \norm{J_M(\xi_n)}_{E''}\norm{x}_{E'}\\
+&= \limsup\limits_{n\to\infty} \norm{\xi_n}_{E''}\norm{x}_{E'}
+\le c\norm{x}_{E'}.
+\end{align*}
+Da $\lin{y_1',y_2',\ldots}$ dicht in $M'$ liegt, können wir den
+Fortsetzungssatz \ref{prop:2.5} anwenden und erhalten eine eindeutige
+Fortsetzung
+\begin{align*}
+x'': M'\to \K,\qquad \norm{f}_{M''} = \norm{x''}_{M'} \le c.
+\end{align*}
+\item Sei $x:=J_M^{-1}(f)$. Wir haben nun zu zeigen, dass $\xi_n\wto x$ in $E$.
+Sei also $f\in E'$, dann gilt
+\begin{align*}
+\abs{f(\xi_n)-f(x)} &= \abs{f\big|_M(\xi_n)-f\big|_M(x)} =
+\abs{J_M(\xi_n)(f\big|_M) - J_M(x)(f\big|_M)} \\ &\le
+\underbrace{\abs{J_M(\xi_n)(f\big|_M-y_j')}}_{\text{(1)}} +
+\underbrace{\abs{J_M(\xi_n)(y_j')-x''(y_j')}}_{\text{(3)}} \\
+&\quad+
+\underbrace{\abs{x''(y_j'-f\big|_M)}}_{\text{(2)}}.
+\end{align*}
+Nun gilt
+\begin{align*}
+&(1) \le \norm{J_M(\xi_n)}_{E''}\norm{f\big|_M-y_j'}_{E'}
+\le c\norm{f\big|_M-y_j'}_{E'} < \frac{\ep}{3},\\
+&(2) \le \norm{x''}_{M''}\norm{y_j'-f\big|_M}_{E'} \le
+c\norm{f\big|_M-y_j'}_{E'} < \frac{\ep}{2}\\
+&(3) < \frac{\ep}{2},\qquad n> N_\ep\text{ bei } y_j' \text{ fest}.
+\end{align*}
+Also ist der gesamte Ausdruck $< \ep$, d.h. $f(\xi_n)\to f(x)$.\qedhere
+\end{proofenum}
+\end{proof}
+
+\begin{defn}
+\label{defn:4.31}
+$K\subseteq L$ heißt \emph{konvex}\index{Menge!konvex}, falls für alle $x,y\in
+K$ gilt,
+\begin{align*}
+\forall\lambda\in[0,1] : \lambda x + (1-\lambda)y\in K.\fishhere
+\end{align*}
+\end{defn}
+
+\begin{bsp}
+\label{bsp:4.32}
+Sei $E$ ein normierter Raum.
+\begin{bspenum}
+  \item \textit{Kugeln sind konvex}. Betrachte also die Kugel mit Radius
+  $R$ um $x_0$ und $x,y$ seien so gewählt, dass $\norm{x-x_0}_E<R$ und
+  $\norm{y-x_0}_E < R$, dann gilt auch
+\begin{align*}
+\norm{\lambda x + (1-\lambda)y - x_0}_E
+&= \norm{\lambda (x-x_0) + (1-\lambda)(y - x_0)}_E\\
+&\le \lambda \norm{x-x_0}_E + (1-\lambda)\norm{y-x_0}_E
+< R.
+\end{align*}
+\item \textit{Halbräume sind konvex}. Betrachte
+\begin{align*}
+K:=\setdef{x\in E}{\Re f(x)\le \alpha},\qquad \alpha\in\R,\quad f\in E'.
+\end{align*}
+Sind $x,y\in K$, so gilt auch
+\begin{align*}
+\Re f(\lambda x + (1-\lambda)y)
+&= \lambda \Re f(x) + (1-\lambda) \Re f(y) \le \lambda \alpha +
+(1-\lambda)\alpha \\ &= \alpha.\bsphere
+\end{align*}
+\end{bspenum}
+\end{bsp}
+
+\begin{prop}[Trennungssatz]
+\label{prop:4.33}
+Sei $K\subseteq E$ konvex und abgeschlossen, $x_0\in E\setminus K$. Dann gibt
+es ein $f\in E'$ und ein $\alpha\in \R$, so dass
+\begin{align*}
+\Re f(x_0) > \alpha \text{ und } \forall x\in K : \Re f(x) \le \alpha.\fishhere
+\end{align*}
+\end{prop}
+
+\begin{figure}[!htpb]
+\centering
+\begin{pspicture}(0,-1.4000001)(4.84,1.4)
+\pspolygon[linestyle=none,fillstyle=solid,fillcolor=glightgray]%
+	(0.14,1.36)(0.14,-1.06)(4.42,-1.06)(3.02,1.38)
+\psline[linecolor=darkblue](4.42,-1.06)(3.02,1.38)
+\psdots(4.58,0.28)
+\psbezier[fillcolor=white,fillstyle=solid](1.5,0.58)(1.08,0.4)(0.0,1.02)(0.5,-0.18)(1.0,-1.38)(2.5482988,-0.81650954)(2.82,0.18)(3.091701,1.1765095)(1.92,0.76)(1.5,0.58)
+
+\rput(2.38,0.025){\color{gdarkgray}$K$}
+\rput(4.62,0.065){\color{gdarkgray}$x_0$}
+\rput(3.27,-0.835){$\Re f(x)\le\alpha$}
+\end{pspicture} 
+\caption{Zum Trennungssatz.}
+\end{figure}
+
+\begin{proof}
+\begin{proofenum}
+\item Sei $\K=\R$.
+\begin{defnenum}
+  \item Wir können ohne Einschrädnkung annehmen, dass $0\in K^\circ$, denn
+  andernfalls verschieben wir $K$ und $x_0$ so, dass $0\in K$ und ersetzen $K$
+  durch,
+\begin{align*}
+\setdef{x\in E}{d(x,K) \ge \frac{1}{2}d(x_0,K)}.
+\end{align*}
+Man kann in leicht zeigen, dass diese Menge konvex ist.
+\item
+Sei $p: E\to \R,\; x\mapsto \inf\setdef{r>0}{r^{-1}x\in K}$. $p$ ist
+wohldefiniert, da $K_\ep(0)\subseteq K$ und damit
+$\left(\frac{2}{\ep}\norm{x}\right)^{-1}x\in K_\ep(0)$, also ist die Menge
+nicht leer und das Infimum endlich.
+
+$p$ heißt \emph{Minkowskifunktional} und hat folgende Eigenschaften,
+\begin{equivenum}
+  \item $0\le p(x) <\infty$.
+  \item $\forall x\in K : p(x) \le 1$.
+  \item $p(x_0) > 1$.
+  \item $p(\lambda x)=\lambda x$, falls $\lambda \ge 0$
+  \item $p(x+y) \le p(x) + p(y)$.
+\end{equivenum}
+(i)-(ii) sind klar.\\
+Angenommen $p(x_0)=1$, dann existiert eine Folge in $K$,
+die gegen $x_0$ konvergiert, $K$ ist abgeschlossen also $x_0\in K$. \dipper
+Ist hingegen $p(x_0)<1$, dann ist $\frac{x_0}{r}\in K$ für ein $r < 1$ und
+damit auch $(1-r)\cdot 0  + r \frac{x_0}{r}\in K.\dipper$ Also folgt (iii).\\
+Zu (iv): Sei $\lambda > 0$, dann ist $\frac{\lambda x}{\lambda r}\in
+K\Leftrightarrow \frac{x}{r}\in K$. $p(0)=0$ ist klar.\\
+Zu (v): Seien $r^{-1}x,s^{-1}y\in K$, dann ist
+\begin{align*}
+\frac{x+y}{r+s} = \frac{r}{r+s}\frac{x}{r} + \frac{s}{r+s}\frac{y}{s}\in K.
+\end{align*}
+Also ist $p$ sublinear.
+\item Setze $T: \lin{x_0}\to \R$, $\lambda x_0\mapsto \lambda p(x_0)$, dann ist
+$T$ linear und $p$-beschränkt, denn
+\begin{align*}
+&\lambda \le 0 : T\lambda x_0 \le 0 \le p(\lambda x_0),\\
+&\lambda > 0 : T\lambda x_0 = \lambda p(x_0) = p(\lambda x_0).
+\end{align*}
+Mit dem Satz von Hahn-Banach folgt nun, dass eine lineare, $p$-beschränkte
+Fortsetzung $\tilde{T}: E\to \R$ existiert. Insbesondere gilt
+\begin{align*}
+&\forall x\in K : \tilde{T}(x) \le p(x) \le 1,\\
+&\tilde{T}(x_0) = T(x_0) = p(x_0) > 1.
+\end{align*}
+\item $\tilde{T}\in E'$, denn $K_\ep(0)\subseteq K$ und daher gilt $\forall
+x\in E: \frac{x}{\ep/2 \norm{x}}\in K$,
+\begin{align*}
+\Rightarrow &\forall x\in E : p(x) \le \frac{\ep}{2}\norm{x},\\
+& \tilde{T}(x) \le p(x)  \le \frac{\ep}{2}\norm{x}\\
+& -\tilde{T}(x) = \tilde{T}(-x) \le \frac{\ep}{2}\norm{x}.
+ \end{align*}
+\end{defnenum}
+\item Sie $\K=\C$. Fasse $E$ als Raum über $\R$ auf und konstruiere $\tilde{T}$
+wie in 1.). Setze anschließend
+\begin{align*}
+f(x) = \tilde{T}(x)-i\tilde{T}(ix).\qedhere
+\end{align*}
+\end{proofenum}
+\end{proof}
+
+\begin{prop}
+\label{prop:4.34}
+Eine konvexe abgeschlossene Menge $K\subseteq E$ ist schwach
+folgenabgeschlossen, d.h. der schwache Grenzwert $x$ einer Folge $(x_n)$ in $K$,
+die schwach in $E$ konvegiert, liegt in $K$.\fishhere
+\end{prop}
+\begin{proof}
+Sei also $(x_n)$ Folge in $K$, die schwach in $E$ konvergiert, d.h.
+\begin{align*}
+\forall f\in E': f(x_n)\to f(x),\qquad x\in K.
+\end{align*}
+Angenommen $x\in E\setminus K$. Wir können also den Trennungssatz auf $x$
+anwenden und erhalten somit ein $f\in E'$ mit
+\begin{align*}
+f(x) > \alpha,\qquad \forall y\in K : f(y)\le \alpha.
+\end{align*}
+Nun gilt aber $x_n\wto x$ und daher auch
+\begin{align*}
+\forall n\in \N f(x_n)\le \alpha \Rightarrow f(x) \le \alpha.\dipper\qedhere
+\end{align*}
+\end{proof}
+
+\begin{prop}
+\label{prop:4.35}
+Sei $E$ reflexiv und $K\subseteq E$ konvex und abgeschlossen, $x_0\in
+E\setminus K$. Dann gilt
+\begin{align*}
+\exists y_0\in K : \norm{x_0-y_0}_E = d(x_0,K).\fishhere
+\end{align*}
+\end{prop}
+\begin{proof}
+Sei $(y_n)$ Folge in $K$ mit $\norm{x_0-y_n} \to d(x_0,K)$, dann ist $(y_n)$
+beschränkt. Somit existiert eine schwach konvergente Teilfolge $(y_{n_k})$ mit
+Grenzwert $y$. Nach \ref{prop:4.34} ist $y\in K$. Außerdem gilt $x_0-y_{n_k}\wto
+x_0-y$ also mit \ref{prop:4.26} auch
+\begin{align*}
+\norm{y-x_0} = \liminf_n \norm{y_{n_k}-x_0} = d(x_0,K).\qedhere
+\end{align*}
+\end{proof}
+
+\begin{bsp}[Anwendung]
+\label{bsp:4.36}
+Betrachte eine kreisförmige dünne Membran, die am Rand befestigt ist. Nun wird
+ein Hindernis unter die Membran geschoben, so dass diese sich diese nach oben
+ausdehnt. Wir interessieren uns nun für die Form, die die Membran annimmt,
+abhängig vom Hindernis.
+
+Zur Modellierung der Membran, betrachte eine Funktion $z=u(x,y)$ mit $(x,y)\in
+G=K_r(0)$, die die Auslenkung im Punkt $(x,y)$ beschreibt. Die Befestigung am
+Rand modellieren wir durch $u\big|_{\partial G} = 0$.
+
+Die Membran beschreibt ein konservatives System. Die Energie ist also erhalten
+und aus der Physik wissen wir, dass sie folgende Form hat:
+\begin{align*}
+&E: C_0^1(G)\to \R,\quad u\mapsto E(u) = \int_G \abs{\partial_x u}^2 +
+\abs{\partial_y u}^2\dmu(x,y),\\
+&C_0^1(G) := \setdef{f\in C^1(G\to\R)}{f\big|_{\partial G}=0}.
+\end{align*}
+
+Gesucht ist nun ein $u\in C_0^1(G)$, so dass $E(u)$ minimal wird. Dazu führen
+wir auf $C_0^1(G)$ die Norm
+\begin{align*}
+\norm{u}_2 = \int_G \abs{u}^2 + \abs{\partial_x u}^2+ \abs{\partial_y
+u}\dmu(x,y)
+\end{align*}
+ein. Auf $C_0^1(G)$ sind $\norm{\cdot}_2$ und $\norm{\cdot}$ äquivalent. Die
+Vervollständigungen bezüglich dieser Normen sind also identisch: 
+\begin{align*}
+W_0^{1,2}(G) = \overline{C_0^1(G)}^{\norm{\cdot}_2} =
+\overline{C_0^1(G)}^{\norm{\cdot}}.
+\end{align*}
+$W_0^{1,2}(G)$ ist ein sogenannter Sobolveraum. Wir werden später zeigen, dass
+dieser reflexiv ist.
+
+Modellieren wir das Hinderniss durch die Funktion $z=f(x,y)$, so 
+besteht unser Problem darin, $u\in W_0^{1,2}(G)$ zu finden mit
+\begin{align*}
+u\in K := \overline{\setdef{u\in C_0^1(G)}{u(x,y)\ge f(x,y)}}.
+\end{align*}
+$K$ ist abgeschlossen und konvex. Ist $\norm{u}$ minimal, dann ist auch
+$E(u)=\norm{u}^2$ minimal. Falls $f$ stetig, existiert nun ein $(x,y)\in G$ mit
+$f(x,y)> 0$, d.h. $0\notin K$. Mit \ref{prop:4.35} folgt nun
+\begin{align*}
+&\exists u\in K : \norm{u-0} = d(0,K) = \inf\limits_{v\in K}\norm{v-0},\\
+\Rightarrow & \norm{u} = \min\limits_{v\in K}\norm{v}.
+\end{align*}
+Wir haben somit die Existenz \textit{einer} Lösung nachgewiesen. Ob diese
+Eindeutig ist oder wie diese konkret aussieht, ist ein weiteres Problem.\bsphere 
+\end{bsp}

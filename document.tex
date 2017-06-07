@@ -1,0 +1,219 @@
+% =============================================================================
+% Titel:		Funktionalanalysis - Mitschrieb
+% Erstellt:	WS 09
+% Dozent:	PD. P.H. Lesky
+% Autor:	Jan-Cornelius Molnar
+% =============================================================================
+\documentclass[%
+	paper=a5,%
+	fleqn,%
+	DIV=calc,%
+	headings=openleft,
+	titlepage=false,%
+	twoside=true]%
+	{scrbook}
+
+% =============================================================================
+% 					Benötigte Pakete
+% =============================================================================
+\usepackage{janmcommon}
+\usepackage{janmscript}
+\usepackage{fancyhdr}
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{marginnote}
+\usepackage{makeidx}
+
+\makeindex
+
+% =============================================================================
+% 					Theorem-Style
+% =============================================================================
+% Theorem Umgebungen *MIT* Numerierung
+\theoremstyle{graymarginwithblueheader}
+\theorembodyfont{\itshape}
+\theoremseparator{}
+\theoremsymbol{}
+
+\newtheorem{prop}{Satz}[chapter]
+\newtheorem{lem}[prop]{Lemma}
+\newtheorem{defn}[prop]{Definition}
+\newtheorem{cor}[prop]{Korollar}
+
+\theoremstyle{graymarginwithyellowheader}
+\theorembodyfont{\normalfont}
+\theoremseparator{}
+\theoremsymbol{}
+
+\newtheorem{bsp}[prop]{Bsp}
+
+\theoremstyle{graymarginwithitblackheader}
+\theorembodyfont{\normalfont}
+\theoremseparator{}
+\theoremsymbol{}
+
+\newtheorem{bem}[prop]{Bemerkung.}
+
+% Theorem Umgebungen *OHNE* Numerierung
+\theoremstyle{graymarginwithblueheadern}
+\theorembodyfont{\itshape}
+\theoremseparator{}
+\theoremsymbol{}
+
+\newtheorem{propn}{Satz}
+\newtheorem{lemn}{Lemma}
+\newtheorem{corn}{Korollar}
+\newtheorem{defnn}{Definition}
+
+\theoremstyle{graymarginwithyellowheadern}
+\theorembodyfont{\normalfont}
+\theoremseparator{}
+\theoremsymbol{}
+
+\newtheorem{bspn}{Bsp}
+
+\theoremstyle{graymarginwithitblackheadern}
+\theorembodyfont{\normalfont}
+\theoremseparator{}
+\theoremsymbol{}
+
+\newtheorem{bemn}{Bemerkung.}
+
+% =============================================================================
+% 					Überschriften-Style
+% =============================================================================
+\renewcommand\thesection{\arabic{chapter}-\Alph{section}}
+\renewcommand\thesubsection{\small\ensuremath{\blacksquare}\normalsize}
+\renewcommand\thebsp{\arabic{bsp}}
+
+\setkomafont{chapter}{\normalfont\bfseries\Huge\color{darkblue}}
+\setkomafont{section}{\normalfont\bfseries\Large\color{darkblue}}
+\setkomafont{subsection}{\normalfont\bfseries\color{darkblue}}
+
+% =============================================================================
+% 					PSTricks-Standards
+% =============================================================================
+\psset{linecolor=gdarkgray}
+\psset{tickcolor=gdarkgray}
+\psset{fillcolor=glightgray}
+
+% =============================================================================
+% 					Header/Footer-Style
+% =============================================================================
+% Select page style
+\pagestyle{fancyplain}
+
+% Reset header & footer
+\fancyhf{}
+
+% Reset chapter & sectionmark
+\renewcommand{\chaptermark}[1]{\markboth{\textsc{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\textsc{#1}}{}}
+
+% Clear headrule
+\renewcommand{\headrule}{}
+
+% =============================================================================
+% 					Listen-Style
+% =============================================================================
+\newenvironment{bemenum}%
+	{\begin{enumerate}[label=\textsc{\alph{*}}.,leftmargin=17pt]}{\end{enumerate}}
+\newenvironment{defnenum}%
+	{\begin{enumerate}[label={\rm(\alph{*})}]}{\end{enumerate}}
+\newenvironment{propenum}%
+	{\begin{enumerate}[label=\arabic{*})]}{\end{enumerate}}
+\newenvironment{equivenum}%
+	{\begin{enumerate}[label=(\roman{*})]}{\end{enumerate}}
+\newenvironment{bspenum}%
+	{\begin{enumerate}[label=\alph{*}.),leftmargin=17pt]}{\end{enumerate}}
+\newenvironment{proofenumarabicbr}%
+	{\begin{enumerate}[label=(\arabic{*}),leftmargin=17pt]}{\end{enumerate}}
+\newenvironment{proofenumroman}%
+	{\begin{enumerate}[label=(\roman{*}),leftmargin=17pt]}{\end{enumerate}}
+\newenvironment{proofenum}%
+	{\begin{enumerate}[label=\arabic{*}),leftmargin=17pt]}{\end{enumerate}}
+\newenvironment{proofenuma}%
+	{\begin{enumerate}[label=\alph{*}.),leftmargin=2pt]}{\end{enumerate}}
+
+% =============================================================================
+% 					Eigene Operatoren
+% =============================================================================
+\renewcommand{\labelenumi}{{\normalfont(\alph{enumi})}}
+\renewcommand{\AA}{\mathcal{A}}
+\newcommand{\Lim}{\mathrm{Lim}}
+
+\renewcommand{\Id}{\mathbf{I}}
+
+\renewcommand{\card}{\#}
+
+\newcommand{\codim}{\mathrm{codim}}
+
+
+% =============================================================================
+% 					Document-Body
+% =============================================================================
+\begin{document}
+
+% Titel
+\begin{titlepage}
+\begin{center}
+{\huge\bf Funktionalanalysis - Mitschrieb}
+
+bei PD. Dr. P. H. Lesky
+
+Jan-Cornelius Molnar, Version: \today\ \thistime
+\end{center}
+\end{titlepage}
+
+In der Funktionalanalysisvorlesung konzentrieren wir uns auf bekannte
+Ergebnisse der Analysis und der linearen Algebra und versuchen diese auf
+unendlichdimensionale Räume zu verallgemeinern bzw. zu erweitern. Dazu gehören
+z.B. die Eigenwerttheorie, Lösbarkeit von linearen Gleichungssystemen,
+Stetigkeitsbegriffe, uvm.
+Anwendung findet die Funktionalanalysis beispielsweise bei der Lösung von
+partiellen Differentialgleichungen, der Spektraltheorie und in anderen
+angewandten Bereichen der Mathematik wie z.B. der Wahrscheinlichkeitstheorie
+und stochastischen Analysis, der mathematischen Physik oder der Numerik.
+
+% Inhaltsverzeichnis
+\tableofcontents
+
+\fancyhead[RO]{\footnotesize\color{gdarkgray}%
+	\marginnote{\Big|\;\textbf{\thesection}}\rightmark}
+\fancyhead[LE]{\footnotesize\color{gdarkgray}%
+	\marginnote{\;\textbf{\thechapter}\Big|}\leftmark}
+
+% Zweiseitig
+\fancyfoot[LE]{\footnotesize\color{gdarkgray}%
+ 	\thepage}%
+ \fancyfoot[RO]{\footnotesize\color{gdarkgray}%
+ 	\thepage}%
+ \fancyfoot[RE,LO]{\tiny\color{gdarkgray}\today\; \thistime}
+
+% Inhalt
+\input{01-NormierteRaeume.tex}
+
+\clearpage
+\input{02-LineareAbbildungen.tex}
+
+\clearpage
+\input{03-BairescherKategoriensatz.tex}
+
+\clearpage
+\input{04-LineareFunktionale.tex}
+
+\clearpage
+\input{05-Hilbertraeume.tex}
+
+\clearpage
+\input{06-LineareOperatorenAufBanachraeumen.tex}
+
+\clearpage
+\input{07-Sobolevraeume.tex}
+
+\clearpage
+\input{08-UnbeschraenkteOperatoren.tex}
+
+\input{bibliography.tex}
+
+\end{document}
